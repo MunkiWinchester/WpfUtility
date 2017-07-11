@@ -46,6 +46,10 @@ namespace WpfUtility.LogViewer
             ViewModel = new NlogViewerViewModel();
             InitializeComponent();
             DataContext = ViewModel;
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                ViewModel.ActivateLoggers();
+            }
             _this = this;
         }
 
@@ -63,23 +67,6 @@ namespace WpfUtility.LogViewer
                     scrollViewer?.ScrollToTop();
                 }
             }
-        }
-
-        private void DataGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            // Use DataGrid_Loaded because UserControl_Loaded bugs..
-            if (!DesignerProperties.GetIsInDesignMode(this))
-            {
-                var window = Window.GetWindow(this);
-                if (window != null)
-                    window.Closing += WindowOnClosing;
-                ViewModel.ActivateLoggers();
-            }
-        }
-
-        private void WindowOnClosing(object sender, CancelEventArgs cancelEventArgs)
-        {
-            ViewModel.DeactivateLoggers();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -22,25 +23,17 @@ namespace WpfUtility.LogViewer.Classes
             set => SetField(ref _selectedLogEntry, value);
         }
 
+        public NlogViewerViewModel()
+        {
+            LogEntries = new ObservableCollection<LogEvent>();
+        }
 
         public void ActivateLoggers()
         {
-            SwitchLoggerEvents(true);
-        }
-
-        public void DeactivateLoggers()
-        {
-            SwitchLoggerEvents(false);
-        }
-
-        private void SwitchLoggerEvents(bool activate)
-        {
+            // TODO: Make this chooseable
             foreach (var target in GetLoggers())
             {
-                if(activate)
-                    target.LogReceived += LogReceived;
-                else
-                    target.LogReceived -= LogReceived;
+                target.LogReceived += LogReceived;
             }
         }
 
@@ -51,18 +44,10 @@ namespace WpfUtility.LogViewer.Classes
 
         private void LogReceived(NLog.Common.AsyncLogEventInfo log)
         {
-            var vm = new LogEvent(log.LogEvent);
-            AddLog(vm);
-        }
-
-        private void AddLog(LogEvent entry)
-        {
-            if (Application.Current != null)
-                Application.Current.Dispatcher.Invoke(
-                    () =>
-                    {
-                        LogEntries.Add(entry);
-                    });
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                LogEntries.Add(new LogEvent(log.LogEvent));
+            }));
         }
     }
 }

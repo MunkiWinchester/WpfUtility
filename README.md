@@ -25,7 +25,7 @@ To setup NlogViewer as a target, add the following to your Nlog.config.
 
 ```xml
   <extensions>
-    <add assembly="NlogViewer" />
+    <add assembly="WpfUtility" />
   </extensions>
   <targets>
     <target xsi:type="NlogViewer" name="ctrl" />

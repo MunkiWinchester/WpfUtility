@@ -33,6 +33,7 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.4.11\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="XAMLMarkupExtensions, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XAMLMarkupExtensions.1.2.2\lib\net40\XAMLMarkupExtensions.dll</HintPath>
     </Reference>
@@ -52,6 +53,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeneralUserControls\ClipboardHelper.cs" />
+    <Compile Include="GeneralUserControls\Converters.cs" />
     <Compile Include="GeneralUserControls\HighlightTextBlock.cs" />
     <Compile Include="GeneralUserControls\IntListHyperlinkTextBlock.cs" />
     <Compile Include="GeneralUserControls\NumberTextBox.cs" />

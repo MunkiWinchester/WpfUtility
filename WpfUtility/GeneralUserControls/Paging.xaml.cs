@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace WpfUtility.GeneralUserControls
@@ -99,6 +101,18 @@ namespace WpfUtility.GeneralUserControls
         public Paging()
         {
             InitializeComponent();
+        }
+
+        private void NumberTextBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var tBox = (NumberTextBox)sender;
+                var prop = TextBox.TextProperty;
+
+                var binding = BindingOperations.GetBindingExpression(tBox, prop);
+                binding?.UpdateSource();
+            }
         }
     }
 }

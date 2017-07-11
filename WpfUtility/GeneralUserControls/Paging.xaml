@@ -42,9 +42,10 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="1" Width="25" Content="&lt;&lt;" Margin="3" Command="{Binding GoToFirstPageCommand}" />
                 <Button Grid.Column="2" Width="25" Content="&lt;" Margin="3" Command="{Binding GoToPreviousPageCommand}" />
-                <generalUserControls:NumberTextBox Grid.Column="3" Width="25" VerticalAlignment="Center" Text="{Binding CurrentPage}" />
-                <generalUserControls:NumberTextBox Grid.Column="5" Width="25" VerticalAlignment="Center" Text="{Binding TotalPages}"
-                                                   IsReadOnly="True" Background="DarkGray" />
+                <generalUserControls:NumberTextBox Grid.Column="3" Width="Auto" MinWidth="25" VerticalAlignment="Center"
+                                                   Text="{Binding CurrentPage}" KeyDown="NumberTextBox_OnKeyDown" />
+                <generalUserControls:NumberTextBox Grid.Column="5" Width="Auto"  MinWidth="25" VerticalAlignment="Center"
+                                                   Text="{Binding TotalPages}" IsReadOnly="True" Background="DarkGray"  />
                 <Button Grid.Column="6" Width="25" Content="&gt;" Margin="3" Command="{Binding GoToNextPageCommand}" />
                 <Button Grid.Column="7" Width="25" Content="&gt;&gt;" Margin="3" Command="{Binding GoToLastPageCommand}" />
             </Grid>
@@ -55,7 +56,8 @@
                 <ColumnDefinition Width="55" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="Entries Per Site:" />
-            <generalUserControls:NumberTextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding EntriesPerPage}" />
+            <generalUserControls:NumberTextBox Grid.Column="1" VerticalAlignment="Center"
+                                               Text="{Binding EntriesPerPage}" KeyDown="NumberTextBox_OnKeyDown" />
         </Grid>
     </Grid>
 </UserControl>

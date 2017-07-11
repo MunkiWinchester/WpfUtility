@@ -12,7 +12,6 @@ namespace WpfUtility.LogViewer.Classes
         protected override void Write(AsyncLogEventInfo logEvent)
         {
             base.Write(logEvent);
-
             LogReceived?.Invoke(logEvent);
         }
     }

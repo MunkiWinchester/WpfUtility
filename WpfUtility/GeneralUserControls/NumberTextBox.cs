@@ -1,12 +1,16 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace WpfUtility.GeneralUserControls
 {
     public class NumberTextBox : TextBox
     {
+        private static NumberTextBox _this;
+
         public NumberTextBox()
         {
+            _this = this;
             TextChanged += OnTextChanged;
             KeyDown += OnKeyDown;
         }
@@ -34,14 +38,40 @@ namespace WpfUtility.GeneralUserControls
             return true;
         }
 
+        public int Maximum
+        {
+            get => (int)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
+        }
+
+        public static readonly DependencyProperty MaximumProperty =
+            DependencyProperty.Register(nameof(Maximum), typeof(int),
+                typeof(NumberTextBox), new FrameworkPropertyMetadata(int.MaxValue, PropertyChangedCallback));
+
+        private static void PropertyChangedCallback(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            _this.Text = _this.LeaveOnlyNumbers(_this.Text);
+        }
+
+        public int Minimum
+        {
+            get => (int)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
+        }
+
+        public static readonly DependencyProperty MinimumProperty =
+            DependencyProperty.Register(nameof(Minimum), typeof(int),
+                typeof(NumberTextBox), new FrameworkPropertyMetadata(0, PropertyChangedCallback));
+
         /// <summary>
         /// Check if the input is a "delete commad"
         /// </summary>
         /// <param name="inKey">Pressed Key</param>
         /// <returns>True or false</returns>
-        private static bool IsDelOrBackspaceKey(Key inKey)
+        private static bool IsDelBackspaceOrEnterKey(Key inKey)
         {
-            return inKey == Key.Delete || inKey == Key.Back;
+            return inKey == Key.Delete || inKey == Key.Back || inKey == Key.Enter;
         }
 
         /// <summary>
@@ -49,7 +79,7 @@ namespace WpfUtility.GeneralUserControls
         /// </summary>
         /// <param name="inString">Entered string</param>
         /// <returns>Purged string</returns>
-        private static string LeaveOnlyNumbers(string inString)
+        private string LeaveOnlyNumbers(string inString)
         {
             var tmp = inString;
             foreach (var c in inString)
@@ -59,12 +89,20 @@ namespace WpfUtility.GeneralUserControls
                     tmp = tmp.Replace(c.ToString(), "");
                 }
             }
+            if(int.TryParse(tmp, out int number))
+            {
+                if (number > Maximum)
+                    return Maximum.ToString();
+                if (number < Minimum)
+                    return Minimum.ToString();
+            }
+
             return tmp;
         }
 
         protected void OnKeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = !IsNumberKey(e.Key) && !IsDelOrBackspaceKey(e.Key);
+            e.Handled = !IsNumberKey(e.Key) && !IsDelBackspaceOrEnterKey(e.Key);
         }
 
         protected void OnTextChanged(object sender, TextChangedEventArgs e)

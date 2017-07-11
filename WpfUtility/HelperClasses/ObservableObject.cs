@@ -5,7 +5,7 @@ using NlogViewer.Properties;
 
 namespace WpfUtility
 {
-    internal class ObservableObject : INotifyPropertyChanged
+    public class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

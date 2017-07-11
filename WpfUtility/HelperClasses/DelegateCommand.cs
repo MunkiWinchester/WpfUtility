@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace WpfUtility
 {
-    internal class DelegateCommand : ICommand
+    public class DelegateCommand : ICommand
     {
         private readonly Action _action;
 
