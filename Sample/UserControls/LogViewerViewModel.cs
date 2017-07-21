@@ -46,10 +46,9 @@ namespace Sample.UserControls
         
         private void SendLog(string logLevel)
         {
-            // TODO: Fix log
             var log = LogManager.GetLogger("button");
             var level = LogLevel.FromString(logLevel);
-            log.Log(level, Text);
+            log.Log(level, new Exception(Text), Text);
         }
 
         private void SendLogFromSource()

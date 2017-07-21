@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Controls;
 
 namespace Sample.UserControls
 {
     /// <summary>
     /// Interaction logic for Hyperlinks.xaml
     /// </summary>
-    public partial class Hyperlinks : UserControl
+    public partial class Hyperlinks
     {
         private readonly HyperlinksViewModel _viewModel;
 

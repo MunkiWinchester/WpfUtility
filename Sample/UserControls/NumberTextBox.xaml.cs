@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace Sample.UserControls
+﻿namespace Sample.UserControls
 {
     /// <summary>
     /// Interaction logic for NumberTextBox.xaml
     /// </summary>
-    public partial class NumberTextBox : UserControl
+    public partial class NumberTextBox
     {
         public NumberTextBox()
         {

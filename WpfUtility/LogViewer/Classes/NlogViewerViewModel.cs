@@ -28,12 +28,14 @@ namespace WpfUtility.LogViewer.Classes
             LogEntries = new ObservableCollection<LogEvent>();
         }
 
-        public void ActivateLoggers()
+        public void ActivateLoggers(bool activate)
         {
-            // TODO: Make this chooseable
             foreach (var target in GetLoggers())
             {
-                target.LogReceived += LogReceived;
+                if(activate)
+                    target.LogReceived += LogReceived;
+                else
+                    target.LogReceived -= LogReceived;
             }
         }
 

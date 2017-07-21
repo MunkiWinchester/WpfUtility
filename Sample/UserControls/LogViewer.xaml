@@ -28,9 +28,10 @@
         <GroupBox Grid.Row="1" Header="Autosending">
             <StackPanel Orientation="Vertical">
                 <CheckBox x:Name="ChkBackgroundSending" Content="Send logs from background thread." IsChecked="{Binding BackgroundSending}" />
+                <CheckBox x:Name="ChkActivateLoggers" Content="(De)activate tracking of loggers" IsChecked="True" />
             </StackPanel>
         </GroupBox>
         <logViewer:NlogViewer Grid.Row="2" Margin="3" ItemSource="{Binding RelativeSource={RelativeSource FindAncestor,
-            AncestorType={x:Type UserControl}}, Path=DataContext.ItemSource}"/>
+            AncestorType={x:Type UserControl}}, Path=DataContext.ItemSource}" ActivateLoggers="{Binding ElementName=ChkActivateLoggers, Path=IsChecked}" />
     </Grid>
 </UserControl>

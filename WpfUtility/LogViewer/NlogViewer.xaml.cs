@@ -40,6 +40,27 @@ namespace WpfUtility.LogViewer
                 }
             }
         }
+        public bool ActivateLoggers
+        {
+            get => (bool)GetValue(ActivateLoggersProperty);
+            set => SetValue(ActivateLoggersProperty, value);
+        }
+
+        public static readonly DependencyProperty ActivateLoggersProperty =
+            DependencyProperty.Register(nameof(ActivateLoggers), typeof(bool),
+                typeof(NlogViewer), new FrameworkPropertyMetadata(true, PropertyChangedCallbackActivate));
+
+        private static void PropertyChangedCallbackActivate(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var nlogViewer = dependencyObject as NlogViewer;
+            if (nlogViewer != null)
+            {
+                var activate = dependencyPropertyChangedEventArgs.NewValue != null &&
+                               (bool) dependencyPropertyChangedEventArgs.NewValue;
+                nlogViewer.ViewModel.ActivateLoggers(activate);
+            }
+        }
 
         public NlogViewer()
         {
@@ -48,7 +69,8 @@ namespace WpfUtility.LogViewer
             DataContext = ViewModel;
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                ViewModel.ActivateLoggers();
+                if(ActivateLoggers)
+                    ViewModel.ActivateLoggers(ActivateLoggers);
             }
             _this = this;
         }
