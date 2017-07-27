@@ -37,6 +37,7 @@ namespace WpfUtility.GeneralUserControls
         private static void ApplyHyperLinks(IntListHyperlinkTextBlock tb)
         {
             tb.Inlines.Clear();
+            if (tb.ItemSource == null) return;
             for (var index = 0; index < tb.ItemSource.Count; index++)
             {
                 var item = tb.ItemSource[index];
