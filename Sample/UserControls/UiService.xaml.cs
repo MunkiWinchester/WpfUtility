@@ -1,4 +1,7 @@
-﻿namespace Sample.UserControls
+﻿using System.Windows;
+using WpfUtility.GeneralUserControls;
+
+namespace Sample.UserControls
 {
     /// <summary>
     /// Interaction logic for UiService.xaml
@@ -8,6 +11,11 @@
         public UiService()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            UiServices.ToggleBusyState();
         }
     }
 }
