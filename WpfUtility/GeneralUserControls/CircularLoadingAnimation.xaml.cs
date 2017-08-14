@@ -6,25 +6,25 @@ using System.Windows.Threading;
 namespace WpfUtility.GeneralUserControls
 {
     /// <summary>
-    /// Interaction logic for CircularProgressBar.xaml
+    /// Interaction logic for CircularLoadingAnimation.xaml
     /// </summary>
-    public partial class CircularProgressBar
+    public partial class CircularLoadingAnimation
     {
         public static readonly DependencyProperty MinimumProperty =
-            DependencyProperty.Register(nameof(Minimum), typeof(int), typeof(CircularProgressBar), new UIPropertyMetadata(1));
+            DependencyProperty.Register(nameof(Minimum), typeof(int), typeof(CircularLoadingAnimation), new UIPropertyMetadata(1));
 
         public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register(nameof(Maximum), typeof(int), typeof(CircularProgressBar), new UIPropertyMetadata(1));
+            DependencyProperty.Register(nameof(Maximum), typeof(int), typeof(CircularLoadingAnimation), new UIPropertyMetadata(1));
 
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(nameof(Value), typeof(int), typeof(CircularProgressBar), new UIPropertyMetadata(100));
+            DependencyProperty.Register(nameof(Value), typeof(int), typeof(CircularLoadingAnimation), new UIPropertyMetadata(100));
         
         private readonly DispatcherTimer _animationTimer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CircularProgressBar"/> class.
+        /// Initializes a new instance of the <see cref="CircularLoadingAnimation"/> class.
         /// </summary>
-        public CircularProgressBar()
+        public CircularLoadingAnimation()
         {
             InitializeComponent();
 
@@ -42,8 +42,8 @@ namespace WpfUtility.GeneralUserControls
         /// <value>The minimum.</value>
         public int Minimum
         {
-            get { return (int)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get => (int)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace WpfUtility.GeneralUserControls
         /// <value>The maximum.</value>
         public int Maximum
         {
-            get { return (int)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (int)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace WpfUtility.GeneralUserControls
         /// <value>The value.</value>
         public int Value
         {
-            get { return (int)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => (int)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace WpfUtility.GeneralUserControls
         /// <param name="step">The step to change.</param>
         private static void SetPosition(DependencyObject ellipse, double offset, double posOffSet, double step)
         {
-            ellipse.SetValue(Canvas.LeftProperty, 50 + (Math.Sin(offset + (posOffSet * step)) * 50));
-            ellipse.SetValue(Canvas.TopProperty, 50 + (Math.Cos(offset + (posOffSet * step)) * 50));
+            ellipse.SetValue(Canvas.LeftProperty, 50 + Math.Sin(offset + posOffSet * step) * 50);
+            ellipse.SetValue(Canvas.TopProperty, 50 + Math.Cos(offset + posOffSet * step) * 50);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace WpfUtility.GeneralUserControls
         /// Handles the animation tick.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnAnimationTick(object sender, EventArgs e)
         {
             SpinnerRotate.Angle = (SpinnerRotate.Angle + 36) % 360;
@@ -111,7 +111,7 @@ namespace WpfUtility.GeneralUserControls
         /// Handles the loaded.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void OnCanvasLoaded(object sender, RoutedEventArgs e)
         {
             const double offset = Math.PI;

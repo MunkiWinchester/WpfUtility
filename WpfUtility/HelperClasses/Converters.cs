@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace WpfUtility.GeneralUserControls
+namespace WpfUtility
 {
     public class BooleanConverter<T> : IValueConverter
     {
@@ -20,7 +20,7 @@ namespace WpfUtility.GeneralUserControls
 
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is bool && ((bool)value) ? True : False;
+            return value is bool && (bool)value ? True : False;
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -47,11 +47,11 @@ namespace WpfUtility.GeneralUserControls
         {
             if (value is System.Drawing.Color)
             {
-                var color = (System.Drawing.Color) value;
+                var color = (System.Drawing.Color)value;
                 return new SolidColorBrush(
                     Color.FromArgb(255, color.R, color.G, color.B));
             }
-            return new SolidColorBrush(new Color {A = 255, R = 255, B = 255, G = 255});
+            return new SolidColorBrush(new Color { A = 255, R = 255, B = 255, G = 255 });
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -53,11 +53,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneralUserControls\CircularProgressBar.xaml.cs">
-      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    <Compile Include="GeneralUserControls\CircularLoadingAnimation.xaml.cs">
+      <DependentUpon>CircularLoadingAnimation.xaml</DependentUpon>
     </Compile>
     <Compile Include="GeneralUserControls\ClipboardHelper.cs" />
-    <Compile Include="GeneralUserControls\Converters.cs" />
+    <Compile Include="HelperClasses\Converters.cs" />
     <Compile Include="GeneralUserControls\HighlightTextBlock.cs" />
     <Compile Include="GeneralUserControls\IntListHyperlinkTextBlock.cs" />
     <Compile Include="GeneralUserControls\LoadingPanel.xaml.cs">
@@ -91,7 +91,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="GeneralUserControls\CircularProgressBar.xaml">
+    <Page Include="GeneralUserControls\CircularLoadingAnimation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

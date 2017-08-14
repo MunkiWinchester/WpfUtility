@@ -4,10 +4,6 @@
              xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <LinearGradientBrush x:Key="PanelBackground" EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="1" />
-            <GradientStop Color="#FF1B1B1B" />
-        </LinearGradientBrush>
         <Style x:Key="BasicButton" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
@@ -19,18 +15,6 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedFocused"/>
-                            </Trigger>
-                            <Trigger Property="IsDefaulted" Value="True">
-                                <Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedFocused"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedPressed"/>
-                            </Trigger>
-                            <Trigger Property="ToggleButton.IsChecked" Value="True">
-                                <Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedPressed"/>
-                            </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                             </Trigger>
@@ -69,14 +53,12 @@
             <Setter Property="SnapsToDevicePixels" Value="True" />
         </Style>
     </UserControl.Resources>
-    <DockPanel Background="{StaticResource PanelBackground}" 
+    <DockPanel Background="Transparent" 
              Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
                                   Path=IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <Path Data="M0,44.956 L312.00641,44.956" Height="1" Margin="0,0.25,0,0" Stretch="Fill" DockPanel.Dock="Top" Stroke="Black" />
-        <Path Data="M0,44.956 L312.00641,44.956" Height="1" Margin="0,0.25,0,0" Stretch="Fill" DockPanel.Dock="Top" Stroke="#FF2F2F2F" />
         <Button x:Name="BtnClose" DockPanel.Dock="Right" Style="{StaticResource CloseButton}" ToolTip="Close"
             Click="OnCloseClick" Content="Close X" />
-        <guc:CircularProgressBar x:Name="ProgressBar" DockPanel.Dock="Left" HorizontalAlignment="Left"
+        <guc:CircularLoadingAnimation x:Name="ProgressBar" DockPanel.Dock="Left" HorizontalAlignment="Left"
                              VerticalAlignment="Top" Height="45" Margin="18,10" />
         <StackPanel VerticalAlignment="Top">
             <TextBlock x:Name="TxtMessage" Style="{StaticResource PanelMessageText}" Foreground="#FFA1C3D2" 
