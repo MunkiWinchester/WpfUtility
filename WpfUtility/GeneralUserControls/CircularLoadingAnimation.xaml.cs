@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace WpfUtility.GeneralUserControls
@@ -10,16 +11,34 @@ namespace WpfUtility.GeneralUserControls
     /// </summary>
     public partial class CircularLoadingAnimation
     {
-        public static readonly DependencyProperty MinimumProperty =
-            DependencyProperty.Register(nameof(Minimum), typeof(int), typeof(CircularLoadingAnimation), new UIPropertyMetadata(1));
+        public SolidColorBrush ForegroundColor
+        {
+            get => (SolidColorBrush)GetValue(ForegroundColorProperty);
+            set => SetValue(ForegroundColorProperty, value);
+        }
 
-        public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register(nameof(Maximum), typeof(int), typeof(CircularLoadingAnimation), new UIPropertyMetadata(1));
+        public static readonly DependencyProperty ForegroundColorProperty =
+            DependencyProperty.Register(nameof(ForegroundColor), typeof(Brush),
+                typeof(CircularLoadingAnimation), new FrameworkPropertyMetadata(
+                    new SolidColorBrush(Colors.Red),
+                    FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender,
+                    ForegroundColorPropertyChangedCallback));
 
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(nameof(Value), typeof(int), typeof(CircularLoadingAnimation), new UIPropertyMetadata(100));
-        
+        private static void ForegroundColorPropertyChangedCallback(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var circularLoadingAnimation = dependencyObject as CircularLoadingAnimation;
+            if (circularLoadingAnimation != null)
+            {
+                var color = dependencyPropertyChangedEventArgs.NewValue as SolidColorBrush;
+                if (color != null)
+                    circularLoadingAnimation._viewModel.ForegroundColor = color;
+            }
+        }
+
         private readonly DispatcherTimer _animationTimer;
+        private readonly CircularLoadingAnimationViewModel _viewModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CircularLoadingAnimation"/> class.
@@ -27,43 +46,14 @@ namespace WpfUtility.GeneralUserControls
         public CircularLoadingAnimation()
         {
             InitializeComponent();
+            _viewModel = new CircularLoadingAnimationViewModel();
+            DataContext = _viewModel;
 
             IsVisibleChanged += OnVisibleChanged;
-
             _animationTimer = new DispatcherTimer(DispatcherPriority.ContextIdle, Dispatcher)
             {
                 Interval = new TimeSpan(0, 0, 0, 0, 75)
             };
-        }
-
-        /// <summary>
-        /// Gets or sets the minimum.
-        /// </summary>
-        /// <value>The minimum.</value>
-        public int Minimum
-        {
-            get => (int)GetValue(MinimumProperty);
-            set => SetValue(MinimumProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the maximum.
-        /// </summary>
-        /// <value>The maximum.</value>
-        public int Maximum
-        {
-            get => (int)GetValue(MaximumProperty);
-            set => SetValue(MaximumProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the value.
-        /// </summary>
-        /// <value>The value.</value>
-        public int Value
-        {
-            get => (int)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, value);
         }
 
         /// <summary>

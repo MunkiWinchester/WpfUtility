@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Input;
+using System.Windows.Media;
 
 namespace WpfUtility.GeneralUserControls
 {
@@ -9,16 +9,29 @@ namespace WpfUtility.GeneralUserControls
     public partial class LoadingPanel
     {
         public static readonly DependencyProperty IsLoadingProperty =
-            DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(LoadingPanel), new UIPropertyMetadata(false));
+            DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(LoadingPanel),
+                new UIPropertyMetadata(false));
+
+        public static readonly DependencyProperty ForegroundColorProperty =
+            DependencyProperty.Register(nameof(ForegroundColor), typeof(SolidColorBrush), typeof(LoadingPanel),
+                new UIPropertyMetadata(new SolidColorBrush(Colors.Red)));
+
+        public static readonly DependencyProperty MessageForegroundColorProperty =
+            DependencyProperty.Register(nameof(MessageForegroundColor), typeof(SolidColorBrush), typeof(LoadingPanel),
+                new UIPropertyMetadata(new SolidColorBrush(Colors.Black)));
+
+        public static readonly DependencyProperty SubMessageForegroundColorProperty =
+            DependencyProperty.Register(nameof(SubMessageForegroundColor), typeof(SolidColorBrush),
+                typeof(LoadingPanel),
+                new UIPropertyMetadata(new SolidColorBrush(Colors.DimGray)));
 
         public static readonly DependencyProperty MessageProperty =
-            DependencyProperty.Register(nameof(Message), typeof(string), typeof(LoadingPanel), new UIPropertyMetadata("Loading..."));
+            DependencyProperty.Register(nameof(Message), typeof(string), typeof(LoadingPanel),
+                new UIPropertyMetadata("Loading..."));
 
         public static readonly DependencyProperty SubMessageProperty =
-            DependencyProperty.Register(nameof(SubMessage), typeof(string), typeof(LoadingPanel), new UIPropertyMetadata(string.Empty));
-
-        public static readonly DependencyProperty ClosePanelCommandProperty =
-            DependencyProperty.Register(nameof(ClosePanelCommand), typeof(ICommand), typeof(LoadingPanel));
+            DependencyProperty.Register(nameof(SubMessage), typeof(string), typeof(LoadingPanel),
+                new UIPropertyMetadata(string.Empty));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoadingPanel"/> class.
@@ -36,8 +49,38 @@ namespace WpfUtility.GeneralUserControls
         /// </value>
         public bool IsLoading
         {
-            get { return (bool)GetValue(IsLoadingProperty); }
-            set { SetValue(IsLoadingProperty, value); }
+            get => (bool) GetValue(IsLoadingProperty);
+            set => SetValue(IsLoadingProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the color of the circular loading animation.
+        /// </summary>
+        /// <value> The (solid color brush) color. </value>
+        public SolidColorBrush ForegroundColor
+        {
+            get => (SolidColorBrush) GetValue(ForegroundColorProperty);
+            set => SetValue(ForegroundColorProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the color of the circular loading animation.
+        /// </summary>
+        /// <value> The (solid color brush) color. </value>
+        public SolidColorBrush MessageForegroundColor
+        {
+            get => (SolidColorBrush) GetValue(ForegroundColorProperty);
+            set => SetValue(ForegroundColorProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the color of the circular loading animation.
+        /// </summary>
+        /// <value> The (solid color brush) color. </value>
+        public SolidColorBrush SubMessageForegroundColor
+        {
+            get => (SolidColorBrush) GetValue(ForegroundColorProperty);
+            set => SetValue(ForegroundColorProperty, value);
         }
 
         /// <summary>
@@ -46,8 +89,8 @@ namespace WpfUtility.GeneralUserControls
         /// <value>The message.</value>
         public string Message
         {
-            get { return (string)GetValue(MessageProperty); }
-            set { SetValue(MessageProperty, value); }
+            get => (string) GetValue(MessageProperty);
+            set => SetValue(MessageProperty, value);
         }
 
         /// <summary>
@@ -56,28 +99,8 @@ namespace WpfUtility.GeneralUserControls
         /// <value>The sub message.</value>
         public string SubMessage
         {
-            get { return (string)GetValue(SubMessageProperty); }
-            set { SetValue(SubMessageProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the close panel command.
-        /// </summary>
-        /// <value>The close panel command.</value>
-        public ICommand ClosePanelCommand
-        {
-            get { return (ICommand)GetValue(ClosePanelCommandProperty); }
-            set { SetValue(ClosePanelCommandProperty, value); }
-        }
-
-        /// <summary>
-        /// Called when [close click].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void OnCloseClick(object sender, RoutedEventArgs e)
-        {
-            ClosePanelCommand?.Execute(null);
+            get => (string) GetValue(SubMessageProperty);
+            set => SetValue(SubMessageProperty, value);
         }
     }
 }

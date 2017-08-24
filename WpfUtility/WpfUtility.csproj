@@ -56,6 +56,7 @@
     <Compile Include="GeneralUserControls\CircularLoadingAnimation.xaml.cs">
       <DependentUpon>CircularLoadingAnimation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GeneralUserControls\CircularLoadingAnimationViewModel.cs" />
     <Compile Include="GeneralUserControls\ClipboardHelper.cs" />
     <Compile Include="HelperClasses\Converters.cs" />
     <Compile Include="GeneralUserControls\HighlightTextBlock.cs" />
@@ -89,6 +90,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
+    <None Include="WpfUtility.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="GeneralUserControls\CircularLoadingAnimation.xaml">

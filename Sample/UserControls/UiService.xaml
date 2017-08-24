@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls;assembly=WpfUtility"
+             xmlns:userControls="clr-namespace:Sample.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <userControls:UiServiceViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,14 +18,16 @@
         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" >
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Button x:Name="BtnShow" Content="Show Panel" Command="{Binding ShowPanelCommand}"
-                Click="ButtonBase_OnClick" Width="86" Height="22" />
+                        Click="ButtonBase_OnClick" Width="86" Height="22" />
                 <Button x:Name="BtnHide" Content="Hide Panel" Command="{Binding HidePanelCommand}"
-                Click="ButtonBase_OnClick" Width="86" Height="22" Margin="5,0,0,0" />
+                        Click="ButtonBase_OnClick" Width="86" Height="22" Margin="5,0,0,0" />
                 <Button x:Name="BtnChange" Content="Change Sub Message" Command="{Binding ChangeSubMessageCommand}"
-                Width="130" Height="22" Margin="5,0,0,0" />
+                        Width="130" Height="22" Margin="5,0,0,0" />
             </StackPanel>
         </DockPanel>
-        <guc:LoadingPanel Grid.Row="1" x:Name="LoadingPanel" IsLoading="{Binding PanelLoading}" Message="{Binding PanelMainMessage}"
-                        SubMessage="{Binding PanelSubMessage}" ClosePanelCommand="{Binding PanelCloseCommand}" />
+        <guc:LoadingPanel Grid.Row="1" x:Name="LoadingPanel" IsLoading="{Binding IsLoading}" Message="{Binding MainMessage}"
+                        SubMessage="{Binding SubMessage}" ForegroundColor="#FF46FF00" />
+        <guc:CircularLoadingAnimation Grid.Row="1" ForegroundColor="SandyBrown" />
+        
     </Grid>
 </UserControl>

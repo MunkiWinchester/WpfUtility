@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -40,9 +41,10 @@ namespace WpfUtility.LogViewer
                 }
             }
         }
+
         public bool ActivateLoggers
         {
-            get => (bool)GetValue(ActivateLoggersProperty);
+            get => (bool) GetValue(ActivateLoggersProperty);
             set => SetValue(ActivateLoggersProperty, value);
         }
 
@@ -58,7 +60,28 @@ namespace WpfUtility.LogViewer
             {
                 var activate = dependencyPropertyChangedEventArgs.NewValue != null &&
                                (bool) dependencyPropertyChangedEventArgs.NewValue;
-                nlogViewer.ViewModel.ActivateLoggers(activate);
+                nlogViewer.ViewModel.ToggleLoggers(activate);
+            }
+        }
+
+        public bool UseApplicationDispatcher
+        {
+            get => (bool) GetValue(UseApplicationDispatcherProperty);
+            set => SetValue(UseApplicationDispatcherProperty, value);
+        }
+
+        public static readonly DependencyProperty UseApplicationDispatcherProperty =
+            DependencyProperty.Register(nameof(UseApplicationDispatcher), typeof(bool),
+                typeof(NlogViewer),
+                new FrameworkPropertyMetadata(true, UseApplicationDispatcherPropertyChangedCallbackActivate));
+
+        private static void UseApplicationDispatcherPropertyChangedCallbackActivate(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var nlogViewer = dependencyObject as NlogViewer;
+            if (nlogViewer != null)
+            {
+                _this.ChooseDispatcherAndToggleLoggers();
             }
         }
 
@@ -67,12 +90,11 @@ namespace WpfUtility.LogViewer
             ViewModel = new NlogViewerViewModel();
             InitializeComponent();
             DataContext = ViewModel;
+            _this = this;
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                if(ActivateLoggers)
-                    ViewModel.ActivateLoggers(ActivateLoggers);
+                ChooseDispatcherAndToggleLoggers();
             }
-            _this = this;
         }
 
         private static NlogViewer _this;
@@ -89,6 +111,33 @@ namespace WpfUtility.LogViewer
                     scrollViewer?.ScrollToTop();
                 }
             }
+        }
+
+        private void ChooseDispatcherAndToggleLoggers()
+        {
+                if (_this.UseApplicationDispatcher)
+                    ViewModel.ToggleLoggers(_this.ActivateLoggers);
+                else
+                    ToggleLoggers(_this.ActivateLoggers);
+        }
+
+        private void ToggleLoggers(bool activate)
+        {
+            foreach (var target in ViewModel.GetLoggers())
+            {
+                if (activate)
+                    target.LogReceived += LogReceived;
+                else
+                    target.LogReceived -= LogReceived;
+            }
+        }
+
+        private void LogReceived(NLog.Common.AsyncLogEventInfo log)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                ViewModel.LogEntries.Add(new LogEvent(log.LogEvent));
+            }));
         }
     }
 }

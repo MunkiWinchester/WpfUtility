@@ -28,7 +28,7 @@ namespace WpfUtility.LogViewer.Classes
             LogEntries = new ObservableCollection<LogEvent>();
         }
 
-        public void ActivateLoggers(bool activate)
+        public void ToggleLoggers(bool activate)
         {
             foreach (var target in GetLoggers())
             {
@@ -39,17 +39,18 @@ namespace WpfUtility.LogViewer.Classes
             }
         }
 
-        private static IEnumerable<NlogViewerTarget> GetLoggers()
+        public IEnumerable<NlogViewerTarget> GetLoggers()
         {
             return LogManager.Configuration.AllTargets.OfType<NlogViewerTarget>().ToList();
         }
 
         private void LogReceived(NLog.Common.AsyncLogEventInfo log)
         {
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                LogEntries.Add(new LogEvent(log.LogEvent));
-            }));
+            if (Application.Current?.Dispatcher != null)
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    LogEntries.Add(new LogEvent(log.LogEvent));
+                }));
         }
     }
 }

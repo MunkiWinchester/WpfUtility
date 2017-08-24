@@ -33,12 +33,7 @@ namespace WpfUtility
         /// <param name="canExecuteMethod">The can execute method.</param>
         public DelegateCommand(Action executeMethod, Func<bool> canExecuteMethod)
         {
-            if (executeMethod == null)
-            {
-                throw new ArgumentNullException(nameof(executeMethod));
-            }
-
-            _action = executeMethod;
+            _action = executeMethod ?? throw new ArgumentNullException(nameof(executeMethod));
             _canExecute = canExecuteMethod;
         }
 
@@ -61,14 +56,8 @@ namespace WpfUtility
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
-            add
-            {
-                CommandManagerHelper.AddWeakReferenceHandler(ref _canExecuteChangedHandlers, value);
-            }
-            remove
-            {
-                CommandManagerHelper.RemoveWeakReferenceHandler(_canExecuteChangedHandlers, value);
-            }
+            add => CommandManagerHelper.AddWeakReferenceHandler(ref _canExecuteChangedHandlers, value);
+            remove => CommandManagerHelper.RemoveWeakReferenceHandler(_canExecuteChangedHandlers, value);
         }
 
         /// <summary>

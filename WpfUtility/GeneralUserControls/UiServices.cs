@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 
 namespace WpfUtility.GeneralUserControls
 {
@@ -18,7 +19,13 @@ namespace WpfUtility.GeneralUserControls
         public static void ToggleBusyState()
         {
             _isBusy = !_isBusy;
-            Mouse.OverrideCursor = _isBusy ? Cursors.Wait : null;
+            if (Application.Current?.Dispatcher != null)
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Mouse.OverrideCursor = _isBusy ? Cursors.Wait : null;
+                });
+            else
+                Mouse.OverrideCursor = _isBusy ? Cursors.Wait : null;
         }
     }
 }

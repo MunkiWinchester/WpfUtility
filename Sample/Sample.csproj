@@ -93,6 +93,7 @@
     <Compile Include="UserControls\UiService.xaml.cs">
       <DependentUpon>UiService.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UiServiceViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
