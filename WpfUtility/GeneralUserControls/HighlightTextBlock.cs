@@ -2,36 +2,17 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using Brush = System.Windows.Media.Brush;
-using Brushes = System.Windows.Media.Brushes;
+using System.Windows.Media;
 
 namespace WpfUtility.GeneralUserControls
 {
     public class HighlightTextBlock : TextBlock
     {
-        /// <summary>
-        /// Text of the TextBlock
-        /// </summary>
-        public new string Text
-        {
-            get => (string) GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
-        }
-
         public new static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(string.Empty,
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
-
-        /// <summary>
-        /// Phrase which should be highlighted in the TextBlock
-        /// </summary>
-        public string HighlightPhrase
-        {
-            get => (string) GetValue(HighlightPhraseProperty);
-            set => SetValue(HighlightPhraseProperty, value);
-        }
 
         public static readonly DependencyProperty HighlightPhraseProperty =
             DependencyProperty.Register(nameof(HighlightPhrase), typeof(string),
@@ -39,44 +20,17 @@ namespace WpfUtility.GeneralUserControls
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
 
-        /// <summary>
-        /// Brush that is used to highlight the phrase
-        /// </summary>
-        public Brush HighlightBrush
-        {
-            get => (Brush) GetValue(HighlightBrushProperty);
-            set => SetValue(HighlightBrushProperty, value);
-        }
-
         public static readonly DependencyProperty HighlightBrushProperty =
             DependencyProperty.Register(nameof(HighlightBrush), typeof(Brush),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(Brushes.Yellow,
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
 
-        /// <summary>
-        /// Brush that is used to highlight the phrase
-        /// </summary>
-        public Brush HighlightForeGround
-        {
-            get => (Brush)GetValue(HighlightForeGroundProperty);
-            set => SetValue(HighlightForeGroundProperty, value);
-        }
-
         public static readonly DependencyProperty HighlightForeGroundProperty =
             DependencyProperty.Register(nameof(HighlightForeGround), typeof(Brush),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(Brushes.Black,
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
-
-        /// <summary>
-        /// If the highlighting is case sensitive
-        /// </summary>
-        public bool IsCaseSensitive
-        {
-            get => (bool) GetValue(IsCaseSensitiveProperty);
-            set => SetValue(IsCaseSensitiveProperty, value);
-        }
 
         public static readonly DependencyProperty IsCaseSensitiveProperty =
             DependencyProperty.Register(nameof(IsCaseSensitive), typeof(bool),
@@ -85,7 +39,52 @@ namespace WpfUtility.GeneralUserControls
                     UpdateHighlighting));
 
         /// <summary>
-        /// Method which is invoked trough the dependency
+        ///     Text of the TextBlock
+        /// </summary>
+        public new string Text
+        {
+            get => (string) GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
+
+        /// <summary>
+        ///     Phrase which should be highlighted in the TextBlock
+        /// </summary>
+        public string HighlightPhrase
+        {
+            get => (string) GetValue(HighlightPhraseProperty);
+            set => SetValue(HighlightPhraseProperty, value);
+        }
+
+        /// <summary>
+        ///     Brush that is used to highlight the phrase
+        /// </summary>
+        public Brush HighlightBrush
+        {
+            get => (Brush) GetValue(HighlightBrushProperty);
+            set => SetValue(HighlightBrushProperty, value);
+        }
+
+        /// <summary>
+        ///     Brush that is used to highlight the phrase
+        /// </summary>
+        public Brush HighlightForeGround
+        {
+            get => (Brush) GetValue(HighlightForeGroundProperty);
+            set => SetValue(HighlightForeGroundProperty, value);
+        }
+
+        /// <summary>
+        ///     If the highlighting is case sensitive
+        /// </summary>
+        public bool IsCaseSensitive
+        {
+            get => (bool) GetValue(IsCaseSensitiveProperty);
+            set => SetValue(IsCaseSensitiveProperty, value);
+        }
+
+        /// <summary>
+        ///     Method which is invoked trough the dependency
         /// </summary>
         /// <param name="d">Object, in our case this control :)</param>
         /// <param name="e">The event which "triggered" the method</param>
@@ -95,7 +94,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Base method to highlight the phrase in the TextBlock
+        ///     Base method to highlight the phrase in the TextBlock
         /// </summary>
         /// <param name="tb">This usercontrol, contains the phrase and the text</param>
         private static void PrepareHighlight(HighlightTextBlock tb)
@@ -128,7 +127,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Deeper method to highlight the phrase in the TextBlock (recursive)
+        ///     Deeper method to highlight the phrase in the TextBlock (recursive)
         /// </summary>
         /// <param name="tb">This usercontrol, contains the phrase and the text</param>
         /// <param name="index">Index to indicate the start "point" in the text</param>
@@ -136,7 +135,7 @@ namespace WpfUtility.GeneralUserControls
         {
             var highlightPhrase = tb.HighlightPhrase;
             var text = tb.Text;
-            
+
             // find (new) index of the highlight phrase
             var newIndex = text.IndexOf(highlightPhrase, index,
                 tb.IsCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
@@ -173,7 +172,9 @@ namespace WpfUtility.GeneralUserControls
                 //if the end of the matched highlightPhrase occurs before the end of text
                 if (newIndex < text.Length)
                     // phrase could appear multiple times, so check again
+                {
                     ApplyHighlight(tb, newIndex);
+                }
                 else
                 {
                     var remainingText = text.Substring(newIndex);

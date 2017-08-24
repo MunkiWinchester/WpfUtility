@@ -3,7 +3,7 @@
 namespace Sample.UserControls
 {
     /// <summary>
-    /// Interaction logic for Clipboard.xaml
+    ///     Interaction logic for Clipboard.xaml
     /// </summary>
     public partial class Clipboard
     {

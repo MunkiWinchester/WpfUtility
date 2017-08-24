@@ -11,27 +11,8 @@ namespace Sample.UserControls
 {
     public class ClipboardViewModel : ObservableObject
     {
-        private ObservableCollection<int> _selectedProducts = new ObservableCollection<int>();
-
-        public ObservableCollection<int> SelectedProducts
-        {
-            get => _selectedProducts;
-            private set => SetField(ref _selectedProducts, value);
-        }
-
-
         private ObservableCollection<string> _pasteElements = new ObservableCollection<string>();
-
-        public ObservableCollection<string> PasteElements
-        {
-            get => _pasteElements;
-            private set => SetField(ref _pasteElements, value);
-        }
-        
-
-        public ICommand PasteCommand => new DelegateCommand(Paste);
-
-        public ICommand EmptyListCommand => new DelegateCommand(EmptyList);
+        private ObservableCollection<int> _selectedProducts = new ObservableCollection<int>();
 
         public ClipboardViewModel()
         {
@@ -40,15 +21,30 @@ namespace Sample.UserControls
                     new List<string> {"218382", "344846", "5614645", "abcdef", "ghijkl", "218382", "mnopqr"});
         }
 
+        public ObservableCollection<int> SelectedProducts
+        {
+            get => _selectedProducts;
+            private set => SetField(ref _selectedProducts, value);
+        }
+
+        public ObservableCollection<string> PasteElements
+        {
+            get => _pasteElements;
+            private set => SetField(ref _pasteElements, value);
+        }
+
+
+        public ICommand PasteCommand => new DelegateCommand(Paste);
+
+        public ICommand EmptyListCommand => new DelegateCommand(EmptyList);
+
         private void Paste()
         {
             var rowData = ClipboardHelper.ParseClipboardData().Select(x => x[0]).ToList();
             var cleansedList = new List<int>();
             foreach (var entry in rowData)
-            {
                 if (int.TryParse(entry, out int value))
                     cleansedList.Add(value);
-            }
             SelectedProducts = new ObservableCollection<int>(cleansedList);
             if (!cleansedList.Any())
                 MessageBox.Show(

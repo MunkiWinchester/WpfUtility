@@ -7,16 +7,10 @@ using System.Windows.Threading;
 namespace WpfUtility.GeneralUserControls
 {
     /// <summary>
-    /// Interaction logic for CircularLoadingAnimation.xaml
+    ///     Interaction logic for CircularLoadingAnimation.xaml
     /// </summary>
     public partial class CircularLoadingAnimation
     {
-        public SolidColorBrush ForegroundColor
-        {
-            get => (SolidColorBrush)GetValue(ForegroundColorProperty);
-            set => SetValue(ForegroundColorProperty, value);
-        }
-
         public static readonly DependencyProperty ForegroundColorProperty =
             DependencyProperty.Register(nameof(ForegroundColor), typeof(Brush),
                 typeof(CircularLoadingAnimation), new FrameworkPropertyMetadata(
@@ -24,6 +18,32 @@ namespace WpfUtility.GeneralUserControls
                     FrameworkPropertyMetadataOptions.AffectsRender |
                     FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender,
                     ForegroundColorPropertyChangedCallback));
+
+        private readonly DispatcherTimer _animationTimer;
+        private readonly CircularLoadingAnimationViewModel _viewModel;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="CircularLoadingAnimation" /> class.
+        /// </summary>
+        public CircularLoadingAnimation()
+        {
+            InitializeComponent();
+            _viewModel = new CircularLoadingAnimationViewModel();
+            DataContext = _viewModel;
+
+            IsVisibleChanged += OnVisibleChanged;
+            // TODO: Use Storyboard instead of Timer
+            _animationTimer = new DispatcherTimer(DispatcherPriority.ContextIdle, Dispatcher)
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 75)
+            };
+        }
+
+        public SolidColorBrush ForegroundColor
+        {
+            get => (SolidColorBrush) GetValue(ForegroundColorProperty);
+            set => SetValue(ForegroundColorProperty, value);
+        }
 
         private static void ForegroundColorPropertyChangedCallback(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
@@ -37,27 +57,8 @@ namespace WpfUtility.GeneralUserControls
             }
         }
 
-        private readonly DispatcherTimer _animationTimer;
-        private readonly CircularLoadingAnimationViewModel _viewModel;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="CircularLoadingAnimation"/> class.
-        /// </summary>
-        public CircularLoadingAnimation()
-        {
-            InitializeComponent();
-            _viewModel = new CircularLoadingAnimationViewModel();
-            DataContext = _viewModel;
-
-            IsVisibleChanged += OnVisibleChanged;
-            _animationTimer = new DispatcherTimer(DispatcherPriority.ContextIdle, Dispatcher)
-            {
-                Interval = new TimeSpan(0, 0, 0, 0, 75)
-            };
-        }
-
-        /// <summary>
-        /// Sets the position.
+        ///     Sets the position.
         /// </summary>
         /// <param name="ellipse">The ellipse.</param>
         /// <param name="offset">The offset.</param>
@@ -70,7 +71,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Starts this instance.
+        ///     Starts this instance.
         /// </summary>
         private void Start()
         {
@@ -79,7 +80,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Stops this instance.
+        ///     Stops this instance.
         /// </summary>
         private void Stop()
         {
@@ -88,20 +89,20 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Handles the animation tick.
+        ///     Handles the animation tick.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void OnAnimationTick(object sender, EventArgs e)
         {
             SpinnerRotate.Angle = (SpinnerRotate.Angle + 36) % 360;
         }
 
         /// <summary>
-        /// Handles the loaded.
+        ///     Handles the loaded.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void OnCanvasLoaded(object sender, RoutedEventArgs e)
         {
             const double offset = Math.PI;
@@ -119,32 +120,28 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Handles the unloaded.
+        ///     Handles the unloaded.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void OnCanvasUnloaded(object sender, RoutedEventArgs e)
         {
             Stop();
         }
 
         /// <summary>
-        /// Handles the visible changed.
+        ///     Handles the visible changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs" /> instance containing the event data.</param>
         private void OnVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var isVisible = (bool)e.NewValue;
+            var isVisible = (bool) e.NewValue;
 
             if (isVisible)
-            {
                 Start();
-            }
             else
-            {
                 Stop();
-            }
         }
     }
 }

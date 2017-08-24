@@ -6,7 +6,7 @@
              xmlns:generalUserControls="clr-namespace:WpfUtility.GeneralUserControls"
              mc:Ignorable="d"
              Background="Transparent" Height="45" Width="45"
-             MinWidth="45" MaxWidth="45" MinHeight="45" MaxHeight="45" >
+             MinWidth="45" MaxWidth="45" MinHeight="45" MaxHeight="45">
     <UserControl.DataContext>
         <generalUserControls:CircularLoadingAnimationViewModel />
     </UserControl.DataContext>

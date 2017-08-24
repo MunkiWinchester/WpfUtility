@@ -9,14 +9,29 @@ namespace Sample.UserControls
 {
     public class PagingViewModel : ObservableObject
     {
+        private readonly List<SampleEntry> _allSampleEntries;
+
+        private int _currentPage;
+
+        private int _entriesPerPage;
         private ObservableCollection<SampleEntry> _sampleEntries;
+
+        private int _totalEntries;
+
+        private int _totalPages;
+
+        public PagingViewModel()
+        {
+            _allSampleEntries = JsonHelper.ReadValuesFromSample();
+            EntriesPerPage = 20;
+            CurrentPage = 1;
+        }
+
         public ObservableCollection<SampleEntry> SampleEntries
         {
             get => _sampleEntries;
             set => SetField(ref _sampleEntries, value);
         }
-
-        private int _totalEntries;
 
         public int TotalEntries
         {
@@ -27,8 +42,6 @@ namespace Sample.UserControls
                 OnPropertyChanged();
             }
         }
-
-        private int _currentPage;
 
         public int CurrentPage
         {
@@ -43,8 +56,6 @@ namespace Sample.UserControls
             }
         }
 
-        private int _totalPages;
-
         public int TotalPages
         {
             get => _totalPages;
@@ -54,8 +65,6 @@ namespace Sample.UserControls
                 OnPropertyChanged();
             }
         }
-
-        private int _entriesPerPage;
 
         public int EntriesPerPage
         {
@@ -72,23 +81,15 @@ namespace Sample.UserControls
 
         public ICommand GoToFirstPageCommand
         {
-            get
-            {
-                return new DelegateCommand(() =>
-                {
-                    CurrentPage = 1;
-                });
-            }
+            get { return new DelegateCommand(() => { CurrentPage = 1; }); }
         }
 
         public ICommand GoToPreviousPageCommand
         {
             get
             {
-                return new DelegateCommand(() =>
-                {
-                    CurrentPage = CurrentPage - 1 >= 1 ? CurrentPage - 1 : CurrentPage;
-                });
+                return new DelegateCommand(
+                    () => { CurrentPage = CurrentPage - 1 >= 1 ? CurrentPage - 1 : CurrentPage; });
             }
         }
 
@@ -108,19 +109,10 @@ namespace Sample.UserControls
             get { return new DelegateCommand(() => { CurrentPage = TotalPages; }); }
         }
 
-        private readonly List<SampleEntry> _allSampleEntries;
-
-        public PagingViewModel()
-        {
-            _allSampleEntries = JsonHelper.ReadValuesFromSample();
-            EntriesPerPage = 20;
-            CurrentPage = 1;
-        }
-
         private void LoadPage()
         {
             TotalEntries = _allSampleEntries.Count;
-            TotalPages = (int)Math.Ceiling((double)TotalEntries / EntriesPerPage);
+            TotalPages = (int) Math.Ceiling((double) TotalEntries / EntriesPerPage);
             SampleEntries =
                 new ObservableCollection<SampleEntry>(_allSampleEntries.Skip(EntriesPerPage * (CurrentPage - 1))
                     .Take(EntriesPerPage));

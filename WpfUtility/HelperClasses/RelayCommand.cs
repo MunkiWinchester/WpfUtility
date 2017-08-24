@@ -5,8 +5,8 @@ namespace WpfUtility
 {
     public class RelayCommand<T> : ICommand
     {
-        readonly Action<T> _execute;
-        readonly Predicate<T> _canExecute;
+        private readonly Predicate<T> _canExecute;
+        private readonly Action<T> _execute;
 
         public RelayCommand(Action<T> execute)
             : this(execute, null)
@@ -21,7 +21,7 @@ namespace WpfUtility
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute?.Invoke((T)parameter) ?? true;
+            return _canExecute?.Invoke((T) parameter) ?? true;
         }
 
         public event EventHandler CanExecuteChanged
@@ -32,7 +32,7 @@ namespace WpfUtility
 
         public void Execute(object parameter)
         {
-            _execute((T)parameter);
+            _execute((T) parameter);
         }
     }
 }

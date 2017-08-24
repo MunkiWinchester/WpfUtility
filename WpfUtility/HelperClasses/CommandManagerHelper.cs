@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace WpfUtility
 {
     /// <summary>
-    /// This class contains methods for the CommandManager that help avoid memory leaks by using weak references.
+    ///     This class contains methods for the CommandManager that help avoid memory leaks by using weak references.
     /// </summary>
     public class CommandManagerHelper
     {
         /// <summary>
-        /// Calls the weak reference handlers.
+        ///     Calls the weak reference handlers.
         /// </summary>
         /// <param name="handlers">The handlers.</param>
         public static void CallWeakReferenceHandlers(List<WeakReference> handlers)
@@ -23,7 +23,7 @@ namespace WpfUtility
             {
                 var reference = handlers[i];
                 var handler = reference.Target as EventHandler;
-                    
+
                 if (handler == null)
                 {
                     handlers.RemoveAt(i);
@@ -43,22 +43,20 @@ namespace WpfUtility
         }
 
         /// <summary>
-        /// Adds the weak reference handler.
+        ///     Adds the weak reference handler.
         /// </summary>
         /// <param name="handlers">The handlers.</param>
         /// <param name="handler">The handler.</param>
         public static void AddWeakReferenceHandler(ref List<WeakReference> handlers, EventHandler handler)
         {
             if (handlers == null)
-            {
                 handlers = new List<WeakReference>();
-            }
 
             handlers.Add(new WeakReference(handler));
         }
 
         /// <summary>
-        /// Removes the weak reference handler.
+        ///     Removes the weak reference handler.
         /// </summary>
         /// <param name="handlers">The handlers.</param>
         /// <param name="handler">The handler.</param>
@@ -70,11 +68,9 @@ namespace WpfUtility
             {
                 var reference = handlers[i];
                 var existingHandler = reference.Target as EventHandler;
-                   
-                if ((existingHandler == null) || (existingHandler == handler))
-                {
+
+                if (existingHandler == null || existingHandler == handler)
                     handlers.RemoveAt(i);
-                }
             }
         }
     }

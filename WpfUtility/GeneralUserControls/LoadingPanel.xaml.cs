@@ -4,7 +4,7 @@ using System.Windows.Media;
 namespace WpfUtility.GeneralUserControls
 {
     /// <summary>
-    /// Interaction logic for LoadingPanel.xaml
+    ///     Interaction logic for LoadingPanel.xaml
     /// </summary>
     public partial class LoadingPanel
     {
@@ -34,7 +34,7 @@ namespace WpfUtility.GeneralUserControls
                 new UIPropertyMetadata(string.Empty));
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LoadingPanel"/> class.
+        ///     Initializes a new instance of the <see cref="LoadingPanel" /> class.
         /// </summary>
         public LoadingPanel()
         {
@@ -42,10 +42,10 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is loading.
+        ///     Gets or sets a value indicating whether this instance is loading.
         /// </summary>
         /// <value>
-        /// <c>true</c> if this instance is loading; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is loading; otherwise, <c>false</c>.
         /// </value>
         public bool IsLoading
         {
@@ -54,7 +54,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Gets or sets the color of the circular loading animation.
+        ///     Gets or sets the color of the circular loading animation.
         /// </summary>
         /// <value> The (solid color brush) color. </value>
         public SolidColorBrush ForegroundColor
@@ -64,7 +64,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Gets or sets the color of the circular loading animation.
+        ///     Gets or sets the color of the circular loading animation.
         /// </summary>
         /// <value> The (solid color brush) color. </value>
         public SolidColorBrush MessageForegroundColor
@@ -74,7 +74,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Gets or sets the color of the circular loading animation.
+        ///     Gets or sets the color of the circular loading animation.
         /// </summary>
         /// <value> The (solid color brush) color. </value>
         public SolidColorBrush SubMessageForegroundColor
@@ -84,7 +84,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Gets or sets the message.
+        ///     Gets or sets the message.
         /// </summary>
         /// <value>The message.</value>
         public string Message
@@ -94,7 +94,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Gets or sets the sub message.
+        ///     Gets or sets the sub message.
         /// </summary>
         /// <value>The sub message.</value>
         public string SubMessage

@@ -55,14 +55,12 @@ namespace Sample
 
         public int Count => _items.Count;
         public bool IsReadOnly => false;
-        
+
 
         public void AddRange(ICollection<T> collection)
         {
             foreach (var item in collection)
-            {
                 _items.Add(item);
-            }
         }
 
         public override string ToString()

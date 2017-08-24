@@ -9,13 +9,6 @@ namespace WpfUtility.GeneralUserControls
     public class IntListHyperlinkTextBlock : TextBlock
     {
         public delegate void IntAsSenderHandler(int sender, EventArgs e);
-        public event IntAsSenderHandler HyperlinkClickedEvent;
-
-        public List<int> ItemSource
-        {
-            get => (List<int>)GetValue(ItemSourceProperty);
-            set => SetValue(ItemSourceProperty, value);
-        }
 
         public static readonly DependencyProperty ItemSourceProperty =
             DependencyProperty.Register(nameof(ItemSource), typeof(List<int>),
@@ -24,10 +17,19 @@ namespace WpfUtility.GeneralUserControls
                     UpdateHyperlinks));
 
         private static IntListHyperlinkTextBlock _self;
+
         public IntListHyperlinkTextBlock()
         {
             _self = this;
         }
+
+        public List<int> ItemSource
+        {
+            get => (List<int>) GetValue(ItemSourceProperty);
+            set => SetValue(ItemSourceProperty, value);
+        }
+
+        public event IntAsSenderHandler HyperlinkClickedEvent;
 
         private static void UpdateHyperlinks(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -41,13 +43,11 @@ namespace WpfUtility.GeneralUserControls
             for (var index = 0; index < tb.ItemSource.Count; index++)
             {
                 var item = tb.ItemSource[index];
-                var hyperlink = new Hyperlink(new Run(item.ToString())) { Tag = item };
+                var hyperlink = new Hyperlink(new Run(item.ToString())) {Tag = item};
                 hyperlink.Click += HyperlinkOnClick;
                 tb.Inlines.Add(hyperlink);
                 if (index < tb.ItemSource.Count - 1)
-                {
                     tb.Inlines.Add(new Run(", "));
-                }
             }
         }
 
@@ -59,7 +59,7 @@ namespace WpfUtility.GeneralUserControls
         private void HyperlinkOnClick(object sender)
         {
             var tb = sender as Hyperlink;
-            if(int.TryParse(tb?.Tag.ToString(), out int articleNumber))
+            if (int.TryParse(tb?.Tag.ToString(), out int articleNumber))
                 HyperlinkClickedEvent?.Invoke(articleNumber, EventArgs.Empty);
         }
     }

@@ -1,37 +1,46 @@
 ﻿<UserControl x:Class="Sample.UserControls.LogViewer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:logViewer="clr-namespace:WpfUtility.LogViewer;assembly=WpfUtility"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="Send">
             <StackPanel Orientation="Vertical">
                 <TextBox x:Name="TbLogText" Text="{Binding Text}" HorizontalAlignment="Stretch" Margin="1" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="1" x:Name="BtnVerbose" Content="Trace" Command="{Binding SendLogCommand}" CommandParameter="Trace" />
-                    <Button Margin="1" x:Name="BtnDebug" Content="Debug" Command="{Binding SendLogCommand}" CommandParameter="Debug" />
-                    <Button Margin="1" x:Name="BtnWarning" Content="Warn" Command="{Binding SendLogCommand}" CommandParameter="Warn" />
-                    <Button Margin="1" x:Name="BtnError" Content="Error" Command="{Binding SendLogCommand}" CommandParameter="Error" />
-                    <Button Margin="1" x:Name="BtnFatal" Content="Fatal" Command="{Binding SendLogCommand}" CommandParameter="Fatal" />
-                    <Button Margin="1" x:Name="BtnItemSource" Content="ItemSource" Command="{Binding SendLogFromSourceCommand}" />
+                    <Button Margin="1" x:Name="BtnVerbose" Content="Trace" Command="{Binding SendLogCommand}"
+                            CommandParameter="Trace" />
+                    <Button Margin="1" x:Name="BtnDebug" Content="Debug" Command="{Binding SendLogCommand}"
+                            CommandParameter="Debug" />
+                    <Button Margin="1" x:Name="BtnWarning" Content="Warn" Command="{Binding SendLogCommand}"
+                            CommandParameter="Warn" />
+                    <Button Margin="1" x:Name="BtnError" Content="Error" Command="{Binding SendLogCommand}"
+                            CommandParameter="Error" />
+                    <Button Margin="1" x:Name="BtnFatal" Content="Fatal" Command="{Binding SendLogCommand}"
+                            CommandParameter="Fatal" />
+                    <Button Margin="1" x:Name="BtnItemSource" Content="ItemSource"
+                            Command="{Binding SendLogFromSourceCommand}" />
                 </StackPanel>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="Autosending">
             <StackPanel Orientation="Vertical">
-                <CheckBox x:Name="ChkBackgroundSending" Content="Send logs from background thread." IsChecked="{Binding BackgroundSending}" />
+                <CheckBox x:Name="ChkBackgroundSending" Content="Send logs from background thread."
+                          IsChecked="{Binding BackgroundSending}" />
                 <CheckBox x:Name="ChkActivateLoggers" Content="(De)activate tracking of loggers" IsChecked="True" />
             </StackPanel>
         </GroupBox>
-        <logViewer:NlogViewer Grid.Row="2" Margin="3" ItemSource="{Binding RelativeSource={RelativeSource FindAncestor,
-            AncestorType={x:Type UserControl}}, Path=DataContext.ItemSource}" ActivateLoggers="{Binding ElementName=ChkActivateLoggers, Path=IsChecked}" />
+        <logViewer:NlogViewer Grid.Row="2" Margin="3"
+                              ItemSource="{Binding RelativeSource={RelativeSource FindAncestor,
+            AncestorType={x:Type UserControl}}, Path=DataContext.ItemSource}"
+                              ActivateLoggers="{Binding ElementName=ChkActivateLoggers, Path=IsChecked}" />
     </Grid>
 </UserControl>

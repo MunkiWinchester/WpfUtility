@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using WpfUtility;
 
 namespace Sample.UserControls
@@ -7,20 +8,20 @@ namespace Sample.UserControls
     {
         private List<int> _integerListe = new List<int>();
 
+        public HyperlinksViewModel()
+        {
+            IntegerListe = new List<int> {66, 33, 11, 99};
+        }
+
         public List<int> IntegerListe
         {
             get => _integerListe;
             private set => SetField(ref _integerListe, value);
         }
 
-        public HyperlinksViewModel()
-        {
-            IntegerListe = new List<int> {66, 33, 11, 99};
-        }
-
         public void OpenNumber(int sender)
         {
-            System.Diagnostics.Process.Start($"http://google.com/#q={sender}");
+            Process.Start($"http://google.com/#q={sender}");
         }
     }
 }

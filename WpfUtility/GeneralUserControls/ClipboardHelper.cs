@@ -6,20 +6,13 @@ using System.Windows;
 namespace WpfUtility.GeneralUserControls
 {
     /// <summary>
-    /// Helper class to get the values from the clipboard
+    ///     Helper class to get the values from the clipboard
     /// </summary>
     public class ClipboardHelper
     {
         /// <summary>
-        /// Delegate for the format
-        /// </summary>
-        /// <param name="value">Value</param>
-        /// <returns>String array</returns>
-        private delegate string[] ParseFormat(string value);
-
-        /// <summary>
-        /// Parses the clipboard data to a list with a string arrays
-        /// Works with CSV (";" separated) and "text" ("\t" separated)
+        ///     Parses the clipboard data to a list with a string arrays
+        ///     Works with CSV (";" separated) and "text" ("\t" separated)
         /// </summary>
         /// <returns>Clipboard data as list with string array</returns>
         public static List<string[]> ParseClipboardData()
@@ -34,13 +27,9 @@ namespace WpfUtility.GeneralUserControls
             {
                 object clipboardRawData;
                 if ((clipboardRawData = dataObj.GetData(DataFormats.CommaSeparatedValue)) != null)
-                {
                     parseFormat = ParseCsvFormat;
-                }
                 else if ((clipboardRawData = dataObj.GetData(DataFormats.Text)) != null)
-                {
                     parseFormat = ParseTextFormat;
-                }
 
                 if (parseFormat != null)
                 {
@@ -59,16 +48,14 @@ namespace WpfUtility.GeneralUserControls
                     {
                         clipboardData = new List<string[]>();
                         foreach (var row in rows)
-                        {
                             clipboardData.Add(parseFormat(row));
-                        }
                     }
                 }
             }
 
             return clipboardData;
         }
-        
+
         public static string[] ParseCsvFormat(string value)
         {
             return ParseCsvOrTextFormat(value, true);
@@ -80,7 +67,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        /// Parses the given data to a string array
+        ///     Parses the given data to a string array
         /// </summary>
         /// <param name="value">Value which should be parsed</param>
         /// <param name="isCsv">If it is CSV or "text"</param>
@@ -109,9 +96,7 @@ namespace WpfUtility.GeneralUserControls
                     // Skip until the ending quotes
                     i++;
                     if (i >= value.Length)
-                    {
                         throw new FormatException($"Value: \"{value}\" had a format exception!");
-                    }
                     var tempCh = value[i];
                     while (tempCh != '\"' && i < value.Length)
                         i++;
@@ -132,5 +117,12 @@ namespace WpfUtility.GeneralUserControls
 
             return outputList.ToArray();
         }
+
+        /// <summary>
+        ///     Delegate for the format
+        /// </summary>
+        /// <param name="value">Value</param>
+        /// <returns>String array</returns>
+        private delegate string[] ParseFormat(string value);
     }
 }

@@ -6,25 +6,61 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using NLog;
+using NLog.Common;
 using WpfUtility.LogViewer.Classes;
 
 namespace WpfUtility.LogViewer
 {
     /// <summary>
-    /// Interaction logic for NlogViewer.xaml
+    ///     Interaction logic for NlogViewer.xaml
     /// </summary>
     public partial class NlogViewer
     {
+        public static readonly DependencyProperty ItemSourceProperty =
+            DependencyProperty.Register(nameof(ItemSource), typeof(ObservableCollection<LogEventInfo>),
+                typeof(NlogViewer),
+                new FrameworkPropertyMetadata(new ObservableCollection<LogEventInfo>(), PropertyChangedCallback));
+
+        public static readonly DependencyProperty ActivateLoggersProperty =
+            DependencyProperty.Register(nameof(ActivateLoggers), typeof(bool),
+                typeof(NlogViewer), new FrameworkPropertyMetadata(true, PropertyChangedCallbackActivate));
+
+        public static readonly DependencyProperty UseApplicationDispatcherProperty =
+            DependencyProperty.Register(nameof(UseApplicationDispatcher), typeof(bool),
+                typeof(NlogViewer),
+                new FrameworkPropertyMetadata(true, UseApplicationDispatcherPropertyChangedCallbackActivate));
+
+        private static NlogViewer _this;
+
+        public NlogViewer()
+        {
+            ViewModel = new NlogViewerViewModel();
+            InitializeComponent();
+            DataContext = ViewModel;
+            _this = this;
+            if (!DesignerProperties.GetIsInDesignMode(this))
+                ChooseDispatcherAndToggleLoggers();
+        }
+
         public ObservableCollection<LogEventInfo> ItemSource
         {
             get => (ObservableCollection<LogEventInfo>) GetValue(ItemSourceProperty);
             set => SetValue(ItemSourceProperty, value);
         }
 
-        public static readonly DependencyProperty ItemSourceProperty =
-            DependencyProperty.Register(nameof(ItemSource), typeof(ObservableCollection<LogEventInfo>),
-                typeof(NlogViewer),
-                new FrameworkPropertyMetadata(new ObservableCollection<LogEventInfo>(), PropertyChangedCallback));
+        public bool ActivateLoggers
+        {
+            get => (bool) GetValue(ActivateLoggersProperty);
+            set => SetValue(ActivateLoggersProperty, value);
+        }
+
+        public bool UseApplicationDispatcher
+        {
+            get => (bool) GetValue(UseApplicationDispatcherProperty);
+            set => SetValue(UseApplicationDispatcherProperty, value);
+        }
+
+        internal NlogViewerViewModel ViewModel { get; set; }
 
         private static void PropertyChangedCallback(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
@@ -42,16 +78,6 @@ namespace WpfUtility.LogViewer
             }
         }
 
-        public bool ActivateLoggers
-        {
-            get => (bool) GetValue(ActivateLoggersProperty);
-            set => SetValue(ActivateLoggersProperty, value);
-        }
-
-        public static readonly DependencyProperty ActivateLoggersProperty =
-            DependencyProperty.Register(nameof(ActivateLoggers), typeof(bool),
-                typeof(NlogViewer), new FrameworkPropertyMetadata(true, PropertyChangedCallbackActivate));
-
         private static void PropertyChangedCallbackActivate(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
@@ -64,41 +90,13 @@ namespace WpfUtility.LogViewer
             }
         }
 
-        public bool UseApplicationDispatcher
-        {
-            get => (bool) GetValue(UseApplicationDispatcherProperty);
-            set => SetValue(UseApplicationDispatcherProperty, value);
-        }
-
-        public static readonly DependencyProperty UseApplicationDispatcherProperty =
-            DependencyProperty.Register(nameof(UseApplicationDispatcher), typeof(bool),
-                typeof(NlogViewer),
-                new FrameworkPropertyMetadata(true, UseApplicationDispatcherPropertyChangedCallbackActivate));
-
         private static void UseApplicationDispatcherPropertyChangedCallbackActivate(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             var nlogViewer = dependencyObject as NlogViewer;
             if (nlogViewer != null)
-            {
                 _this.ChooseDispatcherAndToggleLoggers();
-            }
         }
-
-        public NlogViewer()
-        {
-            ViewModel = new NlogViewerViewModel();
-            InitializeComponent();
-            DataContext = ViewModel;
-            _this = this;
-            if (!DesignerProperties.GetIsInDesignMode(this))
-            {
-                ChooseDispatcherAndToggleLoggers();
-            }
-        }
-
-        private static NlogViewer _this;
-        internal NlogViewerViewModel ViewModel { get; set; }
 
         private void ScrollToTop()
         {
@@ -115,29 +113,24 @@ namespace WpfUtility.LogViewer
 
         private void ChooseDispatcherAndToggleLoggers()
         {
-                if (_this.UseApplicationDispatcher)
-                    ViewModel.ToggleLoggers(_this.ActivateLoggers);
-                else
-                    ToggleLoggers(_this.ActivateLoggers);
+            if (_this.UseApplicationDispatcher)
+                ViewModel.ToggleLoggers(_this.ActivateLoggers);
+            else
+                ToggleLoggers(_this.ActivateLoggers);
         }
 
         private void ToggleLoggers(bool activate)
         {
             foreach (var target in ViewModel.GetLoggers())
-            {
                 if (activate)
                     target.LogReceived += LogReceived;
                 else
                     target.LogReceived -= LogReceived;
-            }
         }
 
-        private void LogReceived(NLog.Common.AsyncLogEventInfo log)
+        private void LogReceived(AsyncLogEventInfo log)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                ViewModel.LogEntries.Add(new LogEvent(log.LogEvent));
-            }));
+            Dispatcher.BeginInvoke(new Action(() => { ViewModel.LogEntries.Add(new LogEvent(log.LogEvent)); }));
         }
     }
 }

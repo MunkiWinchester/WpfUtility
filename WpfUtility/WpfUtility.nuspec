@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>MunkiWinchester.WpfUtility</id>
-    <version>0.2.0.0</version>
-    <title>MunkiWinchester.WpfUtility</title>
-    <authors>Eike Stremlau</authors>
-    <owners>Eike Stremlau</owners>
-    <licenseUrl>https://raw.githubusercontent.com/MunkiWinchester/WpfUtility/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/MunkiWinchester/WpfUtility</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Libary with different tools for WPF. Eg. a Log Viewer for NLog Logfiles, a highlight textblock and many more</description>
-    <releaseNotes>Added loading animation</releaseNotes>
-    <copyright>Copyright 2017</copyright>
-    <tags>WPF extension Nlog WpfUtility UtilityTools Tools</tags>
-  </metadata>
+
+<package>
+    <metadata>
+        <id>MunkiWinchester.WpfUtility</id>
+        <version>0.2.0.0</version>
+        <title>MunkiWinchester.WpfUtility</title>
+        <authors>Eike Stremlau</authors>
+        <owners>Eike Stremlau</owners>
+        <licenseUrl>https://raw.githubusercontent.com/MunkiWinchester/WpfUtility/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/MunkiWinchester/WpfUtility</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Libary with different tools for WPF. Eg. a Log Viewer for NLog Logfiles, a highlight textblock and many more</description>
+        <releaseNotes>Added loading animation</releaseNotes>
+        <copyright>Copyright 2017</copyright>
+        <tags>WPF extension Nlog WpfUtility UtilityTools Tools</tags>
+    </metadata>
 </package>

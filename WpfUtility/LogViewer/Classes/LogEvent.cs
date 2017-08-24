@@ -7,10 +7,13 @@ namespace WpfUtility.LogViewer.Classes
     internal class LogEvent
     {
         private const int MaxLength = 497;
+
         public LogEvent(LogEventInfo logEventInfo)
         {
             ToolTip = logEventInfo.FormattedMessage.Substring(0,
-                          logEventInfo.FormattedMessage.Length > MaxLength ? MaxLength : logEventInfo.FormattedMessage.Length) +
+                          logEventInfo.FormattedMessage.Length > MaxLength
+                              ? MaxLength
+                              : logEventInfo.FormattedMessage.Length) +
                       (logEventInfo.FormattedMessage.Length > MaxLength ? "..." : "");
             Level = logEventInfo.Level.ToString();
             FormattedMessage = logEventInfo.FormattedMessage;
@@ -19,12 +22,6 @@ namespace WpfUtility.LogViewer.Classes
             Time = logEventInfo.TimeStamp;
 
             SetupColors(logEventInfo);
-        }
-
-        public override string ToString()
-        {
-            return Time.ToString("dd.MM.yyyy HH:mm:ss") + "\t" + LoggerName + "\t" + Level + "\t" + FormattedMessage +
-                   "\t" + Exception;
         }
 
         public DateTime Time { get; }
@@ -37,6 +34,12 @@ namespace WpfUtility.LogViewer.Classes
         public SolidColorBrush Foreground { get; private set; }
         public SolidColorBrush BackgroundMouseOver { get; private set; }
         public SolidColorBrush ForegroundMouseOver { get; private set; }
+
+        public override string ToString()
+        {
+            return Time.ToString("dd.MM.yyyy HH:mm:ss") + "\t" + LoggerName + "\t" + Level + "\t" + FormattedMessage +
+                   "\t" + Exception;
+        }
 
         private void SetupColors(LogEventInfo logEventInfo)
         {
