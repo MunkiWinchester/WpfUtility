@@ -56,6 +56,9 @@
     <Compile Include="GeneralUserControls\CircularLoadingAnimation.xaml.cs">
       <DependentUpon>CircularLoadingAnimation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GeneralUserControls\CircularLoadingAnimation2.xaml.cs">
+      <DependentUpon>CircularLoadingAnimation2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GeneralUserControls\CircularLoadingAnimationViewModel.cs" />
     <Compile Include="GeneralUserControls\ClipboardHelper.cs" />
     <Compile Include="HelperClasses\Converters.cs" />
@@ -96,6 +99,10 @@
     <Page Include="GeneralUserControls\CircularLoadingAnimation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GeneralUserControls\CircularLoadingAnimation2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GeneralUserControls\LoadingPanel.xaml">
       <Generator>MSBuild:Compile</Generator>

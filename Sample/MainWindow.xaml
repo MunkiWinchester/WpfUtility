@@ -25,5 +25,8 @@
         <TabItem Header="UiService">
             <userControls:UiService />
         </TabItem>
+        <TabItem Header="Storyboard">
+            <userControls:UserControl1 Foreground="SandyBrown" />
+        </TabItem>
     </TabControl>
 </Window>

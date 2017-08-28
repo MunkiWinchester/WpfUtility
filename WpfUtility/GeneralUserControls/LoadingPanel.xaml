@@ -26,10 +26,12 @@
     </UserControl.Resources>
     <DockPanel Background="Transparent"
                Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
-                                  Path=IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <guc:CircularLoadingAnimation x:Name="ProgressBar" DockPanel.Dock="Left" HorizontalAlignment="Left"
-                                      VerticalAlignment="Center" Height="45" Margin="18,10"
-                                      ForegroundColor="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=ForegroundColor}" />
+                                    Path=IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <guc:CircularLoadingAnimation2 x:Name="ProgressBar2" DockPanel.Dock="Left" HorizontalAlignment="Left"
+                                       VerticalAlignment="Center" Margin="18,10"
+                                       ForegroundColor="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=ForegroundColor}"
+                                       Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
+                                                           Path=IsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <StackPanel VerticalAlignment="Center">
             <TextBlock x:Name="TxtMessage" Style="{StaticResource PanelMessageText}"
                        Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=MessageForegroundColor}"
