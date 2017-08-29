@@ -8,4 +8,4 @@ platform: Any CPU
 init:
   - cmd: git config --global core.autocrlf true
 before_build:
-  - cmd: nuget restore source\WpfUtility.sln
+  - cmd: nuget restore WpfUtility.sln
