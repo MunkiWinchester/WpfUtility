@@ -5,7 +5,7 @@ namespace WpfUtility.GeneralUserControls
     internal class CircularLoadingAnimationViewModel : ObservableObject
     {
         private SolidColorBrush _foregroundColor;
-        private bool _isVisible;
+        private bool _isLoading;
 
         public CircularLoadingAnimationViewModel()
         {
@@ -18,10 +18,10 @@ namespace WpfUtility.GeneralUserControls
             set => SetField(ref _foregroundColor, value);
         }
 
-        public bool IsVisible
+        public bool IsLoading
         {
-            get => _isVisible;
-            set => SetField(ref _isVisible, value);
+            get => _isLoading;
+            set => SetField(ref _isLoading, value);
         }
     }
 }

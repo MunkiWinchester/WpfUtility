@@ -121,4 +121,3 @@ ObservableCollection<NLog.LogEventInfo>
 ==========
 ...
 
----
