@@ -8,6 +8,7 @@ using NLog.Common;
 
 namespace WpfUtility.LogViewer.Classes
 {
+    // TODO: Implement this into the view to have a simpler binding for the user
     internal class NlogViewerViewModel : ObservableObject
     {
         private ObservableCollection<LogEvent> _logEntries;

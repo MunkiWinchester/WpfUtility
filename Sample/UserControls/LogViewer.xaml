@@ -14,33 +14,33 @@
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="Send">
             <StackPanel Orientation="Vertical">
-                <TextBox x:Name="TbLogText" Text="{Binding Text}" HorizontalAlignment="Stretch" Margin="1" />
+                <TextBox x:Name="TextBoxLogText" Text="{Binding Text}" HorizontalAlignment="Stretch" Margin="1" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="1" x:Name="BtnVerbose" Content="Trace" Command="{Binding SendLogCommand}"
+                    <Button Margin="1" x:Name="ButtonTrace" Content="Trace" Command="{Binding SendLogCommand}"
                             CommandParameter="Trace" />
-                    <Button Margin="1" x:Name="BtnDebug" Content="Debug" Command="{Binding SendLogCommand}"
+                    <Button Margin="1" x:Name="ButtonDebug" Content="Debug" Command="{Binding SendLogCommand}"
                             CommandParameter="Debug" />
-                    <Button Margin="1" x:Name="BtnWarning" Content="Warn" Command="{Binding SendLogCommand}"
+                    <Button Margin="1" x:Name="ButtonWarning" Content="Warn" Command="{Binding SendLogCommand}"
                             CommandParameter="Warn" />
-                    <Button Margin="1" x:Name="BtnError" Content="Error" Command="{Binding SendLogCommand}"
+                    <Button Margin="1" x:Name="ButtonError" Content="Error" Command="{Binding SendLogCommand}"
                             CommandParameter="Error" />
-                    <Button Margin="1" x:Name="BtnFatal" Content="Fatal" Command="{Binding SendLogCommand}"
+                    <Button Margin="1" x:Name="ButtonFatal" Content="Fatal" Command="{Binding SendLogCommand}"
                             CommandParameter="Fatal" />
-                    <Button Margin="1" x:Name="BtnItemSource" Content="ItemSource"
+                    <Button Margin="1" x:Name="ButtonItemSource" Content="ItemSource"
                             Command="{Binding SendLogFromSourceCommand}" />
                 </StackPanel>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="Autosending">
             <StackPanel Orientation="Vertical">
-                <CheckBox x:Name="ChkBackgroundSending" Content="Send logs from background thread."
+                <CheckBox x:Name="CheckBoxBackgroundSending" Content="Send logs from background thread."
                           IsChecked="{Binding BackgroundSending}" />
-                <CheckBox x:Name="ChkActivateLoggers" Content="(De)activate tracking of loggers" IsChecked="True" />
+                <CheckBox x:Name="CheckBoxActivateLoggers" Content="(De)activate tracking of loggers" IsChecked="True" />
             </StackPanel>
         </GroupBox>
         <logViewer:NlogViewer Grid.Row="2" Margin="3"
                               ItemSource="{Binding RelativeSource={RelativeSource FindAncestor,
             AncestorType={x:Type UserControl}}, Path=DataContext.ItemSource}"
-                              ActivateLoggers="{Binding ElementName=ChkActivateLoggers, Path=IsChecked}" />
+                              ActivateLoggers="{Binding ElementName=CheckBoxActivateLoggers, Path=IsChecked}" />
     </Grid>
 </UserControl>

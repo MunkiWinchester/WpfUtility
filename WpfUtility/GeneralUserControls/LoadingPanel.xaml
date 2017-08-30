@@ -28,9 +28,9 @@
                Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
                                     Path=IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
         <guc:CircularLoadingAnimation x:Name="ProgressBar2" DockPanel.Dock="Left" HorizontalAlignment="Left"
-                                       VerticalAlignment="Center" Margin="18,10"
-                                       ForegroundColor="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=ForegroundColor}"
-                                       IsLoading="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
+                                      VerticalAlignment="Center" Margin="18,10"
+                                      ForegroundColor="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=ForegroundColor}"
+                                      IsLoading="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
                                                    Path=IsLoading}" />
         <StackPanel VerticalAlignment="Center">
             <TextBlock x:Name="TxtMessage" Style="{StaticResource PanelMessageText}"

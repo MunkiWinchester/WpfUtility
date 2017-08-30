@@ -24,18 +24,27 @@ namespace WpfUtility.GeneralUserControls
             KeyDown += OnKeyDown;
         }
 
+        /// <summary>
+        ///     Text of the TextBlock
+        /// </summary>
         public new string Text
         {
             get => base.Text;
             set => base.Text = LeaveOnlyNumbers(value);
         }
 
+        /// <summary>
+        ///     The maximum number that can be entered
+        /// </summary>
         public int Maximum
         {
             get => (int) GetValue(MaximumProperty);
             set => SetValue(MaximumProperty, value);
         }
 
+        /// <summary>
+        ///     The minimum number that can be entered
+        /// </summary>
         public int Minimum
         {
             get => (int) GetValue(MinimumProperty);
@@ -55,6 +64,11 @@ namespace WpfUtility.GeneralUserControls
             return true;
         }
 
+        /// <summary>
+        ///     Method which is invoked trough the dependency
+        /// </summary>
+        /// <param name="dependencyObject">This contains the NumberTextBox ("this")</param>
+        /// <param name="dependencyPropertyChangedEventArgs">The event which "triggered" the method</param>
         private static void PropertyChangedCallback(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
@@ -93,11 +107,21 @@ namespace WpfUtility.GeneralUserControls
             return tmp;
         }
 
+        /// <summary>
+        ///     Event which is triggered when a key is pressed down
+        /// </summary>
+        /// <param name="sender">Which control triggered this event</param>
+        /// <param name="e">Which key triggered this event</param>
         protected void OnKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = !IsNumberKey(e.Key) && !IsDelBackspaceOrEnterKey(e.Key);
         }
 
+        /// <summary>
+        ///     Event which is triggered when the text is changed
+        /// </summary>
+        /// <param name="sender">Which control triggered this event</param>
+        /// <param name="e"></param>
         protected void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             base.Text = LeaveOnlyNumbers(Text);

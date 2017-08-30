@@ -30,36 +30,55 @@ namespace WpfUtility.LogViewer
                 typeof(NlogViewer),
                 new FrameworkPropertyMetadata(true, UseApplicationDispatcherPropertyChangedCallbackActivate));
 
+        /// <summary>
+        ///     Variable with itself in it, to use it in static content
+        /// </summary>
         private static NlogViewer _this;
 
+        /// <summary>
+        ///     Constructor for the NlogViewer
+        /// </summary>
         public NlogViewer()
         {
             ViewModel = new NlogViewerViewModel();
             InitializeComponent();
+            UseApplicationDispatcher = true;
             DataContext = ViewModel;
             _this = this;
             if (!DesignerProperties.GetIsInDesignMode(this))
                 ChooseDispatcherAndToggleLoggers();
         }
 
+        /// <summary>
+        ///     Gets or sets the value of the item source.
+        /// </summary>
         public ObservableCollection<LogEventInfo> ItemSource
         {
             get => (ObservableCollection<LogEventInfo>) GetValue(ItemSourceProperty);
             set => SetValue(ItemSourceProperty, value);
         }
 
+        /// <summary>
+        ///     Gets or sets the value if the loggers should be active
+        /// </summary>
         public bool ActivateLoggers
         {
             get => (bool) GetValue(ActivateLoggersProperty);
             set => SetValue(ActivateLoggersProperty, value);
         }
 
+        /// <summary>
+        ///     Gets or sets the value if the application dispatcher should be used or the threading dispatcher
+        /// </summary>
         public bool UseApplicationDispatcher
         {
             get => (bool) GetValue(UseApplicationDispatcherProperty);
             set => SetValue(UseApplicationDispatcherProperty, value);
         }
 
+        /// <summary>
+        ///     Gets or sets the view model of the nlog viewer
+        /// </summary>
         internal NlogViewerViewModel ViewModel { get; set; }
 
         private static void PropertyChangedCallback(DependencyObject dependencyObject,
@@ -78,6 +97,11 @@ namespace WpfUtility.LogViewer
             }
         }
 
+        /// <summary>
+        ///     Method which is invoked trough the dependency
+        /// </summary>
+        /// <param name="dependencyObject">This contains the NlogViewer ("this")</param>
+        /// <param name="dependencyPropertyChangedEventArgs">This contains the changed event arguments such as the new value</param>
         private static void PropertyChangedCallbackActivate(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
@@ -90,6 +114,11 @@ namespace WpfUtility.LogViewer
             }
         }
 
+        /// <summary>
+        ///     Method which is invoked trough the dependency
+        /// </summary>
+        /// <param name="dependencyObject">This contains the NlogViewer ("this")</param>
+        /// <param name="dependencyPropertyChangedEventArgs">This contains the changed event arguments such as the new value</param>
         private static void UseApplicationDispatcherPropertyChangedCallbackActivate(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
@@ -98,6 +127,9 @@ namespace WpfUtility.LogViewer
                 _this.ChooseDispatcherAndToggleLoggers();
         }
 
+        /// <summary>
+        ///     Method to set the datagrid to the top entry
+        /// </summary>
         private void ScrollToTop()
         {
             if (VisualTreeHelper.GetChildrenCount(DataGrid) > 0)
@@ -111,6 +143,9 @@ namespace WpfUtility.LogViewer
             }
         }
 
+        /// <summary>
+        ///     Method to choose which dispatcher is used and toogles the loggers
+        /// </summary>
         private void ChooseDispatcherAndToggleLoggers()
         {
             if (_this.UseApplicationDispatcher)
@@ -119,6 +154,10 @@ namespace WpfUtility.LogViewer
                 ToggleLoggers(_this.ActivateLoggers);
         }
 
+        /// <summary>
+        ///     Method to toggle the loggers on or off
+        /// </summary>
+        /// <param name="activate">Bool indicating if the loggers should be active</param>
         private void ToggleLoggers(bool activate)
         {
             foreach (var target in ViewModel.GetLoggers())
@@ -128,6 +167,10 @@ namespace WpfUtility.LogViewer
                     target.LogReceived -= LogReceived;
         }
 
+        /// <summary>
+        ///     Method which is called when a ne wlog entry is written
+        /// </summary>
+        /// <param name="log">Log entry which will be added to the display</param>
         private void LogReceived(AsyncLogEventInfo log)
         {
             Dispatcher.BeginInvoke(new Action(() => { ViewModel.LogEntries.Add(new LogEvent(log.LogEvent)); }));

@@ -7,9 +7,9 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <guc:IntListHyperlinkTextBlock TextWrapping="Wrap" ItemSource="{Binding IntegerListe}"
-                                       HorizontalAlignment="Center"
+        <guc:IntListHyperlinkTextBlock ItemSource="{Binding IntegerListe}"
                                        HyperlinkClickedEvent="ListHyperlinkTextBlock_OnHyperlinkClicked"
-                                       VerticalAlignment="Center" />
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Grid>
 </UserControl>

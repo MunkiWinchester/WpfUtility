@@ -86,11 +86,12 @@ namespace WpfUtility.GeneralUserControls
         /// <summary>
         ///     Method which is invoked trough the dependency
         /// </summary>
-        /// <param name="d">Object, in our case this control :)</param>
-        /// <param name="e">The event which "triggered" the method</param>
-        private static void UpdateHighlighting(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <param name="dependencyObject">This contains the HighlightTextBlock ("this")</param>
+        /// <param name="dependencyPropertyChangedEventArgs">The event which "triggered" the method</param>
+        private static void UpdateHighlighting(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            PrepareHighlight(d as HighlightTextBlock);
+            PrepareHighlight(dependencyObject as HighlightTextBlock);
         }
 
         /// <summary>

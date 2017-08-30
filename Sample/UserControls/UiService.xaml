@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="5">
@@ -30,7 +31,9 @@
         <guc:LoadingPanel Grid.Row="1" x:Name="LoadingPanel" IsLoading="{Binding IsLoading}"
                           Message="{Binding MainMessage}" MessageForegroundColor="{Binding MessageForegroundColor}"
                           SubMessageForegroundColor="{Binding SubMessageForegroundColor}"
-                          SubMessage="{Binding SubMessage}" ForegroundColor="{Binding CircleColor}" 
+                          SubMessage="{Binding SubMessage}" ForegroundColor="{Binding CircleColor}"
                           VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <guc:CircularLoadingAnimation Grid.Row="2" ForegroundColor="{Binding CircleColor}"
+                                      IsLoading="{Binding IsLoading}" />
     </Grid>
 </UserControl>

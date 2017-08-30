@@ -14,10 +14,6 @@ namespace WpfUtility
         private readonly Func<bool> _canExecute;
         private List<WeakReference> _canExecuteChangedHandlers;
 
-        //public DelegateCommand(Action action)
-        //{
-        //    _action = action;
-        //}
         /// <summary>
         ///     Initializes a new instance of the <see cref="DelegateCommand" /> class.
         /// </summary>
@@ -71,6 +67,10 @@ namespace WpfUtility
             Execute();
         }
 
+        /// <summary>
+        ///     Executes the action
+        /// </summary>
+        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
             _action();

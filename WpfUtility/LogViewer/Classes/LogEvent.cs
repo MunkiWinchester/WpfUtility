@@ -4,10 +4,17 @@ using NLog;
 
 namespace WpfUtility.LogViewer.Classes
 {
+    /// <summary>
+    ///     Class for the LogEvent
+    /// </summary>
     internal class LogEvent
     {
         private const int MaxLength = 497;
 
+        /// <summary>
+        ///     Constructor for the LogEvent
+        /// </summary>
+        /// <param name="logEventInfo">LogEventInfo which is transformed to the LogEvent</param>
         public LogEvent(LogEventInfo logEventInfo)
         {
             ToolTip = logEventInfo.FormattedMessage.Substring(0,
@@ -35,12 +42,20 @@ namespace WpfUtility.LogViewer.Classes
         public SolidColorBrush BackgroundMouseOver { get; private set; }
         public SolidColorBrush ForegroundMouseOver { get; private set; }
 
+        /// <summary>
+        ///     Converts the LogEventInfo to a readable string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return Time.ToString("dd.MM.yyyy HH:mm:ss") + "\t" + LoggerName + "\t" + Level + "\t" + FormattedMessage +
                    "\t" + Exception;
         }
 
+        /// <summary>
+        ///     Sets the colors accordingly to the LogEventInfo
+        /// </summary>
+        /// <param name="logEventInfo">LogEventInfo for the values</param>
         private void SetupColors(LogEventInfo logEventInfo)
         {
             if (logEventInfo.Level == LogLevel.Warn)
