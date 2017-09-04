@@ -42,7 +42,6 @@ namespace WpfUtility.LogViewer
         {
             ViewModel = new NlogViewerViewModel();
             InitializeComponent();
-            UseApplicationDispatcher = true;
             DataContext = ViewModel;
             _this = this;
             if (!DesignerProperties.GetIsInDesignMode(this))
@@ -54,7 +53,7 @@ namespace WpfUtility.LogViewer
         /// </summary>
         public ObservableCollection<LogEventInfo> ItemSource
         {
-            get => (ObservableCollection<LogEventInfo>) GetValue(ItemSourceProperty);
+            get => (ObservableCollection<LogEventInfo>)GetValue(ItemSourceProperty);
             set => SetValue(ItemSourceProperty, value);
         }
 
@@ -63,7 +62,11 @@ namespace WpfUtility.LogViewer
         /// </summary>
         public bool ActivateLoggers
         {
-            get => (bool) GetValue(ActivateLoggersProperty);
+            get
+            {
+                var value = GetValue(ActivateLoggersProperty);
+                return value != null && (bool) value;
+            }
             set => SetValue(ActivateLoggersProperty, value);
         }
 
@@ -72,7 +75,11 @@ namespace WpfUtility.LogViewer
         /// </summary>
         public bool UseApplicationDispatcher
         {
-            get => (bool) GetValue(UseApplicationDispatcherProperty);
+            get
+            {
+                var value = GetValue(UseApplicationDispatcherProperty);
+                return value != null && (bool) value;
+            }
             set => SetValue(UseApplicationDispatcherProperty, value);
         }
 
@@ -109,7 +116,7 @@ namespace WpfUtility.LogViewer
             if (nlogViewer != null)
             {
                 var activate = dependencyPropertyChangedEventArgs.NewValue != null &&
-                               (bool) dependencyPropertyChangedEventArgs.NewValue;
+                               (bool)dependencyPropertyChangedEventArgs.NewValue;
                 nlogViewer.ViewModel.ToggleLoggers(activate);
             }
         }
@@ -148,10 +155,18 @@ namespace WpfUtility.LogViewer
         /// </summary>
         private void ChooseDispatcherAndToggleLoggers()
         {
+            // Activate the loggers of the ApplicationDispatcher
+            // Deactivate the other loggers (if running)
             if (_this.UseApplicationDispatcher)
+            {
                 ViewModel.ToggleLoggers(_this.ActivateLoggers);
+                ToggleLoggers(!_this.ActivateLoggers);
+            }
             else
+            {
+                ViewModel.ToggleLoggers(!_this.ActivateLoggers);
                 ToggleLoggers(_this.ActivateLoggers);
+            }
         }
 
         /// <summary>

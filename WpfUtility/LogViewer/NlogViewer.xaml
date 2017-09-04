@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:generalUserControls="clr-namespace:WpfUtility.GeneralUserControls"
+             xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls"
+             xmlns:vm="clr-namespace:WpfUtility.LogViewer.Classes"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <vm:NlogViewerViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -23,7 +27,7 @@
                   HorizontalGridLinesBrush="Transparent" Background="Transparent" EnableRowVirtualization="True"
                   EnableColumnVirtualization="True" VirtualizingStackPanel.IsVirtualizing="True"
                   VirtualizingPanel.ScrollUnit="Pixel" x:Name="DataGrid"
-                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
                                  Color="DarkOrange" />
@@ -60,12 +64,12 @@
                 <DataGridTemplateColumn Width="*" Header="Message" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <generalUserControls:HighlightTextBlock Text="{Binding FormattedMessage}"
+                            <guc:HighlightTextBlock Text="{Binding FormattedMessage}"
                                                                     HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
                                                                     IsCaseSensitive="False" TextWrapping="Wrap"
                                                                     HighlightBrush="Turquoise"
                                                                     HighlightForeGround="Black"
-                                                                    ToolTip="{Binding FormattedMessage}"
+                                                                    ToolTip="{Binding (vm:LogEvent.FormattedMessage)}"
                                                                     Foreground="Black" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -73,7 +77,7 @@
                 <DataGridTemplateColumn Width="0.33*" Header="Exception" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <generalUserControls:HighlightTextBlock Text="{Binding Exception}"
+                            <guc:HighlightTextBlock Text="{Binding Exception}"
                                                                     HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
                                                                     IsCaseSensitive="False" TextWrapping="Wrap"
                                                                     HighlightBrush="Turquoise"

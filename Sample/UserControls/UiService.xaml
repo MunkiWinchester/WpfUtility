@@ -18,13 +18,13 @@
         </Grid.RowDefinitions>
         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Button x:Name="BtnShow" Content="Show Panel" Command="{Binding ShowPanelCommand}"
+                <Button x:Name="ButtonShow" Content="Show Panel" Command="{Binding ShowPanelCommand}"
                         Click="ButtonBase_OnClick" Width="86" Height="22" />
-                <Button x:Name="BtnHide" Content="Hide Panel" Command="{Binding HidePanelCommand}"
+                <Button x:Name="ButtonHide" Content="Hide Panel" Command="{Binding HidePanelCommand}"
                         Click="ButtonBase_OnClick" Width="86" Height="22" Margin="5,0,0,0" />
-                <Button x:Name="BtnChange" Content="Change Sub Message" Command="{Binding ChangeSubMessageCommand}"
+                <Button x:Name="ButtonChange" Content="Change Sub Message" Command="{Binding ChangeSubMessageCommand}"
                         Width="130" Height="22" Margin="5,0,0,0" />
-                <Button x:Name="BtnChangeColor" Content="Change Color" Command="{Binding ChangeColorCommand}"
+                <Button x:Name="ButtonChangeColor" Content="Change Color" Command="{Binding ChangeColorCommand}"
                         Width="130" Height="22" Margin="5,0,0,0" />
             </StackPanel>
         </DockPanel>

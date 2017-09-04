@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Sample.UserControls
+﻿namespace Sample.UserControls
 {
     /// <summary>
     ///     Interaction logic for Paging.xaml
@@ -10,8 +8,6 @@ namespace Sample.UserControls
         public Paging()
         {
             InitializeComponent();
-            if (!DesignerProperties.GetIsInDesignMode(this))
-                DataContext = new PagingViewModel();
         }
     }
 }

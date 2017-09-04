@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls;assembly=WpfUtility"
+             xmlns:userControls="clr-namespace:Sample.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <userControls:PagingViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

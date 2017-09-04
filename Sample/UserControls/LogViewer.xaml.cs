@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Sample.UserControls
+﻿namespace Sample.UserControls
 {
     /// <summary>
     ///     Interaction logic for LogViewer.xaml
@@ -10,8 +8,6 @@ namespace Sample.UserControls
         public LogViewer()
         {
             InitializeComponent();
-            if (!DesignerProperties.GetIsInDesignMode(this))
-                DataContext = new LogViewerViewModel();
         }
     }
 }

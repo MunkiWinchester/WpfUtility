@@ -54,7 +54,10 @@ namespace Sample.UserControls
         {
             var log = LogManager.GetLogger("button");
             var level = LogLevel.FromString(logLevel);
-            log.Log(level, new Exception(Text), Text);
+            if(level == LogLevel.Info || level == LogLevel.Trace || level == LogLevel.Debug)
+                log.Log(level, Text);
+            else
+                log.Log(level, new Exception(Text), Text);
         }
 
         private void SendLogFromSource()
@@ -108,9 +111,9 @@ namespace Sample.UserControls
             while (!ct.WaitHandle.WaitOne(2000))
                 if (counter % 5 == 0)
                     log.Error(new IndexOutOfRangeException($"{counter} % 5 resulted in 0!"),
-                        $"Messageno {counter++} from backgroudtask caused an error");
+                        $"Messageno {counter++} from backgroundtask caused an error");
                 else
-                    log.Trace($"Messageno {counter++} from backgroudtask.");
+                    log.Trace($"Messageno {counter++} from backgroundtask.");
 
             log.Debug("Backgroundtask stopped.");
         }

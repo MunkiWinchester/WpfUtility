@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Sample.UserControls
+﻿namespace Sample.UserControls
 {
     /// <summary>
     ///     Interaction logic for Clipboard.xaml
@@ -10,8 +8,6 @@ namespace Sample.UserControls
         public Clipboard()
         {
             InitializeComponent();
-            if (!DesignerProperties.GetIsInDesignMode(this))
-                DataContext = new ClipboardViewModel();
         }
     }
 }
