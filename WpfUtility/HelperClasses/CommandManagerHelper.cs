@@ -6,7 +6,7 @@ namespace WpfUtility
     /// <summary>
     ///     This class contains methods for the CommandManager that help avoid memory leaks by using weak references.
     /// </summary>
-    public class CommandManagerHelper
+    public static class CommandManagerHelper
     {
         /// <summary>
         ///     Calls the weak reference handlers.
