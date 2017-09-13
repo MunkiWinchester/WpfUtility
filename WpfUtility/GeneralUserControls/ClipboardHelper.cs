@@ -56,12 +56,12 @@ namespace WpfUtility.GeneralUserControls
             return clipboardData;
         }
 
-        public static string[] ParseCsvFormat(string value)
+        private static string[] ParseCsvFormat(string value)
         {
             return ParseCsvOrTextFormat(value, true);
         }
 
-        public static string[] ParseTextFormat(string value)
+        private static string[] ParseTextFormat(string value)
         {
             return ParseCsvOrTextFormat(value, false);
         }

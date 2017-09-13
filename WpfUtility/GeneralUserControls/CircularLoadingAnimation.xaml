@@ -10,7 +10,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <!-- ReSharper disable once Xaml.RedundantResource 
              We need it to enable/disable the storyboard -->
-        <Storyboard x:Key="Spinner" RepeatBehavior="Forever"
+        <Storyboard x:Key="Spinner" RepeatBehavior="Forever" DesiredFrameRate="10"
                     BeginTime="00:00:00" Duration="00:00:01.1000000">
             <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
                                            Storyboard.TargetName="Ellipse01"
