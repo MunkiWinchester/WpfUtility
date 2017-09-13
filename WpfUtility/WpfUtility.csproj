@@ -56,8 +56,8 @@
     <Compile Include="GeneralUserControls\CircularLoadingAnimation.xaml.cs">
       <DependentUpon>CircularLoadingAnimation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HelperClasses\ClipboardHelper.cs" />
-    <Compile Include="HelperClasses\Converters.cs" />
+    <Compile Include="Services\ClipboardHelper.cs" />
+    <Compile Include="Services\Converters.cs" />
     <Compile Include="GeneralUserControls\HighlightTextBlock.cs" />
     <Compile Include="GeneralUserControls\IntListHyperlinkTextBlock.cs" />
     <Compile Include="GeneralUserControls\LoadingPanel.xaml.cs">
@@ -68,13 +68,13 @@
       <DependentUpon>Paging.xaml</DependentUpon>
     </Compile>
     <Compile Include="GeneralUserControls\UiServices.cs" />
-    <Compile Include="HelperClasses\CommandManagerHelper.cs" />
+    <Compile Include="Services\CommandManagerHelper.cs" />
     <Compile Include="LogViewer\Classes\LogEvent.cs" />
     <Compile Include="LogViewer\Classes\NlogViewerTarget.cs" />
     <Compile Include="LogViewer\Classes\NlogViewerViewModel.cs" />
-    <Compile Include="HelperClasses\DelegateCommand.cs" />
-    <Compile Include="HelperClasses\ObservableObject.cs" />
-    <Compile Include="HelperClasses\RelayCommand.cs" />
+    <Compile Include="Services\DelegateCommand.cs" />
+    <Compile Include="Services\ObservableObject.cs" />
+    <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="LogViewer\NlogViewer.xaml.cs">
       <DependentUpon>NlogViewer.xaml</DependentUpon>
     </Compile>

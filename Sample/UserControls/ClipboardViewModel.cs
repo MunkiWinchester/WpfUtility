@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using WpfUtility;
 using WpfUtility.GeneralUserControls;
+using WpfUtility.Services;
 
 namespace Sample.UserControls
 {

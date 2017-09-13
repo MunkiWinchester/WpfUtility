@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 using WpfUtility;
+using WpfUtility.Services;
 
 namespace Sample.UserControls
 {

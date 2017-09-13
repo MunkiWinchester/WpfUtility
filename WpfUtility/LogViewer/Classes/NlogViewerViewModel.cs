@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using NLog;
 using NLog.Common;
+using WpfUtility.Services;
 
 namespace WpfUtility.LogViewer.Classes
 {

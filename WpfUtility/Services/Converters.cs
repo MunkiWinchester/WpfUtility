@@ -6,7 +6,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Color = System.Drawing.Color;
 
-namespace WpfUtility
+namespace WpfUtility.Services
 {
     /// <summary>
     ///     Converts true or false to one of two given values of type T

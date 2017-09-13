@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using NlogViewer.Properties;
 
-namespace WpfUtility
+namespace WpfUtility.Services
 {
     /// <summary>
     ///     This class allows simpler handling of the INotifyPropertyChanged

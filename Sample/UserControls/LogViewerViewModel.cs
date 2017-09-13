@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using NLog;
 using WpfUtility;
+using WpfUtility.Services;
 
 namespace Sample.UserControls
 {

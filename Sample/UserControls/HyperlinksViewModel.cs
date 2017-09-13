@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using WpfUtility;
+using WpfUtility.Services;
 
 namespace Sample.UserControls
 {

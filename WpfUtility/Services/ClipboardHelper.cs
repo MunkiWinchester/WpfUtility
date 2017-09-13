@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
-namespace WpfUtility
+namespace WpfUtility.Services
 {
     /// <summary>
     ///     Helper class to get the values from the clipboard
