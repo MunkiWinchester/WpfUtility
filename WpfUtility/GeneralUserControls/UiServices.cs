@@ -6,7 +6,7 @@ namespace WpfUtility.GeneralUserControls
     /// <summary>
     ///     Contains helper methods for UI, so far just one for showing a wait cursor
     /// </summary>
-    public class UiServices
+    public static class UiServices
     {
         /// <summary>
         ///     Indicating whether the UI is currently busy or not

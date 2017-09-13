@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
-namespace WpfUtility.GeneralUserControls
+namespace WpfUtility
 {
     /// <summary>
     ///     Helper class to get the values from the clipboard
     /// </summary>
-    public class ClipboardHelper
+    public static class ClipboardHelper
     {
         /// <summary>
         ///     Parses the clipboard data to a list with a string arrays
@@ -52,7 +52,6 @@ namespace WpfUtility.GeneralUserControls
                     }
                 }
             }
-
             return clipboardData;
         }
 
