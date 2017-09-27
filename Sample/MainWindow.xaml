@@ -1,9 +1,49 @@
-﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<controls:MetroWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:userControls="clr-namespace:Sample.UserControls"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sample="clr-namespace:Sample"
+        mc:Ignorable="d" x:Name="MetroWindow"
         x:Class="Sample.MainWindow" Title="WpfUtility Sample"
-        Height="350" Width="525" WindowStartupLocation="CenterScreen" Icon="test.png">
-    <TabControl>
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1" SaveWindowPosition="True"
+        Height="350" Width="525" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <sample:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <Rectangle Height="20" Width="20" Margin="4">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Resources/test.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Command="{Binding SettingsClickedCommand}"
+                    CommandParameter="{Binding ElementName=MetroWindow}">
+                <Rectangle Width="20" Height="20"
+                           Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+    <controls:MetroAnimatedSingleRowTabControl>
         <TabItem Header="LogViewer">
             <userControls:LogViewer />
         </TabItem>
@@ -25,5 +65,5 @@
         <TabItem Header="UiService">
             <userControls:UiService />
         </TabItem>
-    </TabControl>
-</Window>
+    </controls:MetroAnimatedSingleRowTabControl>
+</controls:MetroWindow>

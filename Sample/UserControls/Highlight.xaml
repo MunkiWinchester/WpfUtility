@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls;assembly=WpfUtility"
              xmlns:userControls="clr-namespace:Sample.UserControls"
+             xmlns:sample="clr-namespace:Sample"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="450">
     <UserControl.DataContext>
@@ -29,38 +30,22 @@
                VerticalAlignment="Bottom" />
         <TextBox Grid.Column="0" Grid.Row="1" x:Name="TextBoxSearch" Margin="3,0,3,3" />
         <CheckBox Grid.Column="1" Grid.Row="1" x:Name="CheckBox" Margin="3,0,3,3" VerticalContentAlignment="Stretch" />
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid x:Name="FirstColumn" Grid.Column="0" />
-            <ListView Grid.Column="0" ItemsSource="{Binding SampleEntries}" x:Name="ListView">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="BorderBrush" Value="LightGray" />
-                        <Setter Property="BorderThickness" Value="0,0,0,1" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView>
-                        <GridView.Columns>
-                            <GridViewColumn Width="{Binding ElementName=FirstColumn, Path=ActualWidth}">
-                                <GridViewColumnHeader Content="TargetText" HorizontalContentAlignment="Left"
-                                                      Padding="5,0,2,0" />
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <guc:HighlightTextBlock Text="{Binding Track}"
-                                                                HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
-                                                                IsCaseSensitive="{Binding ElementName=CheckBox, Path=IsChecked}"
-                                                                HighlightBrush="SandyBrown" HighlightForeGround="Black"
-                                                                ToolTip="{Binding Track}" Foreground="Black" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView.Columns>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
+        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding SampleEntries}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Artists" IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="sample:SampleEntry">
+                            <guc:HighlightTextBlock Text="{Binding Artists}"
+                                                HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
+                                                IsCaseSensitive="False" TextWrapping="Wrap"
+                                                HighlightBrush="Turquoise"
+                                                HighlightForeGround="Black"
+                                                ToolTip="{Binding Artists}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

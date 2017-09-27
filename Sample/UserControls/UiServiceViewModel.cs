@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using System.Windows.Media;
-using WpfUtility;
+using WpfUtility.GeneralUserControls;
 using WpfUtility.Services;
 
 namespace Sample.UserControls
@@ -52,6 +52,7 @@ namespace Sample.UserControls
             set
             {
                 _isLoading = value;
+                UiServices.ToggleBusyState();
                 OnPropertyChanged();
             }
         }

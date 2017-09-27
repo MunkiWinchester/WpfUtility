@@ -190,5 +190,11 @@ namespace WpfUtility.LogViewer
         {
             Dispatcher.BeginInvoke(new Action(() => { ViewModel.LogEntries.Add(new LogEvent(log.LogEvent)); }));
         }
+
+        private void DataGrid_OnCopyingRowClipboardContent(object sender, DataGridRowClipboardEventArgs e)
+        {
+            e.ClipboardRowContent.Clear();
+            e.ClipboardRowContent.Add(new DataGridClipboardCellContent(e.Item, (sender as DataGrid).CurrentColumn, e.Item.ToString()));
+        }
     }
 }

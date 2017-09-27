@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 using System.Windows.Media;
 using NLog;
 
@@ -17,13 +19,19 @@ namespace WpfUtility.LogViewer.Classes
         /// <param name="logEventInfo">LogEventInfo which is transformed to the LogEvent</param>
         public LogEvent(LogEventInfo logEventInfo)
         {
-            ToolTip = logEventInfo.FormattedMessage.Substring(0,
+            Level = logEventInfo.Level.ToString();
+            FormattedMessageToolTip = logEventInfo.FormattedMessage.Substring(0,
                           logEventInfo.FormattedMessage.Length > MaxLength
                               ? MaxLength
                               : logEventInfo.FormattedMessage.Length) +
                       (logEventInfo.FormattedMessage.Length > MaxLength ? "..." : "");
-            Level = logEventInfo.Level.ToString();
             FormattedMessage = logEventInfo.FormattedMessage;
+            if (logEventInfo.Exception != null)
+                ExceptionToolTip = logEventInfo.Exception.ToString().Substring(0,
+                                       logEventInfo.Exception.ToString().Length > MaxLength
+                                           ? MaxLength
+                                           : logEventInfo.Exception.ToString().Length) +
+                                   (logEventInfo.Exception.ToString().Length > MaxLength ? "..." : "");
             Exception = logEventInfo.Exception;
             LoggerName = logEventInfo.LoggerName;
             Time = logEventInfo.TimeStamp;
@@ -36,7 +44,8 @@ namespace WpfUtility.LogViewer.Classes
         public string Level { get; }
         public string FormattedMessage { get; }
         public Exception Exception { get; }
-        public string ToolTip { get; }
+        public string FormattedMessageToolTip { get; }
+        public string ExceptionToolTip { get; }
         public SolidColorBrush Background { get; private set; }
         public SolidColorBrush Foreground { get; private set; }
         public SolidColorBrush BackgroundMouseOver { get; private set; }
@@ -48,8 +57,19 @@ namespace WpfUtility.LogViewer.Classes
         /// <returns></returns>
         public override string ToString()
         {
-            return Time.ToString("dd.MM.yyyy HH:mm:ss") + "\t" + LoggerName + "\t" + Level + "\t" + FormattedMessage +
-                   "\t" + Exception;
+            var sb = new StringBuilder($"{nameof(Time)}:");
+            sb.AppendLine();
+            sb.AppendLine(Time.ToString(CultureInfo.CurrentCulture));
+            sb.AppendLine();
+            sb.AppendLine($"{nameof(Level)}:");
+            sb.AppendLine(Level);
+            sb.AppendLine();
+            sb.AppendLine($"{nameof(FormattedMessage)}:");
+            sb.AppendLine(FormattedMessage);
+            sb.AppendLine();
+            sb.AppendLine($"{nameof(Exception)}:");
+            sb.AppendLine(Exception.ToString());
+            return sb.ToString();
         }
 
         /// <summary>

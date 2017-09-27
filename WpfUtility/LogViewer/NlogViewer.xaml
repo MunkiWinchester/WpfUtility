@@ -9,6 +9,20 @@
     <UserControl.DataContext>
         <vm:NlogViewerViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="ToolTip">
+            <Style.Resources>
+                <Style TargetType="ContentPresenter">
+                    <Style.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Style.Resources>
+            <Setter Property="MaxWidth" Value="400" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -22,67 +36,65 @@
         <Label Content="Search:" Grid.Row="0" Grid.Column="0" />
         <TextBox x:Name="TextBoxSearch" Grid.Row="0" Grid.Column="1" Width="150" Margin="3" />
         <DataGrid ItemsSource="{Binding LogEntries}" SelectedItem="{Binding SelectedLogEntry}"
-                  AutoGenerateColumns="False"
+                  AutoGenerateColumns="False" CopyingRowClipboardContent="DataGrid_OnCopyingRowClipboardContent"
                   SelectionMode="Single" SelectionUnit="FullRow" GridLinesVisibility="Horizontal" RowHeaderWidth="0"
-                  HorizontalGridLinesBrush="Transparent" Background="Transparent" EnableRowVirtualization="True"
+                  HorizontalGridLinesBrush="#FFD8D8D8" Background="Transparent" EnableRowVirtualization="True"
                   EnableColumnVirtualization="True" VirtualizingStackPanel.IsVirtualizing="True"
                   VirtualizingPanel.ScrollUnit="Pixel" x:Name="DataGrid"
                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
-            <DataGrid.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
-                                 Color="DarkOrange" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
-                                 Color="Black" />
-            </DataGrid.Resources>
-            <DataGrid.ItemContainerStyle>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Margin" Value="0,1,0,1" />
-                    <Setter Property="ToolTip" Value="{Binding ToolTip}" />
-                    <Setter Property="Background" Value="{Binding Background}" />
-                    <Setter Property="Foreground" Value="{Binding Foreground}" />
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{Binding BackgroundMouseOver}" />
-                            <Setter Property="Foreground" Value="{Binding ForegroundMouseOver}" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.ItemContainerStyle>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
+                    <Setter Property="Margin" Value="2,0,2,0" />
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                 </Style>
             </DataGrid.CellStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Level}" Value="Fatal">
+                            <Setter Property="Background" Value="Red" />
+                            <Setter Property="Foreground" Value="White"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Level}" Value="Error">
+                            <Setter Property="Background" Value="#FFD64A30" />
+                            <Setter Property="Foreground" Value="White"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Level}" Value="Warn">
+                            <Setter Property="Background" Value="#FFF7B136" />
+                            <Setter Property="Foreground" Value="Black"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="120" Header="Time"
+                <DataGridTextColumn Width="120" Header="Time" x:Name="TimeTextColumn"
                                     Binding="{Binding Time, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"
                                     IsReadOnly="True" />
                 <DataGridTextColumn Width="50" Header="Logger" Binding="{Binding LoggerName}" Visibility="Hidden"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Width="70" Header="Level" Binding="{Binding Level}" IsReadOnly="True" />
+                <DataGridTextColumn Width="70" Header="Level" Binding="{Binding Level}" IsReadOnly="True"/>
                 <DataGridTemplateColumn Width="*" Header="Message" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType="vm:LogEvent">
                             <guc:HighlightTextBlock Text="{Binding FormattedMessage}"
-                                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
-                                                                    IsCaseSensitive="False" TextWrapping="Wrap"
-                                                                    HighlightBrush="Turquoise"
-                                                                    HighlightForeGround="Black"
-                                                                    ToolTip="{Binding (vm:LogEvent.FormattedMessage)}"
-                                                                    Foreground="Black" />
+                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
+                                                    IsCaseSensitive="False" TextWrapping="Wrap"
+                                                    HighlightBrush="Turquoise"
+                                                    HighlightForeGround="Black"
+                                                    ToolTip="{Binding FormattedMessageToolTip}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="0.33*" Header="Exception" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType="vm:LogEvent">
                             <guc:HighlightTextBlock Text="{Binding Exception}"
-                                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
-                                                                    IsCaseSensitive="False" TextWrapping="Wrap"
-                                                                    HighlightBrush="Turquoise"
-                                                                    HighlightForeGround="Black"
-                                                                    ToolTip="{Binding Exception}" Foreground="Black" />
+                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
+                                                    IsCaseSensitive="False" TextWrapping="Wrap"
+                                                    HighlightBrush="Turquoise"
+                                                    HighlightForeGround="Black"
+                                                    ToolTip="{Binding ExceptionToolTip}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -15,7 +15,6 @@ namespace Sample.UserControls
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            UiServices.ToggleBusyState();
         }
     }
 }
