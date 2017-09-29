@@ -44,7 +44,7 @@
                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
-                    <Setter Property="Margin" Value="2,0,2,0" />
+                    <Setter Property="Margin" Value="0,1" />
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                 </Style>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-using System.Windows.Media;
 using NLog;
 
 namespace WpfUtility.LogViewer.Classes
@@ -35,8 +34,6 @@ namespace WpfUtility.LogViewer.Classes
             Exception = logEventInfo.Exception;
             LoggerName = logEventInfo.LoggerName;
             Time = logEventInfo.TimeStamp;
-
-            SetupColors(logEventInfo);
         }
 
         public DateTime Time { get; }
@@ -46,10 +43,6 @@ namespace WpfUtility.LogViewer.Classes
         public Exception Exception { get; }
         public string FormattedMessageToolTip { get; }
         public string ExceptionToolTip { get; }
-        public SolidColorBrush Background { get; private set; }
-        public SolidColorBrush Foreground { get; private set; }
-        public SolidColorBrush BackgroundMouseOver { get; private set; }
-        public SolidColorBrush ForegroundMouseOver { get; private set; }
 
         /// <summary>
         ///     Converts the LogEventInfo to a readable string
@@ -68,38 +61,8 @@ namespace WpfUtility.LogViewer.Classes
             sb.AppendLine(FormattedMessage);
             sb.AppendLine();
             sb.AppendLine($"{nameof(Exception)}:");
-            sb.AppendLine(Exception.ToString());
+            sb.AppendLine(Exception?.ToString());
             return sb.ToString();
-        }
-
-        /// <summary>
-        ///     Sets the colors accordingly to the LogEventInfo
-        /// </summary>
-        /// <param name="logEventInfo">LogEventInfo for the values</param>
-        private void SetupColors(LogEventInfo logEventInfo)
-        {
-            if (logEventInfo.Level == LogLevel.Warn)
-            {
-                Background = Brushes.Yellow;
-                BackgroundMouseOver = Brushes.GreenYellow;
-            }
-            else if (logEventInfo.Level == LogLevel.Error)
-            {
-                Background = Brushes.Tomato;
-                BackgroundMouseOver = Brushes.IndianRed;
-            }
-            else if (logEventInfo.Level == LogLevel.Fatal)
-            {
-                Background = Brushes.Red;
-                BackgroundMouseOver = Brushes.OrangeRed;
-            }
-            else
-            {
-                Background = Brushes.White;
-                BackgroundMouseOver = Brushes.LightGray;
-            }
-            Foreground = Brushes.Black;
-            ForegroundMouseOver = Brushes.Black;
         }
     }
 }
