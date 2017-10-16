@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using WpfUtility;
 using WpfUtility.Services;
 
 namespace Sample.UserControls

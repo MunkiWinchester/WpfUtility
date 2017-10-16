@@ -72,7 +72,7 @@ namespace WpfUtility.Services
         ///     Converts true to Visibility.Collapsed or false to Visibility.Visible
         /// </summary>
         public NegatedBooleanToVisibilityConverter() :
-            base(Visibility.Visible, Visibility.Collapsed)
+            base(Visibility.Collapsed, Visibility.Visible)
         {
         }
     }
@@ -128,6 +128,51 @@ namespace WpfUtility.Services
             if (brush != null)
                 return Color.FromArgb(brush.Color.A, brush.Color.R, brush.Color.G, brush.Color.B);
             return Color.Black;
+        }
+    }
+
+    /// <summary>
+    ///     Subtratcs an Int (parameter) from a given Int (value)
+    ///     E.g. ActualWidth - Spacing
+    /// </summary>
+    public class SubtractIntConverter : IValueConverter
+    {
+        /// <summary>
+        ///     Subtratcs an Int (parameter) from a given Int (value)
+        ///     E.g. ActualWidth - Spacing
+        /// </summary>
+        /// <param name="value">Int from which is subtracted</param>
+        /// <param name="targetType">Not used</param>
+        /// <param name="parameter">Int which is subtracted from value</param>
+        /// <param name="culture">Not used</param>
+        /// <returns>Value - paramter</returns>
+        public object Convert(object value, Type targetType,
+            object parameter, CultureInfo culture)
+        {
+            if (value == null || !int.TryParse(value.ToString(), out var parsedValue))
+                return 0;
+            if (parameter == null || !int.TryParse(parameter.ToString(), out var parsedParameter))
+                return parsedValue;
+            var returnValue = parsedValue - parsedParameter;
+            return returnValue > 0 ? returnValue : 0;
+        }
+
+        /// <summary>
+        ///     Adds an Int (parameter) back to a given int (value)
+        /// </summary>
+        /// <param name="value">Int from which was subtracted</param>
+        /// <param name="targetType">Not used</param>
+        /// <param name="parameter">Int which was subtracted from value</param>
+        /// <param name="culture">Not used</param>
+        /// <returns>Value + parameter</returns>
+        public object ConvertBack(object value, Type targetType,
+            object parameter, CultureInfo culture)
+        {
+            if (value == null || !int.TryParse(value.ToString(), out var parsedValue))
+                return 0;
+            if (parameter != null && int.TryParse(parameter.ToString(), out var parsedParameter))
+                return parsedValue + parsedParameter;
+            return parsedValue;
         }
     }
 }

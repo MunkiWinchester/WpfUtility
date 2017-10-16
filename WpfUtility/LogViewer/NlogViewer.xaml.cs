@@ -53,7 +53,7 @@ namespace WpfUtility.LogViewer
         /// </summary>
         public ObservableCollection<LogEventInfo> ItemSource
         {
-            get => (ObservableCollection<LogEventInfo>)GetValue(ItemSourceProperty);
+            get => (ObservableCollection<LogEventInfo>) GetValue(ItemSourceProperty);
             set => SetValue(ItemSourceProperty, value);
         }
 
@@ -116,7 +116,7 @@ namespace WpfUtility.LogViewer
             if (nlogViewer != null)
             {
                 var activate = dependencyPropertyChangedEventArgs.NewValue != null &&
-                               (bool)dependencyPropertyChangedEventArgs.NewValue;
+                               (bool) dependencyPropertyChangedEventArgs.NewValue;
                 nlogViewer.ViewModel.ToggleLoggers(activate);
             }
         }
@@ -194,7 +194,8 @@ namespace WpfUtility.LogViewer
         private void DataGrid_OnCopyingRowClipboardContent(object sender, DataGridRowClipboardEventArgs e)
         {
             e.ClipboardRowContent.Clear();
-            e.ClipboardRowContent.Add(new DataGridClipboardCellContent(e.Item, (sender as DataGrid).CurrentColumn, e.Item.ToString()));
+            e.ClipboardRowContent.Add(
+                new DataGridClipboardCellContent(e.Item, (sender as DataGrid).CurrentColumn, e.Item.ToString()));
         }
     }
 }

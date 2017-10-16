@@ -20,16 +20,17 @@ namespace WpfUtility.LogViewer.Classes
         {
             Level = logEventInfo.Level.ToString();
             FormattedMessageToolTip = logEventInfo.FormattedMessage.Substring(0,
-                          logEventInfo.FormattedMessage.Length > MaxLength
-                              ? MaxLength
-                              : logEventInfo.FormattedMessage.Length) +
-                      (logEventInfo.FormattedMessage.Length > MaxLength ? "..." : "");
+                                          logEventInfo.FormattedMessage.Length > MaxLength
+                                              ? MaxLength
+                                              : logEventInfo.FormattedMessage.Length) +
+                                      (logEventInfo.FormattedMessage.Length > MaxLength ? "..." : "");
             FormattedMessage = logEventInfo.FormattedMessage;
             if (logEventInfo.Exception != null)
-                ExceptionToolTip = logEventInfo.Exception.ToString().Substring(0,
-                                       logEventInfo.Exception.ToString().Length > MaxLength
-                                           ? MaxLength
-                                           : logEventInfo.Exception.ToString().Length) +
+                ExceptionToolTip = logEventInfo.Exception.ToString()
+                                       .Substring(0,
+                                           logEventInfo.Exception.ToString().Length > MaxLength
+                                               ? MaxLength
+                                               : logEventInfo.Exception.ToString().Length) +
                                    (logEventInfo.Exception.ToString().Length > MaxLength ? "..." : "");
             Exception = logEventInfo.Exception;
             LoggerName = logEventInfo.LoggerName;

@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using WpfUtility.GeneralUserControls;
 
 namespace Sample.UserControls
 {

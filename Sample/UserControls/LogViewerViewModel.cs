@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NLog;
-using WpfUtility;
 using WpfUtility.Services;
 
 namespace Sample.UserControls
@@ -55,7 +54,7 @@ namespace Sample.UserControls
         {
             var log = LogManager.GetLogger("button");
             var level = LogLevel.FromString(logLevel);
-            if(level == LogLevel.Info || level == LogLevel.Trace || level == LogLevel.Debug)
+            if (level == LogLevel.Info || level == LogLevel.Trace || level == LogLevel.Debug)
                 log.Log(level, Text);
             else
                 log.Log(level, new Exception(Text), Text);

@@ -1,11 +1,13 @@
 ﻿<UserControl x:Class="WpfUtility.LogViewer.NlogViewer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WpfUtility.LogViewer.Classes"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:NlogViewerViewModel />
     </UserControl.DataContext>
@@ -33,15 +35,32 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Content="Search:" Grid.Row="0" Grid.Column="0" />
-        <TextBox x:Name="TextBoxSearch" Grid.Row="0" Grid.Column="1" Width="150" Margin="3" />
-        <DataGrid ItemsSource="{Binding LogEntries}" SelectedItem="{Binding SelectedLogEntry}"
-                  AutoGenerateColumns="False" CopyingRowClipboardContent="DataGrid_OnCopyingRowClipboardContent"
-                  SelectionMode="Single" SelectionUnit="FullRow" GridLinesVisibility="Horizontal" RowHeaderWidth="0"
-                  HorizontalGridLinesBrush="#FFD8D8D8" Background="Transparent" EnableRowVirtualization="True"
-                  EnableColumnVirtualization="True" VirtualizingStackPanel.IsVirtualizing="True"
-                  VirtualizingPanel.ScrollUnit="Pixel" x:Name="DataGrid"
-                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Content="Search:" />
+        <TextBox x:Name="TextBoxSearch"
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 Width="150"
+                 Margin="3" />
+        <DataGrid x:Name="DataGrid"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  AutoGenerateColumns="False"
+                  Background="Transparent"
+                  CopyingRowClipboardContent="DataGrid_OnCopyingRowClipboardContent"
+                  EnableColumnVirtualization="True"
+                  EnableRowVirtualization="True"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="#FFD8D8D8"
+                  ItemsSource="{Binding LogEntries}"
+                  RowHeaderWidth="0"
+                  SelectedItem="{Binding SelectedLogEntry}"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"
+                  VirtualizingPanel.ScrollUnit="Pixel"
+                  VirtualizingStackPanel.IsVirtualizing="True">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="Margin" Value="0,1" />
@@ -54,46 +73,60 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Level}" Value="Fatal">
                             <Setter Property="Background" Value="Red" />
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="White" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Level}" Value="Error">
                             <Setter Property="Background" Value="#FFD64A30" />
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="White" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Level}" Value="Warn">
                             <Setter Property="Background" Value="#FFF7B136" />
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Foreground" Value="Black" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="120" Header="Time" x:Name="TimeTextColumn"
+                <DataGridTextColumn x:Name="TimeTextColumn"
+                                    Width="120"
                                     Binding="{Binding Time, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"
+                                    Header="Time"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Width="50" Header="Logger" Binding="{Binding LoggerName}" Visibility="Hidden"
+                <DataGridTextColumn Width="50"
+                                    Binding="{Binding LoggerName}"
+                                    Header="Logger"
+                                    IsReadOnly="True"
+                                    Visibility="Hidden" />
+                <DataGridTextColumn Width="70"
+                                    Binding="{Binding Level}"
+                                    Header="Level"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Width="70" Header="Level" Binding="{Binding Level}" IsReadOnly="True"/>
-                <DataGridTemplateColumn Width="*" Header="Message" IsReadOnly="True">
+                <DataGridTemplateColumn Width="*"
+                                        Header="Message"
+                                        IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="vm:LogEvent">
-                            <guc:HighlightTextBlock Text="{Binding FormattedMessage}"
-                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
-                                                    IsCaseSensitive="False" TextWrapping="Wrap"
-                                                    HighlightBrush="Turquoise"
+                            <guc:HighlightTextBlock HighlightBrush="Turquoise"
                                                     HighlightForeGround="Black"
+                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
+                                                    IsCaseSensitive="False"
+                                                    Text="{Binding FormattedMessage}"
+                                                    TextWrapping="Wrap"
                                                     ToolTip="{Binding FormattedMessageToolTip}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="0.33*" Header="Exception" IsReadOnly="True">
+                <DataGridTemplateColumn Width="0.33*"
+                                        Header="Exception"
+                                        IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="vm:LogEvent">
-                            <guc:HighlightTextBlock Text="{Binding Exception}"
-                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
-                                                    IsCaseSensitive="False" TextWrapping="Wrap"
-                                                    HighlightBrush="Turquoise"
+                            <guc:HighlightTextBlock HighlightBrush="Turquoise"
                                                     HighlightForeGround="Black"
+                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
+                                                    IsCaseSensitive="False"
+                                                    Text="{Binding Exception}"
+                                                    TextWrapping="Wrap"
                                                     ToolTip="{Binding ExceptionToolTip}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="Send">
             <StackPanel Orientation="Vertical">
-                <TextBox x:Name="TextBoxLogText" Text="{Binding Text}" HorizontalAlignment="Stretch" Margin="1"/>
+                <TextBox x:Name="TextBoxLogText" Text="{Binding Text}" HorizontalAlignment="Stretch" Margin="1" />
                 <StackPanel Orientation="Horizontal">
                     <Button Margin="1" x:Name="ButtonTrace" Content="Trace" Command="{Binding SendLogCommand}"
                             CommandParameter="Trace" />

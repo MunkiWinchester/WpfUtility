@@ -1,37 +1,63 @@
 ﻿<UserControl x:Class="Sample.UserControls.Paging"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:con="clr-namespace:WpfUtility.Services;assembly=WpfUtility"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls;assembly=WpfUtility"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:userControls="clr-namespace:Sample.UserControls"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <UserControl.DataContext>
         <userControls:PagingViewModel />
     </UserControl.DataContext>
-    <Grid>
+    <UserControl.Resources>
+        <con:SubtractIntConverter x:Key="SubtractIntConverter" />
+    </UserControl.Resources>
+    <Grid x:Name="Grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" VerticalAlignment="Top" ItemsSource="{Binding SampleEntries}"
+        <DataGrid x:Name="DataGrid"
+                  Grid.Row="0"
+                  Width="{Binding ElementName=PagingControl, Path=ActualWidth, Converter={StaticResource SubtractIntConverter}, ConverterParameter=200}"
+                  Margin="3"
+                  VerticalAlignment="Top"
                   AutoGenerateColumns="False"
-                  IsReadOnly="True" x:Name="DataGrid" SelectionUnit="Cell" Margin="3">
+                  IsReadOnly="True"
+                  ItemsSource="{Binding SampleEntries}"
+                  SelectionUnit="Cell">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding User}" Width="0.4*" />
-                <DataGridTextColumn Header="Artists" Binding="{Binding Artists}" Width="*" />
-                <DataGridTextColumn Header="Track" Binding="{Binding Track}" Width="*" />
-                <DataGridTextColumn Header="Genres" Binding="{Binding Genres}" Width="*" />
-                <DataGridTextColumn Header="TrackId" Binding="{Binding TrackId}" Width="*" Visibility="Hidden" />
+                <DataGridTextColumn Width="0.4*"
+                                    Binding="{Binding User}"
+                                    Header="Name" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding Artists}"
+                                    Header="Artists" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding Track}"
+                                    Header="Track" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding Genres}"
+                                    Header="Genres" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding TrackId}"
+                                    Header="TrackId"
+                                    Visibility="Hidden" />
             </DataGrid.Columns>
         </DataGrid>
-        <guc:Paging Grid.Row="1" Grid.Column="0"
-                    TotalEntries="{Binding TotalEntries}" CurrentPage="{Binding CurrentPage}"
-                    TotalPages="{Binding TotalPages}" EntriesPerPage="{Binding EntriesPerPage}"
+        <guc:Paging x:Name="PagingControl"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    CurrentPage="{Binding CurrentPage}"
+                    EntriesPerPage="{Binding EntriesPerPage}"
                     GoToFirstPageCommand="{Binding GoToFirstPageCommand}"
-                    GoToPreviousPageCommand="{Binding GoToPreviousPageCommand}"
+                    GoToLastPageCommand="{Binding GoToLastPageCommand}"
                     GoToNextPageCommand="{Binding GoToNextPageCommand}"
-                    GoToLastPageCommand="{Binding GoToLastPageCommand}" />
+                    GoToPreviousPageCommand="{Binding GoToPreviousPageCommand}"
+                    TotalEntries="{Binding TotalEntries}"
+                    TotalPages="{Binding TotalPages}" />
     </Grid>
 </UserControl>

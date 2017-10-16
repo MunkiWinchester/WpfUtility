@@ -33,15 +33,15 @@ namespace Sample.UserControls
             _initial = false;
         }
 
-        ///// <summary>
-        /////     Command to save the settings
-        ///// </summary>
-        //public ICommand SaveCommand => new DelegateCommand(SaveSettings);
+        /// <summary>
+        ///     Command to save the settings
+        /// </summary>
+        public ICommand SaveCommand => new DelegateCommand(SaveSettings);
 
-        ///// <summary>
-        /////     Command to cancle the settings
-        ///// </summary>
-        //public ICommand CancelCommand => new DelegateCommand(ResetSettings);
+        /// <summary>
+        ///     Command to cancle the settings
+        /// </summary>
+        public ICommand CancelCommand => new DelegateCommand(ResetSettings);
 
         /// <summary>
         ///     Command to switch the style of the app
@@ -105,24 +105,24 @@ namespace Sample.UserControls
                     ThemeManager.GetAppTheme(_selectedTheme));
         }
 
-        ///// <summary>
-        ///// Resets the settings to the previous ones
-        ///// </summary>
-        //private static void ResetSettings()
-        //{
-        //    ThemeManager.ChangeAppStyle(Application.Current,
-        //        ThemeManager.GetAccent(Settings.Default.SelectedAccent),
-        //        ThemeManager.GetAppTheme(Settings.Default.SelectedTheme));
-        //}
+        /// <summary>
+        ///     Saves the selected accent and theme to the settings
+        /// </summary>
+        private static void ResetSettings()
+        {
+            ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(Settings.Default.SelectedAccent),
+                ThemeManager.GetAppTheme(Settings.Default.SelectedTheme));
 
-        ///// <summary>
-        /////     Saves the selected accent and theme to the settings
-        ///// </summary>
-        //private void SaveSettings()
-        //{
-        //    Settings.Default.SelectedAccent = SelectedAccent;
-        //    Settings.Default.SelectedTheme = SelectedTheme;
-        //    Settings.Default.Save();
-        //}
+        }
+
+        /// <summary>
+        /// Resets the settings to the previous ones
+        /// </summary>
+        private void SaveSettings()
+        {
+            Settings.Default.SelectedAccent = SelectedAccent;
+            Settings.Default.SelectedTheme = SelectedTheme;
+            Settings.Default.Save();
+        }
     }
 }
