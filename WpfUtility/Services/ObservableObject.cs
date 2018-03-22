@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using NlogViewer.Properties;
@@ -29,7 +30,7 @@ namespace WpfUtility.Services
         /// <param name="field">Reference of the given field</param>
         /// <param name="value">Value which will be set to the field</param>
         /// <param name="propertyName">Name of the property (if none is given CallerMemberName will be used)</param>
-        /// <returns>True if the value has changed or false if it equal</returns>
+        /// <returns>True if the value has changed or false if it is equal</returns>
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
@@ -37,6 +38,38 @@ namespace WpfUtility.Services
             // ReSharper disable once ExplicitCallerInfoArgument
             // Don't remove propertyName! CallerMemberName would be SetField and not the property!
             OnPropertyChanged(propertyName);
+            return true;
+        }
+        /// <summary>
+        ///     Sets a field of the given class to the given value
+        /// </summary>
+        /// <typeparam name="T">The type of the class</typeparam>
+        /// <param name="parent">The class which contains the field</param>
+        /// <param name="property">The name of the field</param>
+        /// <param name="value">The new value</param>
+        /// <param name="propertyName">Name of the property (if none is given CallerMemberName will be used)</param>
+        /// <returns>True if the value has changed or false if it is equal</returns>
+        protected bool SetField<T>(ref T parent, string property, object value, [CallerMemberName] string propertyName = null)
+        {
+            if (parent == null)
+                return false;
+
+            if (string.IsNullOrEmpty(property))
+                throw new ArgumentNullException(nameof(property));
+
+            var propertyInfo = parent.GetType().GetProperty(property);
+            if (propertyInfo == null)
+            {
+                throw new NullReferenceException($"The property with the name \"{property}\" does not exist.");
+            }
+
+            var currentValue = propertyInfo.GetValue(parent, null);
+            if (currentValue.Equals(value))
+                return false;
+
+            propertyInfo.SetValue(parent, Convert.ChangeType(value, propertyInfo.PropertyType), null);
+            OnPropertyChanged(propertyName);
+
             return true;
         }
     }
