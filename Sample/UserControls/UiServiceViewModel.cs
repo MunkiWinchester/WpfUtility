@@ -37,14 +37,15 @@ namespace Sample.UserControls
 
         public ICommand ShowPanelCommand => new DelegateCommand(() => { IsLoading = true; });
 
-        public ICommand ChangeSubMessageCommand => new DelegateCommand(() =>
-        {
-            if (_current < Total)
-                _current++;
-            else
-                _current = 1;
-            SubMessage = $"{_current} of {Total} files read..";
-        });
+        public ICommand ChangeSubMessageCommand =>
+            new DelegateCommand(() =>
+            {
+                if (_current < Total)
+                    _current++;
+                else
+                    _current = 1;
+                SubMessage = $"{_current} of {Total} files read..";
+            });
 
         public bool IsLoading
         {
@@ -77,15 +78,16 @@ namespace Sample.UserControls
             }
         }
 
-        public ICommand ChangeColorCommand => new DelegateCommand(() =>
-        {
-            CircleColor = new SolidColorBrush(
-                Color.FromArgb(255, (byte) _rnd.Next(256), (byte) _rnd.Next(256), (byte) _rnd.Next(256)));
-            MessageForegroundColor = new SolidColorBrush(
-                Color.FromArgb(255, (byte) _rnd.Next(256), (byte) _rnd.Next(256), (byte) _rnd.Next(256)));
-            SubMessageForegroundColor = new SolidColorBrush(
-                Color.FromArgb(255, (byte) _rnd.Next(256), (byte) _rnd.Next(256), (byte) _rnd.Next(256)));
-        });
+        public ICommand ChangeColorCommand =>
+            new DelegateCommand(() =>
+            {
+                CircleColor = new SolidColorBrush(
+                    Color.FromArgb(255, (byte) _rnd.Next(256), (byte) _rnd.Next(256), (byte) _rnd.Next(256)));
+                MessageForegroundColor = new SolidColorBrush(
+                    Color.FromArgb(255, (byte) _rnd.Next(256), (byte) _rnd.Next(256), (byte) _rnd.Next(256)));
+                SubMessageForegroundColor = new SolidColorBrush(
+                    Color.FromArgb(255, (byte) _rnd.Next(256), (byte) _rnd.Next(256), (byte) _rnd.Next(256)));
+            });
 
         public SolidColorBrush CircleColor
         {

@@ -4,17 +4,17 @@ using System.Windows.Input;
 namespace WpfUtility.GeneralUserControls
 {
     /// <summary>
-    ///     Contains helper methods for UI, so far just one for showing a wait cursor
+    /// Contains helper methods for UI, so far just one for showing a wait cursor
     /// </summary>
     public static class UiServices
     {
         /// <summary>
-        ///     Indicating whether the UI is currently busy or not
+        /// Indicating whether the UI is currently busy or not
         /// </summary>
         private static bool _isBusy;
 
         /// <summary>
-        ///     Sets the busystate
+        /// Sets the busystate
         /// </summary>
         public static void ToggleBusyState()
         {

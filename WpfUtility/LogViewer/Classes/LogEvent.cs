@@ -6,14 +6,14 @@ using NLog;
 namespace WpfUtility.LogViewer.Classes
 {
     /// <summary>
-    ///     Class for the LogEvent
+    /// Class for the LogEvent
     /// </summary>
     internal class LogEvent
     {
         private const int MaxLength = 497;
 
         /// <summary>
-        ///     Constructor for the LogEvent
+        /// Constructor for the LogEvent
         /// </summary>
         /// <param name="logEventInfo">LogEventInfo which is transformed to the LogEvent</param>
         public LogEvent(LogEventInfo logEventInfo)
@@ -46,7 +46,7 @@ namespace WpfUtility.LogViewer.Classes
         public string ExceptionToolTip { get; }
 
         /// <summary>
-        ///     Converts the LogEventInfo to a readable string
+        /// Converts the LogEventInfo to a readable string
         /// </summary>
         /// <returns></returns>
         public override string ToString()

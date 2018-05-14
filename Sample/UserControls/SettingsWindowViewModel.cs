@@ -21,7 +21,7 @@ namespace Sample.UserControls
         private ObservableCollection<string> _themes;
 
         /// <summary>
-        ///     Initializes a settings window view model
+        /// Initializes a settings window view model
         /// </summary>
         public SettingsWindowViewModel()
         {
@@ -34,22 +34,22 @@ namespace Sample.UserControls
         }
 
         /// <summary>
-        ///     Command to save the settings
+        /// Command to save the settings
         /// </summary>
         public ICommand SaveCommand => new DelegateCommand(SaveSettings);
 
         /// <summary>
-        ///     Command to cancle the settings
+        /// Command to cancle the settings
         /// </summary>
         public ICommand CancelCommand => new DelegateCommand(ResetSettings);
 
         /// <summary>
-        ///     Command to switch the style of the app
+        /// Command to switch the style of the app
         /// </summary>
         public ICommand SwitchCommand => new DelegateCommand(SwitchAppStyle);
 
         /// <summary>
-        ///     Collection with the different accents
+        /// Collection with the different accents
         /// </summary>
         public ObservableCollection<string> Accents
         {
@@ -58,7 +58,7 @@ namespace Sample.UserControls
         }
 
         /// <summary>
-        ///     Collection with the different themes
+        /// Collection with the different themes
         /// </summary>
         public ObservableCollection<string> Themes
         {
@@ -67,7 +67,7 @@ namespace Sample.UserControls
         }
 
         /// <summary>
-        ///     Value of the selected accent
+        /// Value of the selected accent
         /// </summary>
         public string SelectedAccent
         {
@@ -81,7 +81,7 @@ namespace Sample.UserControls
         }
 
         /// <summary>
-        ///     Value of the selected theme
+        /// Value of the selected theme
         /// </summary>
         public string SelectedTheme
         {
@@ -95,7 +95,7 @@ namespace Sample.UserControls
         }
 
         /// <summary>
-        ///     Switches the theme and/or accent of the app
+        /// Switches the theme and/or accent of the app
         /// </summary>
         private void SwitchAppStyle()
         {
@@ -106,13 +106,12 @@ namespace Sample.UserControls
         }
 
         /// <summary>
-        ///     Saves the selected accent and theme to the settings
+        /// Saves the selected accent and theme to the settings
         /// </summary>
         private static void ResetSettings()
         {
             ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(Settings.Default.SelectedAccent),
                 ThemeManager.GetAppTheme(Settings.Default.SelectedTheme));
-
         }
 
         /// <summary>

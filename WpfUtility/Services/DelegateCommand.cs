@@ -5,8 +5,8 @@ using System.Windows.Input;
 namespace WpfUtility.Services
 {
     /// <summary>
-    ///     This class allows delegating the commanding logic to methods passed as parameters,
-    ///     and enables a View to bind commands to objects that are not part of the element tree.
+    /// This class allows delegating the commanding logic to methods passed as parameters,
+    /// and enables a View to bind commands to objects that are not part of the element tree.
     /// </summary>
     public class DelegateCommand : ICommand
     {
@@ -15,7 +15,7 @@ namespace WpfUtility.Services
         private List<WeakReference> _canExecuteChangedHandlers;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DelegateCommand" /> class.
+        /// Initializes a new instance of the <see cref="DelegateCommand" /> class.
         /// </summary>
         /// <param name="executeMethod">The execute method.</param>
         public DelegateCommand(Action executeMethod) : this(executeMethod, null)
@@ -23,7 +23,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DelegateCommand" /> class.
+        /// Initializes a new instance of the <see cref="DelegateCommand" /> class.
         /// </summary>
         /// <param name="executeMethod">The execute method.</param>
         /// <param name="canExecuteMethod">The can execute method.</param>
@@ -34,7 +34,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Occurs when changes occur that affect whether or not the command should execute.
+        /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
@@ -43,11 +43,11 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Defines the method that determines whether the command can execute in its current state.
+        /// Defines the method that determines whether the command can execute in its current state.
         /// </summary>
         /// <param name="parameter">
-        ///     Data used by the command.  If the command does not require data to be passed, this object can
-        ///     be set to null.
+        /// Data used by the command.  If the command does not require data to be passed, this object can
+        /// be set to null.
         /// </param>
         /// <returns><c>true</c> if this command can be executed; otherwise, <c>false</c>.</returns>
         bool ICommand.CanExecute(object parameter)
@@ -56,11 +56,11 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Defines the method to be called when the command is invoked.
+        /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">
-        ///     Data used by the command.  If the command does not require data to be passed, this object can
-        ///     be set to null.
+        /// Data used by the command.  If the command does not require data to be passed, this object can
+        /// be set to null.
         /// </param>
         void ICommand.Execute(object parameter)
         {
@@ -68,7 +68,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Executes the action
+        /// Executes the action
         /// </summary>
         /// <param name="parameter"></param>
         public void Execute(object parameter)
@@ -77,7 +77,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Method to determine if the command can be executed.
+        /// Method to determine if the command can be executed.
         /// </summary>
         /// <returns><c>true</c> if this instance can execute; otherwise, <c>false</c>.</returns>
         public bool CanExecute()
@@ -86,7 +86,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Executes this instance.
+        /// Executes this instance.
         /// </summary>
         public void Execute()
         {
@@ -94,7 +94,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Raises the CanExecuteChaged event
+        /// Raises the CanExecuteChaged event
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
@@ -102,7 +102,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Protected virtual method to raise CanExecuteChanged event
+        /// Protected virtual method to raise CanExecuteChanged event
         /// </summary>
         protected virtual void OnCanExecuteChanged()
         {

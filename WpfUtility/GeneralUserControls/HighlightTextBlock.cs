@@ -6,32 +6,51 @@ using System.Windows.Media;
 
 namespace WpfUtility.GeneralUserControls
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// HighlightTextBlock can highlight particullar parts of a text.
+    /// </summary>
     public class HighlightTextBlock : TextBlock
     {
+        /// <summary>
+        /// Text of the text block
+        /// </summary>
         public new static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(string.Empty,
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
 
+        /// <summary>
+        /// Phrase to highlight
+        /// </summary>
         public static readonly DependencyProperty HighlightPhraseProperty =
             DependencyProperty.Register(nameof(HighlightPhrase), typeof(string),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(string.Empty,
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
 
+        /// <summary>
+        /// Brush to highlight with
+        /// </summary>
         public static readonly DependencyProperty HighlightBrushProperty =
             DependencyProperty.Register(nameof(HighlightBrush), typeof(Brush),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(Brushes.Yellow,
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
 
+        /// <summary>
+        /// Foreground brush of the hightlighted text
+        /// </summary>
         public static readonly DependencyProperty HighlightForeGroundProperty =
             DependencyProperty.Register(nameof(HighlightForeGround), typeof(Brush),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(Brushes.Black,
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     UpdateHighlighting));
 
+        /// <summary>
+        /// Is the check for highlights case sensitive
+        /// </summary>
         public static readonly DependencyProperty IsCaseSensitiveProperty =
             DependencyProperty.Register(nameof(IsCaseSensitive), typeof(bool),
                 typeof(HighlightTextBlock), new FrameworkPropertyMetadata(false,
@@ -39,7 +58,7 @@ namespace WpfUtility.GeneralUserControls
                     UpdateHighlighting));
 
         /// <summary>
-        ///     Text of the TextBlock
+        /// Text of the TextBlock
         /// </summary>
         public new string Text
         {
@@ -48,7 +67,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Phrase which should be highlighted in the TextBlock
+        /// Phrase which should be highlighted in the TextBlock
         /// </summary>
         public string HighlightPhrase
         {
@@ -57,7 +76,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Brush that is used to highlight the phrase
+        /// Brush that is used to highlight the phrase
         /// </summary>
         public Brush HighlightBrush
         {
@@ -66,7 +85,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Brush that is used to highlight the phrase
+        /// Brush that is used to highlight the phrase
         /// </summary>
         public Brush HighlightForeGround
         {
@@ -75,7 +94,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     If the highlighting is case sensitive
+        /// If the highlighting is case sensitive
         /// </summary>
         public bool IsCaseSensitive
         {
@@ -84,7 +103,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Method which is invoked trough the dependency
+        /// Method which is invoked trough the dependency
         /// </summary>
         /// <param name="dependencyObject">This contains the HighlightTextBlock ("this")</param>
         /// <param name="dependencyPropertyChangedEventArgs">The event which "triggered" the method</param>
@@ -95,7 +114,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Base method to highlight the phrase in the TextBlock
+        /// Base method to highlight the phrase in the TextBlock
         /// </summary>
         /// <param name="tb">This usercontrol, contains the phrase and the text</param>
         private static void PrepareHighlight(HighlightTextBlock tb)
@@ -128,7 +147,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Deeper method to highlight the phrase in the TextBlock (recursive)
+        /// Deeper method to highlight the phrase in the TextBlock (recursive)
         /// </summary>
         /// <param name="tb">This usercontrol, contains the phrase and the text</param>
         /// <param name="index">Index to indicate the start "point" in the text</param>

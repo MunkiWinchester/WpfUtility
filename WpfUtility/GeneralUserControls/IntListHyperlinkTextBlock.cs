@@ -6,15 +6,22 @@ using System.Windows.Documents;
 
 namespace WpfUtility.GeneralUserControls
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// HighlightTextBlock can highlight particullar parts of a text.
+    /// </summary>
     public class IntListHyperlinkTextBlock : TextBlock
     {
         /// <summary>
-        ///     Custom event to give the integer as sender to the subscribed event
+        /// Custom event to give the integer as sender to the subscribed event
         /// </summary>
         /// <param name="sender">Interger which (as hyperlink) was clicked</param>
         /// <param name="e">EventArgs of the event</param>
         public delegate void IntAsSenderHandler(int sender, EventArgs e);
 
+        /// <summary>
+        /// Property of the item source
+        /// </summary>
         public static readonly DependencyProperty ItemSourceProperty =
             DependencyProperty.Register(nameof(ItemSource), typeof(List<int>),
                 typeof(IntListHyperlinkTextBlock), new FrameworkPropertyMetadata(new List<int>(),
@@ -22,12 +29,12 @@ namespace WpfUtility.GeneralUserControls
                     UpdateHyperlinks));
 
         /// <summary>
-        ///     Variable with itself in it, to use it in static content
+        /// Variable with itself in it, to use it in static content
         /// </summary>
         private static IntListHyperlinkTextBlock _self;
 
         /// <summary>
-        ///     Constructor for IntListHyperlinkTextBlock
+        /// Constructor for IntListHyperlinkTextBlock
         /// </summary>
         public IntListHyperlinkTextBlock()
         {
@@ -35,7 +42,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the value of the item source.
+        /// Gets or sets the value of the item source.
         /// </summary>
         public List<int> ItemSource
         {
@@ -44,13 +51,13 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Event which is triggered when one of the hyperlinks is clicked
+        /// Event which is triggered when one of the hyperlinks is clicked
         /// </summary>
         public event IntAsSenderHandler HyperlinkClickedEvent;
 
 
         /// <summary>
-        ///     Method which is invoked trough the dependency
+        /// Method which is invoked trough the dependency
         /// </summary>
         /// <param name="dependencyObject">This contains the IntListHyperlinkTextBlock ("this")</param>
         /// <param name="dependencyPropertyChangedEventArgs">The event which "triggered" the method</param>
@@ -61,7 +68,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Base method to apply to apply the hyperlinks to the list in the TextBlock
+        /// Base method to apply to apply the hyperlinks to the list in the TextBlock
         /// </summary>
         /// <param name="tb">This usercontrol, contains the item source</param>
         private static void ApplyHyperLinks(IntListHyperlinkTextBlock tb)
@@ -80,7 +87,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Event which is triggered when one of the hyperlinks is clicked
+        /// Event which is triggered when one of the hyperlinks is clicked
         /// </summary>
         /// <param name="sender">Hyperlink which was clicked</param>
         /// <param name="routedEventArgs">The event which "triggered" the method</param>
@@ -90,13 +97,13 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Event which is triggered when one of the hyperlinks is clicked
+        /// Event which is triggered when one of the hyperlinks is clicked
         /// </summary>
         /// <param name="sender">Hyperlink which was clicked</param>
         private void HyperlinkOnClick(object sender)
         {
             var tb = sender as Hyperlink;
-            if (int.TryParse(tb?.Tag.ToString(), out int articleNumber))
+            if (int.TryParse(tb?.Tag.ToString(), out var articleNumber))
                 HyperlinkClickedEvent?.Invoke(articleNumber, EventArgs.Empty);
         }
     }

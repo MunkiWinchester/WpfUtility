@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace WpfUtility.Services
 {
     /// <summary>
-    ///     This class contains methods for the CommandManager that help avoid memory leaks by using weak references.
+    /// This class contains methods for the CommandManager that help avoid memory leaks by using weak references.
     /// </summary>
     public static class CommandManagerHelper
     {
         /// <summary>
-        ///     Calls the weak reference handlers.
+        /// Calls the weak reference handlers.
         /// </summary>
         /// <param name="handlers">The handlers.</param>
         public static void CallWeakReferenceHandlers(List<WeakReference> handlers)
@@ -43,7 +43,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Adds the weak reference handler.
+        /// Adds the weak reference handler.
         /// </summary>
         /// <param name="handlers">The handlers.</param>
         /// <param name="handler">The handler.</param>
@@ -56,7 +56,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Removes the weak reference handler.
+        /// Removes the weak reference handler.
         /// </summary>
         /// <param name="handlers">The handlers.</param>
         /// <param name="handler">The handler.</param>

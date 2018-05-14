@@ -3,12 +3,12 @@
 namespace CutAndGo.Views
 {
     /// <summary>
-    ///     Interaction logic for SettingsWindow.xaml
+    /// Interaction logic for SettingsWindow.xaml
     /// </summary>
     public partial class SettingsWindow
     {
         /// <summary>
-        ///     Creates a new instance
+        /// Creates a new instance
         /// </summary>
         public SettingsWindow()
         {
@@ -16,7 +16,7 @@ namespace CutAndGo.Views
         }
 
         /// <summary>
-        ///     Sets the DialogResult to true to close the window
+        /// Sets the DialogResult to true to close the window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

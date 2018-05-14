@@ -6,13 +6,13 @@ using System.Windows;
 namespace WpfUtility.Services
 {
     /// <summary>
-    ///     Helper class to get the values from the clipboard
+    /// Helper class to get the values from the clipboard
     /// </summary>
     public static class ClipboardHelper
     {
         /// <summary>
-        ///     Parses the clipboard data to a list with a string arrays
-        ///     Works with CSV (";" separated) and "text" ("\t" separated)
+        /// Parses the clipboard data to a list with a string arrays
+        /// Works with CSV (";" separated) and "text" ("\t" separated)
         /// </summary>
         /// <returns>Clipboard data as list with string array</returns>
         public static List<string[]> ParseClipboardData()
@@ -52,6 +52,7 @@ namespace WpfUtility.Services
                     }
                 }
             }
+
             return clipboardData;
         }
 
@@ -66,7 +67,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Parses the given data to a string array
+        /// Parses the given data to a string array
         /// </summary>
         /// <param name="value">Value which should be parsed</param>
         /// <param name="isCsv">If it is CSV or "text"</param>
@@ -118,7 +119,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Delegate for the format
+        /// Delegate for the format
         /// </summary>
         /// <param name="value">Value</param>
         /// <returns>String array</returns>

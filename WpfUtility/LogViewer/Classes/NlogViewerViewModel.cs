@@ -10,22 +10,22 @@ using WpfUtility.Services;
 namespace WpfUtility.LogViewer.Classes
 {
     /// <summary>
-    ///     This class is the view model of the NLogViewer
+    /// This class is the view model of the NLogViewer
     /// </summary>
     internal class NlogViewerViewModel : ObservableObject
     {
         /// <summary>
-        ///     Private property for LogEntries
+        /// Private property for LogEntries
         /// </summary>
         private ObservableCollection<LogEvent> _logEntries;
 
         /// <summary>
-        ///     Private property for SelectedLogEntry
+        /// Private property for SelectedLogEntry
         /// </summary>
         private LogEvent _selectedLogEntry;
 
         /// <summary>
-        ///     Constructor for the NlogViewerViewModel
+        /// Constructor for the NlogViewerViewModel
         /// </summary>
         public NlogViewerViewModel()
         {
@@ -33,7 +33,7 @@ namespace WpfUtility.LogViewer.Classes
         }
 
         /// <summary>
-        ///     Property for the log entries
+        /// Property for the log entries
         /// </summary>
         public ObservableCollection<LogEvent> LogEntries
         {
@@ -42,7 +42,7 @@ namespace WpfUtility.LogViewer.Classes
         }
 
         /// <summary>
-        ///     Property for the selected log entry
+        /// Property for the selected log entry
         /// </summary>
         public LogEvent SelectedLogEntry
         {
@@ -51,7 +51,7 @@ namespace WpfUtility.LogViewer.Classes
         }
 
         /// <summary>
-        ///     Toggles the tracking of the nlog loggers on/off
+        /// Toggles the tracking of the nlog loggers on/off
         /// </summary>
         /// <param name="activate">Should the loggers be tracked?</param>
         public void ToggleLoggers(bool activate)
@@ -64,7 +64,7 @@ namespace WpfUtility.LogViewer.Classes
         }
 
         /// <summary>
-        ///     Loads all loggers of Nlog
+        /// Loads all loggers of Nlog
         /// </summary>
         /// <returns></returns>
         public IEnumerable<NlogViewerTarget> GetLoggers()
@@ -73,7 +73,7 @@ namespace WpfUtility.LogViewer.Classes
         }
 
         /// <summary>
-        ///     Event which is triggered when a log is received
+        /// Event which is triggered when a log is received
         /// </summary>
         /// <param name="log">Log entry which was received</param>
         private void LogReceived(AsyncLogEventInfo log)

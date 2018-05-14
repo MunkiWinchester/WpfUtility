@@ -33,8 +33,8 @@ using System;
 namespace Sample.Properties
 {
     /// <summary>
-    ///     Indicates that the value of the marked element could be <c>null</c> sometimes,
-    ///     so the check for <c>null</c> is necessary before its usage.
+    /// Indicates that the value of the marked element could be <c>null</c> sometimes,
+    /// so the check for <c>null</c> is necessary before its usage.
     /// </summary>
     /// <example>
     ///     <code>
@@ -55,7 +55,7 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the value of the marked element could never be <c>null</c>.
+    /// Indicates that the value of the marked element could never be <c>null</c>.
     /// </summary>
     /// <example>
     ///     <code>
@@ -73,9 +73,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
-    ///     and Lazy classes to indicate that the value of a collection item, of the Task.Result property
-    ///     or of the Lazy.Value property can never be null.
+    /// Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+    /// and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+    /// or of the Lazy.Value property can never be null.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
@@ -85,9 +85,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
-    ///     and Lazy classes to indicate that the value of a collection item, of the Task.Result property
-    ///     or of the Lazy.Value property can be null.
+    /// Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+    /// and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+    /// or of the Lazy.Value property can be null.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
@@ -97,9 +97,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the marked method builds string by format pattern and (optional) arguments.
-    ///     Parameter, which contains format string, should be given in constructor. The format string
-    ///     should be in <see cref="string.Format(IFormatProvider,string,object[])" />-like form.
+    /// Indicates that the marked method builds string by format pattern and (optional) arguments.
+    /// Parameter, which contains format string, should be given in constructor. The format string
+    /// should be in <see cref="string.Format(IFormatProvider,string,object[])" />-like form.
     /// </summary>
     /// <example>
     ///     <code>
@@ -117,7 +117,7 @@ namespace Sample.Properties
     public sealed class StringFormatMethodAttribute : Attribute
     {
         /// <param name="formatParameterName">
-        ///     Specifies which parameter of an annotated method should be treated as format-string
+        /// Specifies which parameter of an annotated method should be treated as format-string
         /// </param>
         public StringFormatMethodAttribute([NotNull] string formatParameterName)
         {
@@ -129,8 +129,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     For a parameter that is expected to be one of the limited set of values.
-    ///     Specify fields of which type should be used as values for this parameter.
+    /// For a parameter that is expected to be one of the limited set of values.
+    /// Specify fields of which type should be used as values for this parameter.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field,
@@ -147,9 +147,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the function argument should be string literal and match one
-    ///     of the parameters of the caller function. For example, ReSharper annotates
-    ///     the parameter of <see cref="System.ArgumentNullException" />.
+    /// Indicates that the function argument should be string literal and match one
+    /// of the parameters of the caller function. For example, ReSharper annotates
+    /// the parameter of <see cref="System.ArgumentNullException" />.
     /// </summary>
     /// <example>
     ///     <code>
@@ -165,13 +165,13 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the method is contained in a type that implements
-    ///     <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method
-    ///     is used to notify that some property value changed.
+    /// Indicates that the method is contained in a type that implements
+    /// <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method
+    /// is used to notify that some property value changed.
     /// </summary>
     /// <remarks>
-    ///     The method should be non-static and conform to one of the supported signatures:
-    ///     <list>
+    /// The method should be non-static and conform to one of the supported signatures:
+    /// <list>
     ///         <item>
     ///             <c>NotifyChanged(string)</c>
     ///         </item>
@@ -187,10 +187,10 @@ namespace Sample.Properties
     ///         <item>
     ///             <c>SetProperty{T}(ref T, T, string)</c>
     ///         </item>
-    ///     </list>
+    /// </list>
     /// </remarks>
     /// <example>
-    ///     <code>
+    /// <code>
     ///  public class Foo : INotifyPropertyChanged {
     ///    public event PropertyChangedEventHandler PropertyChanged;
     ///  
@@ -205,8 +205,8 @@ namespace Sample.Properties
     ///    }
     ///  }
     ///  </code>
-    ///     Examples of generated notifications:
-    ///     <list>
+    /// Examples of generated notifications:
+    /// <list>
     ///         <item>
     ///             <c>NotifyChanged("Property")</c>
     ///         </item>
@@ -219,7 +219,7 @@ namespace Sample.Properties
     ///         <item>
     ///             <c>SetProperty(ref myField, value, "Property")</c>
     ///         </item>
-    ///     </list>
+    /// </list>
     /// </example>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class NotifyPropertyChangedInvocatorAttribute : Attribute
@@ -238,24 +238,24 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Describes dependency between method input and output.
+    /// Describes dependency between method input and output.
     /// </summary>
     /// <syntax>
-    ///     <p>Function Definition Table syntax:</p>
-    ///     <list>
+    /// <p>Function Definition Table syntax:</p>
+    /// <list>
     ///         <item>FDT      ::= FDTRow [;FDTRow]*</item>
     ///         <item>FDTRow   ::= Input =&gt; Output | Output &lt;= Input</item>
     ///         <item>Input    ::= ParameterName: Value [, Input]*</item>
     ///         <item>Output   ::= [ParameterName: Value]* {halt|stop|void|nothing|Value}</item>
     ///         <item>Value    ::= true | false | null | notnull | canbenull</item>
-    ///     </list>
-    ///     If method has single input parameter, it's name could be omitted.<br />
-    ///     Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same) for method output
-    ///     means that the methos doesn't return normally (throws or terminates the process).<br />
-    ///     Value <c>canbenull</c> is only applicable for output parameters.<br />
-    ///     You can use multiple <c>[ContractAnnotation]</c> for each FDT row, or use single attribute
-    ///     with rows separated by semicolon. There is no notion of order rows, all rows are checked
-    ///     for applicability and applied per each program state tracked by R# analysis.<br />
+    /// </list>
+    /// If method has single input parameter, it's name could be omitted.<br />
+    /// Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same) for method output
+    /// means that the methos doesn't return normally (throws or terminates the process).<br />
+    /// Value <c>canbenull</c> is only applicable for output parameters.<br />
+    /// You can use multiple <c>[ContractAnnotation]</c> for each FDT row, or use single attribute
+    /// with rows separated by semicolon. There is no notion of order rows, all rows are checked
+    /// for applicability and applied per each program state tracked by R# analysis.<br />
     /// </syntax>
     /// <examples>
     ///     <list>
@@ -314,7 +314,7 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that marked element should be localized or not.
+    /// Indicates that marked element should be localized or not.
     /// </summary>
     /// <example>
     ///     <code>
@@ -340,10 +340,10 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the value of the marked type (or its derivatives)
-    ///     cannot be compared using '==' or '!=' operators and <c>Equals()</c>
-    ///     should be used instead. However, using '==' or '!=' for comparison
-    ///     with <c>null</c> is always permitted.
+    /// Indicates that the value of the marked type (or its derivatives)
+    /// cannot be compared using '==' or '!=' operators and <c>Equals()</c>
+    /// should be used instead. However, using '==' or '!=' for comparison
+    /// with <c>null</c> is always permitted.
     /// </summary>
     /// <example>
     ///     <code>
@@ -367,8 +367,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     When applied to a target attribute, specifies a requirement for any type marked
-    ///     with the target attribute to implement or inherit specific type or types.
+    /// When applied to a target attribute, specifies a requirement for any type marked
+    /// with the target attribute to implement or inherit specific type or types.
     /// </summary>
     /// <example>
     ///     <code>
@@ -393,8 +393,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
-    ///     so this symbol will not be marked as unused (as well as by other usage inspections).
+    /// Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+    /// so this symbol will not be marked as unused (as well as by other usage inspections).
     /// </summary>
     [AttributeUsage(AttributeTargets.All)]
     public sealed class UsedImplicitlyAttribute : Attribute
@@ -426,8 +426,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes
-    ///     as unused (as well as by other usage inspections)
+    /// Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes
+    /// as unused (as well as by other usage inspections)
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.GenericParameter)]
     public sealed class MeansImplicitUseAttribute : Attribute
@@ -472,8 +472,8 @@ namespace Sample.Properties
         Assign = 2,
 
         /// <summary>
-        ///     Indicates implicit instantiation of a type with fixed constructor signature.
-        ///     That means any unused constructor parameters won't be reported as such.
+        /// Indicates implicit instantiation of a type with fixed constructor signature.
+        /// That means any unused constructor parameters won't be reported as such.
         /// </summary>
         InstantiatedWithFixedConstructorSignature = 4,
 
@@ -482,8 +482,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Specify what is considered used implicitly when marked
-    ///     with <see cref="MeansImplicitUseAttribute" /> or <see cref="UsedImplicitlyAttribute" />.
+    /// Specify what is considered used implicitly when marked
+    /// with <see cref="MeansImplicitUseAttribute" /> or <see cref="UsedImplicitlyAttribute" />.
     /// </summary>
     [Flags]
     public enum ImplicitUseTargetFlags
@@ -499,8 +499,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     This attribute is intended to mark publicly available API
-    ///     which should not be removed and so is treated as used.
+    /// This attribute is intended to mark publicly available API
+    /// which should not be removed and so is treated as used.
     /// </summary>
     [MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
     public sealed class PublicAPIAttribute : Attribute
@@ -519,9 +519,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
-    ///     If the parameter is a delegate, indicates that delegate is executed while the method is executed.
-    ///     If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
+    /// Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
+    /// If the parameter is a delegate, indicates that delegate is executed while the method is executed.
+    /// If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class InstantHandleAttribute : Attribute
@@ -529,8 +529,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that a method does not make any observable state changes.
-    ///     The same as <c>System.Diagnostics.Contracts.PureAttribute</c>.
+    /// Indicates that a method does not make any observable state changes.
+    /// The same as <c>System.Diagnostics.Contracts.PureAttribute</c>.
     /// </summary>
     /// <example>
     ///     <code>
@@ -547,7 +547,7 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the return value of method invocation must be used.
+    /// Indicates that the return value of method invocation must be used.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class MustUseReturnValueAttribute : Attribute
@@ -566,9 +566,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates the type member or parameter of some type, that should be used instead of all other ways
-    ///     to get the value that type. This annotation is useful when you have some "context" value evaluated
-    ///     and stored somewhere, meaning that all other ways to get this value must be consolidated with existing one.
+    /// Indicates the type member or parameter of some type, that should be used instead of all other ways
+    /// to get the value that type. This annotation is useful when you have some "context" value evaluated
+    /// and stored somewhere, meaning that all other ways to get this value must be consolidated with existing one.
     /// </summary>
     /// <example>
     ///     <code>
@@ -591,8 +591,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that a parameter is a path to a file or a folder within a web project.
-    ///     Path can be relative or absolute, starting from web root (~).
+    /// Indicates that a parameter is a path to a file or a folder within a web project.
+    /// Path can be relative or absolute, starting from web root (~).
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class PathReferenceAttribute : Attribute
@@ -611,20 +611,20 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     An extension method marked with this attribute is processed by ReSharper code completion
-    ///     as a 'Source Template'. When extension method is completed over some expression, it's source code
-    ///     is automatically expanded like a template at call site.
+    /// An extension method marked with this attribute is processed by ReSharper code completion
+    /// as a 'Source Template'. When extension method is completed over some expression, it's source code
+    /// is automatically expanded like a template at call site.
     /// </summary>
     /// <remarks>
-    ///     Template method body can contain valid source code and/or special comments starting with '$'.
-    ///     Text inside these comments is added as source code when the template is applied. Template parameters
-    ///     can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
-    ///     Use the <see cref="MacroAttribute" /> attribute to specify macros for parameters.
+    /// Template method body can contain valid source code and/or special comments starting with '$'.
+    /// Text inside these comments is added as source code when the template is applied. Template parameters
+    /// can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
+    /// Use the <see cref="MacroAttribute" /> attribute to specify macros for parameters.
     /// </remarks>
     /// <example>
-    ///     In this example, the 'forEach' method is a source template available over all values
-    ///     of enumerable types, producing ordinary C# 'foreach' statement and placing caret inside block:
-    ///     <code>
+    /// In this example, the 'forEach' method is a source template available over all values
+    /// of enumerable types, producing ordinary C# 'foreach' statement and placing caret inside block:
+    /// <code>
     /// [SourceTemplate]
     /// public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; xs) {
     ///   foreach (var x in xs) {
@@ -639,17 +639,17 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
+    /// Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
     /// </summary>
     /// <remarks>
-    ///     You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
-    ///     is defined in the <see cref="MacroAttribute.Expression" /> property. When applied on a method, the target
-    ///     template parameter is defined in the <see cref="MacroAttribute.Target" /> property. To apply the macro silently
-    ///     for the parameter, set the <see cref="MacroAttribute.Editable" /> property value = -1.
+    /// You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
+    /// is defined in the <see cref="MacroAttribute.Expression" /> property. When applied on a method, the target
+    /// template parameter is defined in the <see cref="MacroAttribute.Target" /> property. To apply the macro silently
+    /// for the parameter, set the <see cref="MacroAttribute.Editable" /> property value = -1.
     /// </remarks>
     /// <example>
-    ///     Applying the attribute on a source template method:
-    ///     <code>
+    /// Applying the attribute on a source template method:
+    /// <code>
     /// [SourceTemplate, Macro(Target = "item", Expression = "suggestVariableName()")]
     /// public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; collection) {
     ///   foreach (var item in collection) {
@@ -657,8 +657,8 @@ namespace Sample.Properties
     ///   }
     /// }
     /// </code>
-    ///     Applying the attribute on a template method parameter:
-    ///     <code>
+    /// Applying the attribute on a template method parameter:
+    /// <code>
     /// [SourceTemplate]
     /// public static void something(this Entity x, [Macro(Expression = "guid()", Editable = -1)] string newguid) {
     ///   /*$ var $x$Id = "$newguid$" + x.ToString();
@@ -670,26 +670,26 @@ namespace Sample.Properties
     public sealed class MacroAttribute : Attribute
     {
         /// <summary>
-        ///     Allows specifying a macro that will be executed for a <see cref="SourceTemplateAttribute">source template</see>
-        ///     parameter when the template is expanded.
+        /// Allows specifying a macro that will be executed for a <see cref="SourceTemplateAttribute">source template</see>
+        /// parameter when the template is expanded.
         /// </summary>
         [CanBeNull]
         public string Expression { get; set; }
 
         /// <summary>
-        ///     Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
+        /// Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
         /// </summary>
         /// <remarks>
-        ///     If the target parameter is used several times in the template, only one occurrence becomes editable;
-        ///     other occurrences are changed synchronously. To specify the zero-based index of the editable occurrence,
-        ///     use values >= 0. To make the parameter non-editable when the template is expanded, use -1.
+        /// If the target parameter is used several times in the template, only one occurrence becomes editable;
+        /// other occurrences are changed synchronously. To specify the zero-based index of the editable occurrence,
+        /// use values >= 0. To make the parameter non-editable when the template is expanded, use -1.
         /// </remarks>
         /// >
         public int Editable { get; set; }
 
         /// <summary>
-        ///     Identifies the target parameter of a <see cref="SourceTemplateAttribute">source template</see> if the
-        ///     <see cref="MacroAttribute" /> is applied on a template method.
+        /// Identifies the target parameter of a <see cref="SourceTemplateAttribute">source template</see> if the
+        /// <see cref="MacroAttribute" /> is applied on a template method.
         /// </summary>
         [CanBeNull]
         public string Target { get; set; }
@@ -774,10 +774,10 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
-    ///     is an MVC action. If applied to a method, the MVC action name is calculated
-    ///     implicitly from the context. Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+    /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+    /// is an MVC action. If applied to a method, the MVC action name is calculated
+    /// implicitly from the context. Use this attribute for custom wrappers similar to
+    /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class AspMvcActionAttribute : Attribute
@@ -796,9 +796,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
-    ///     Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+    /// ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
+    /// Use this attribute for custom wrappers similar to
+    /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcAreaAttribute : Attribute
@@ -817,10 +817,10 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
-    ///     an MVC controller. If applied to a method, the MVC controller name is calculated
-    ///     implicitly from the context. Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
+    /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
+    /// an MVC controller. If applied to a method, the MVC controller name is calculated
+    /// implicitly from the context. Use this attribute for custom wrappers similar to
+    /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class AspMvcControllerAttribute : Attribute
@@ -839,8 +839,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. Indicates that a parameter is an MVC Master. Use this attribute
-    ///     for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
+    /// ASP.NET MVC attribute. Indicates that a parameter is an MVC Master. Use this attribute
+    /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcMasterAttribute : Attribute
@@ -848,8 +848,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
-    ///     for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
+    /// ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
+    /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcModelTypeAttribute : Attribute
@@ -857,10 +857,10 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
-    ///     partial view. If applied to a method, the MVC partial view name is calculated implicitly
-    ///     from the context. Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
+    /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
+    /// partial view. If applied to a method, the MVC partial view name is calculated implicitly
+    /// from the context. Use this attribute for custom wrappers similar to
+    /// <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class AspMvcPartialViewAttribute : Attribute
@@ -868,7 +868,7 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
+    /// ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public sealed class AspMvcSuppressViewErrorAttribute : Attribute
@@ -876,9 +876,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
-    ///     Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
+    /// ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
+    /// Use this attribute for custom wrappers similar to
+    /// <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcDisplayTemplateAttribute : Attribute
@@ -886,9 +886,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
-    ///     Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
+    /// ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
+    /// Use this attribute for custom wrappers similar to
+    /// <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcEditorTemplateAttribute : Attribute
@@ -896,9 +896,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
-    ///     Use this attribute for custom wrappers similar to
-    ///     <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
+    /// ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
+    /// Use this attribute for custom wrappers similar to
+    /// <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcTemplateAttribute : Attribute
@@ -906,10 +906,10 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
-    ///     is an MVC view component. If applied to a method, the MVC view name is calculated implicitly
-    ///     from the context. Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.Mvc.Controller.View(Object)</c>.
+    /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+    /// is an MVC view component. If applied to a method, the MVC view name is calculated implicitly
+    /// from the context. Use this attribute for custom wrappers similar to
+    /// <c>System.Web.Mvc.Controller.View(Object)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class AspMvcViewAttribute : Attribute
@@ -917,8 +917,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
-    ///     is an MVC view component name.
+    /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+    /// is an MVC view component name.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcViewComponentAttribute : Attribute
@@ -926,8 +926,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
-    ///     is an MVC view component view. If applied to a method, the MVC view component view name is default.
+    /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+    /// is an MVC view component view. If applied to a method, the MVC view component view name is default.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class AspMvcViewComponentViewAttribute : Attribute
@@ -935,8 +935,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     ASP.NET MVC attribute. When applied to a parameter of an attribute,
-    ///     indicates that this parameter is an MVC action name.
+    /// ASP.NET MVC attribute. When applied to a parameter of an attribute,
+    /// indicates that this parameter is an MVC action name.
     /// </summary>
     /// <example>
     ///     <code>
@@ -981,9 +981,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Razor attribute. Indicates that a parameter or a method is a Razor section.
-    ///     Use this attribute for custom wrappers similar to
-    ///     <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
+    /// Razor attribute. Indicates that a parameter or a method is a Razor section.
+    /// Use this attribute for custom wrappers similar to
+    /// <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class RazorSectionAttribute : Attribute
@@ -991,8 +991,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates how method, constructor invocation or property access
-    ///     over collection type affects content of the collection.
+    /// Indicates how method, constructor invocation or property access
+    /// over collection type affects content of the collection.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property)]
     public sealed class CollectionAccessAttribute : Attribute
@@ -1022,9 +1022,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the marked method is assertion method, i.e. it halts control flow if
-    ///     one of the conditions is satisfied. To set the condition, mark one of the parameters with
-    ///     <see cref="AssertionConditionAttribute" /> attribute.
+    /// Indicates that the marked method is assertion method, i.e. it halts control flow if
+    /// one of the conditions is satisfied. To set the condition, mark one of the parameters with
+    /// <see cref="AssertionConditionAttribute" /> attribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class AssertionMethodAttribute : Attribute
@@ -1032,9 +1032,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates the condition parameter of the assertion method. The method itself should be
-    ///     marked by <see cref="AssertionMethodAttribute" /> attribute. The mandatory argument of
-    ///     the attribute is the assertion type.
+    /// Indicates the condition parameter of the assertion method. The method itself should be
+    /// marked by <see cref="AssertionMethodAttribute" /> attribute. The mandatory argument of
+    /// the attribute is the assertion type.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AssertionConditionAttribute : Attribute
@@ -1048,8 +1048,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Specifies assertion type. If the assertion method argument satisfies the condition,
-    ///     then the execution continues. Otherwise, execution is assumed to be halted.
+    /// Specifies assertion type. If the assertion method argument satisfies the condition,
+    /// then the execution continues. Otherwise, execution is assumed to be halted.
     /// </summary>
     public enum AssertionConditionType
     {
@@ -1067,8 +1067,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that the marked method unconditionally terminates control flow execution.
-    ///     For example, it could unconditionally throw exception.
+    /// Indicates that the marked method unconditionally terminates control flow execution.
+    /// For example, it could unconditionally throw exception.
     /// </summary>
     [Obsolete("Use [ContractAnnotation('=> halt')] instead")]
     [AttributeUsage(AttributeTargets.Method)]
@@ -1077,9 +1077,9 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
-    ///     .Where). This annotation allows inference of [InstantHandle] annotation for parameters
-    ///     of delegate type by analyzing LINQ method chains.
+    /// Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
+    /// .Where). This annotation allows inference of [InstantHandle] annotation for parameters
+    /// of delegate type by analyzing LINQ method chains.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class LinqTunnelAttribute : Attribute
@@ -1087,7 +1087,7 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that IEnumerable, passed as parameter, is not enumerated.
+    /// Indicates that IEnumerable, passed as parameter, is not enumerated.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class NoEnumerationAttribute : Attribute
@@ -1095,7 +1095,7 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Indicates that parameter is regular expression pattern.
+    /// Indicates that parameter is regular expression pattern.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class RegexPatternAttribute : Attribute
@@ -1103,10 +1103,10 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     Prevents the Member Reordering feature from tossing members of the marked class.
+    /// Prevents the Member Reordering feature from tossing members of the marked class.
     /// </summary>
     /// <remarks>
-    ///     The attribute must be mentioned in your member reordering patterns
+    /// The attribute must be mentioned in your member reordering patterns
     /// </remarks>
     [AttributeUsage(
         AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum)]
@@ -1115,8 +1115,8 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
-    ///     as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
+    /// XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
+    /// as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class XamlItemsControlAttribute : Attribute
@@ -1124,13 +1124,13 @@ namespace Sample.Properties
     }
 
     /// <summary>
-    ///     XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that
-    ///     is used to bind some item of <c>ItemsControl</c>-derived type. This annotation will
-    ///     enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
+    /// XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that
+    /// is used to bind some item of <c>ItemsControl</c>-derived type. This annotation will
+    /// enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
     /// </summary>
     /// <remarks>
-    ///     Property should have the tree ancestor of the <c>ItemsControl</c> type or
-    ///     marked with the <see cref="XamlItemsControlAttribute" /> attribute.
+    /// Property should have the tree ancestor of the <c>ItemsControl</c> type or
+    /// marked with the <see cref="XamlItemsControlAttribute" /> attribute.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class XamlItemBindingOfItemsControlAttribute : Attribute

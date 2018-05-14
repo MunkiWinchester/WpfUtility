@@ -5,53 +5,79 @@ using System.Windows.Input;
 
 namespace WpfUtility.GeneralUserControls
 {
+    /// <inheritdoc cref="UserControl" />
     /// <summary>
-    ///     Interaction logic for Paging.xaml
+    /// Interaction logic for Paging.xaml
     /// </summary>
     public partial class Paging
     {
+        /// <summary>
+        /// Gets or sets the value of the current page
+        /// </summary>
         public static readonly DependencyProperty CurrentPageProperty =
             DependencyProperty.Register(nameof(CurrentPage), typeof(int),
                 typeof(Paging), new FrameworkPropertyMetadata(1));
 
+        /// <summary>
+        /// Gets or sets the value of the total page
+        /// </summary>
         public static readonly DependencyProperty TotalPagesProperty =
             DependencyProperty.Register(nameof(TotalPages), typeof(int),
                 typeof(Paging), new FrameworkPropertyMetadata(1));
 
+        /// <summary>
+        /// Gets or sets the value of the entries per page
+        /// </summary>
         public static readonly DependencyProperty EntriesPerPageProperty =
             DependencyProperty.Register(nameof(EntriesPerPage), typeof(int),
                 typeof(Paging), new FrameworkPropertyMetadata(100));
 
+        /// <summary>
+        /// Gets or sets the value of the total entries
+        /// </summary>
         public static readonly DependencyProperty TotalEntriesProperty =
             DependencyProperty.Register(nameof(TotalEntries), typeof(int),
                 typeof(Paging), new FrameworkPropertyMetadata(0));
 
+        /// <summary>
+        /// Gets or sets the command of the GoToFirstPageCommand
+        /// </summary>
         public static DependencyProperty GoToFirstPageCommandProperty
             = DependencyProperty.Register(
                 nameof(GoToFirstPageCommand),
                 typeof(ICommand),
                 typeof(Paging));
 
+        /// <summary>
+        /// Gets or sets the command of the GoToPreviousPageCommand
+        /// </summary>
         public static DependencyProperty GoToPreviousPageCommandProperty
             = DependencyProperty.Register(
                 nameof(GoToPreviousPageCommand),
                 typeof(ICommand),
                 typeof(Paging));
 
+        /// <summary>
+        /// Gets or sets the command of the GoToNextPageCommand
+        /// </summary>
         public static DependencyProperty GoToNextPageCommandProperty
             = DependencyProperty.Register(
                 nameof(GoToNextPageCommand),
                 typeof(ICommand),
                 typeof(Paging));
 
+        /// <summary>
+        /// Gets or sets the command of the GoToLastPageCommand
+        /// </summary>
         public static DependencyProperty GoToLastPageCommandProperty
             = DependencyProperty.Register(
                 nameof(GoToLastPageCommand),
                 typeof(ICommand),
                 typeof(Paging));
 
+        /// <inheritdoc />
         /// <summary>
-        ///     Constructor of the paging control
+        /// Constructor of the paging control
         /// </summary>
         public Paging()
         {
@@ -59,7 +85,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the value of the current page
+        /// Gets or sets the value of the current page
         /// </summary>
         public int CurrentPage
         {
@@ -68,7 +94,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the value of the total page
+        /// Gets or sets the value of the total page
         /// </summary>
         public int TotalPages
         {
@@ -77,7 +103,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the value of the entries per page
+        /// Gets or sets the value of the entries per page
         /// </summary>
         public int EntriesPerPage
         {
@@ -86,7 +112,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the value of the total entries
+        /// Gets or sets the value of the total entries
         /// </summary>
         public int TotalEntries
         {
@@ -95,7 +121,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the command of the GoToFirstPageCommand
+        /// Gets or sets the command of the GoToFirstPageCommand
         /// </summary>
         public ICommand GoToFirstPageCommand
         {
@@ -104,7 +130,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the command of the GoToPreviousPageCommand
+        /// Gets or sets the command of the GoToPreviousPageCommand
         /// </summary>
         public ICommand GoToPreviousPageCommand
         {
@@ -113,7 +139,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the command of the GoToNextPageCommand
+        /// Gets or sets the command of the GoToNextPageCommand
         /// </summary>
         public ICommand GoToNextPageCommand
         {
@@ -122,7 +148,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Gets or sets the command of the GoToLastPageCommand
+        /// Gets or sets the command of the GoToLastPageCommand
         /// </summary>
         public ICommand GoToLastPageCommand
         {
@@ -131,7 +157,7 @@ namespace WpfUtility.GeneralUserControls
         }
 
         /// <summary>
-        ///     Event which is triggered when the key is pressed down (just Enter)
+        /// Event which is triggered when the key is pressed down (just Enter)
         /// </summary>
         /// <param name="sender">Which control triggered the event</param>
         /// <param name="e">Which key triggered this event</param>

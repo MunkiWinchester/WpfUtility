@@ -11,32 +11,42 @@ using WpfUtility.LogViewer.Classes;
 
 namespace WpfUtility.LogViewer
 {
+    /// <inheritdoc cref="UserControl" />
     /// <summary>
-    ///     Interaction logic for NlogViewer.xaml
+    /// Interaction logic for NlogViewer.xaml
     /// </summary>
     public partial class NlogViewer
     {
+        /// <summary>
+        /// Property for the item source
+        /// </summary>
         public static readonly DependencyProperty ItemSourceProperty =
             DependencyProperty.Register(nameof(ItemSource), typeof(ObservableCollection<LogEventInfo>),
                 typeof(NlogViewer),
                 new FrameworkPropertyMetadata(new ObservableCollection<LogEventInfo>(), PropertyChangedCallback));
 
+        /// <summary>
+        /// Should the observation of loggers be active
+        /// </summary>
         public static readonly DependencyProperty ActivateLoggersProperty =
             DependencyProperty.Register(nameof(ActivateLoggers), typeof(bool),
                 typeof(NlogViewer), new FrameworkPropertyMetadata(true, PropertyChangedCallbackActivate));
 
+        /// <summary>
+        /// Should the application dispatcher be used
+        /// </summary>
         public static readonly DependencyProperty UseApplicationDispatcherProperty =
             DependencyProperty.Register(nameof(UseApplicationDispatcher), typeof(bool),
                 typeof(NlogViewer),
                 new FrameworkPropertyMetadata(true, UseApplicationDispatcherPropertyChangedCallbackActivate));
 
         /// <summary>
-        ///     Variable with itself in it, to use it in static content
+        /// Variable with itself in it, to use it in static content
         /// </summary>
         private static NlogViewer _this;
 
         /// <summary>
-        ///     Constructor for the NlogViewer
+        /// Constructor for the NlogViewer
         /// </summary>
         public NlogViewer()
         {
@@ -49,7 +59,7 @@ namespace WpfUtility.LogViewer
         }
 
         /// <summary>
-        ///     Gets or sets the value of the item source.
+        /// Gets or sets the value of the item source.
         /// </summary>
         public ObservableCollection<LogEventInfo> ItemSource
         {
@@ -58,7 +68,7 @@ namespace WpfUtility.LogViewer
         }
 
         /// <summary>
-        ///     Gets or sets the value if the loggers should be active
+        /// Gets or sets the value if the loggers should be active
         /// </summary>
         public bool ActivateLoggers
         {
@@ -71,7 +81,7 @@ namespace WpfUtility.LogViewer
         }
 
         /// <summary>
-        ///     Gets or sets the value if the application dispatcher should be used or the threading dispatcher
+        /// Gets or sets the value if the application dispatcher should be used or the threading dispatcher
         /// </summary>
         public bool UseApplicationDispatcher
         {
@@ -84,36 +94,31 @@ namespace WpfUtility.LogViewer
         }
 
         /// <summary>
-        ///     Gets or sets the view model of the nlog viewer
+        /// Gets or sets the view model of the nlog viewer
         /// </summary>
         internal NlogViewerViewModel ViewModel { get; set; }
 
         private static void PropertyChangedCallback(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var nlogViewer = dependencyObject as NlogViewer;
-            if (nlogViewer != null)
-            {
-                var list = dependencyPropertyChangedEventArgs.NewValue as ObservableCollection<LogEventInfo>;
-                if (list != null)
+            if (dependencyObject is NlogViewer nlogViewer)
+                if (dependencyPropertyChangedEventArgs.NewValue is ObservableCollection<LogEventInfo> list)
                 {
                     nlogViewer.ViewModel.LogEntries =
                         new ObservableCollection<LogEvent>(list.Select(x => new LogEvent(x)));
                     _this.ScrollToTop();
                 }
-            }
         }
 
         /// <summary>
-        ///     Method which is invoked trough the dependency
+        /// Method which is invoked trough the dependency
         /// </summary>
         /// <param name="dependencyObject">This contains the NlogViewer ("this")</param>
         /// <param name="dependencyPropertyChangedEventArgs">This contains the changed event arguments such as the new value</param>
         private static void PropertyChangedCallbackActivate(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var nlogViewer = dependencyObject as NlogViewer;
-            if (nlogViewer != null)
+            if (dependencyObject is NlogViewer nlogViewer)
             {
                 var activate = dependencyPropertyChangedEventArgs.NewValue != null &&
                                (bool) dependencyPropertyChangedEventArgs.NewValue;
@@ -122,36 +127,32 @@ namespace WpfUtility.LogViewer
         }
 
         /// <summary>
-        ///     Method which is invoked trough the dependency
+        /// Method which is invoked trough the dependency
         /// </summary>
         /// <param name="dependencyObject">This contains the NlogViewer ("this")</param>
         /// <param name="dependencyPropertyChangedEventArgs">This contains the changed event arguments such as the new value</param>
         private static void UseApplicationDispatcherPropertyChangedCallbackActivate(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var nlogViewer = dependencyObject as NlogViewer;
-            if (nlogViewer != null)
+            if (dependencyObject is NlogViewer)
                 _this.ChooseDispatcherAndToggleLoggers();
         }
 
         /// <summary>
-        ///     Method to set the datagrid to the top entry
+        /// Method to set the datagrid to the top entry
         /// </summary>
         private void ScrollToTop()
         {
-            if (VisualTreeHelper.GetChildrenCount(DataGrid) > 0)
-            {
-                var border = VisualTreeHelper.GetChild(DataGrid, 0) as Decorator;
-                if (border != null)
+            if (VisualTreeHelper.GetChildrenCount(_dataGrid) > 0)
+                if (VisualTreeHelper.GetChild(_dataGrid, 0) is Decorator border)
                 {
                     var scrollViewer = border.Child as ScrollViewer;
                     scrollViewer?.ScrollToTop();
                 }
-            }
         }
 
         /// <summary>
-        ///     Method to choose which dispatcher is used and toogles the loggers
+        /// Method to choose which dispatcher is used and toogles the loggers
         /// </summary>
         private void ChooseDispatcherAndToggleLoggers()
         {
@@ -170,7 +171,7 @@ namespace WpfUtility.LogViewer
         }
 
         /// <summary>
-        ///     Method to toggle the loggers on or off
+        /// Method to toggle the loggers on or off
         /// </summary>
         /// <param name="activate">Bool indicating if the loggers should be active</param>
         private void ToggleLoggers(bool activate)
@@ -183,7 +184,7 @@ namespace WpfUtility.LogViewer
         }
 
         /// <summary>
-        ///     Method which is called when a ne wlog entry is written
+        /// Method which is called when a ne wlog entry is written
         /// </summary>
         /// <param name="log">Log entry which will be added to the display</param>
         private void LogReceived(AsyncLogEventInfo log)
@@ -195,7 +196,7 @@ namespace WpfUtility.LogViewer
         {
             e.ClipboardRowContent.Clear();
             e.ClipboardRowContent.Add(
-                new DataGridClipboardCellContent(e.Item, (sender as DataGrid).CurrentColumn, e.Item.ToString()));
+                new DataGridClipboardCellContent(e.Item, (sender as DataGrid)?.CurrentColumn, e.Item.ToString()));
         }
     }
 }

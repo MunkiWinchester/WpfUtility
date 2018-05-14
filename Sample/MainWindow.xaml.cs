@@ -6,7 +6,7 @@ using Sample.Properties;
 namespace Sample
 {
     /// <summary>
-    ///     Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
@@ -27,7 +27,8 @@ namespace Sample
 
             try
             {
-                ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.GetAccent(Settings.Default.SelectedAccent),
+                ThemeManager.ChangeAppStyle(Application.Current,
+                    ThemeManager.GetAccent(Settings.Default.SelectedAccent),
                     ThemeManager.GetAppTheme(Settings.Default.SelectedTheme));
             }
             catch (Exception exception)

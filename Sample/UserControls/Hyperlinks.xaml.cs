@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace Sample.UserControls
 {
     /// <summary>
-    ///     Interaction logic for Hyperlinks.xaml
+    /// Interaction logic for Hyperlinks.xaml
     /// </summary>
     public partial class Hyperlinks
     {

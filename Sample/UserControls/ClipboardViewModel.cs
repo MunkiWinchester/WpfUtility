@@ -42,7 +42,7 @@ namespace Sample.UserControls
             var rowData = ClipboardHelper.ParseClipboardData().Select(x => x[0]).ToList();
             var cleansedList = new List<int>();
             foreach (var entry in rowData)
-                if (int.TryParse(entry, out int value))
+                if (int.TryParse(entry, out var value))
                     cleansedList.Add(value);
             SelectedProducts = new ObservableCollection<int>(cleansedList);
             if (!cleansedList.Any())

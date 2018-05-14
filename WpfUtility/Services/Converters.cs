@@ -9,13 +9,13 @@ using Color = System.Drawing.Color;
 namespace WpfUtility.Services
 {
     /// <summary>
-    ///     Converts true or false to one of two given values of type T
+    /// Converts true or false to one of two given values of type T
     /// </summary>
     /// <typeparam name="T">Type which is converted</typeparam>
     public class BooleanConverter<T> : IValueConverter
     {
         /// <summary>
-        ///     Constructor for the boolean converter
+        /// Constructor for the boolean converter
         /// </summary>
         /// <param name="trueValue">Value which is equal to true</param>
         /// <param name="falseValue">Value which is equal to false</param>
@@ -26,17 +26,17 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Value which is equal to true
+        /// Value which is equal to true
         /// </summary>
         public T True { get; set; }
 
         /// <summary>
-        ///     Value which is equal to false
+        /// Value which is equal to false
         /// </summary>
         public T False { get; set; }
 
         /// <summary>
-        ///     Converts the given bool value to equally set value
+        /// Converts the given bool value to equally set value
         /// </summary>
         /// <param name="value">Bool which is "converted"</param>
         /// <param name="targetType">Not used</param>
@@ -50,7 +50,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Converts the given value back to the equally set bool
+        /// Converts the given value back to the equally set bool
         /// </summary>
         /// <param name="value">Bool which is "converted"</param>
         /// <param name="targetType">Not used</param>
@@ -64,12 +64,12 @@ namespace WpfUtility.Services
     }
 
     /// <summary>
-    ///     Converts true to Visibility.Collapsed or false to Visibility.Visible
+    /// Converts true to Visibility.Collapsed or false to Visibility.Visible
     /// </summary>
     public sealed class NegatedBooleanToVisibilityConverter : BooleanConverter<Visibility>
     {
         /// <summary>
-        ///     Converts true to Visibility.Collapsed or false to Visibility.Visible
+        /// Converts true to Visibility.Collapsed or false to Visibility.Visible
         /// </summary>
         public NegatedBooleanToVisibilityConverter() :
             base(Visibility.Collapsed, Visibility.Visible)
@@ -78,12 +78,12 @@ namespace WpfUtility.Services
     }
 
     /// <summary>
-    ///     Converts true to false or false to true
+    /// Converts true to false or false to true
     /// </summary>
     public sealed class NegatedBooleanConverter : BooleanConverter<bool>
     {
         /// <summary>
-        ///     Converts true to false or false to true
+        /// Converts true to false or false to true
         /// </summary>
         public NegatedBooleanConverter() : base(false, true)
         {
@@ -91,12 +91,12 @@ namespace WpfUtility.Services
     }
 
     /// <summary>
-    ///     Converts a Drawing.Color to a solid color brush
+    /// Converts a Drawing.Color to a solid color brush
     /// </summary>
     public sealed class DrawingColorConverter : IValueConverter
     {
         /// <summary>
-        ///     Converts a Drawing.Color to a solid color brush
+        /// Converts a Drawing.Color to a solid color brush
         /// </summary>
         /// <param name="value">Value which is a Drawing.Color</param>
         /// <param name="targetType">Not used</param>
@@ -111,11 +111,12 @@ namespace WpfUtility.Services
                 return new SolidColorBrush(
                     System.Windows.Media.Color.FromArgb(255, color.R, color.G, color.B));
             }
+
             return new SolidColorBrush(new System.Windows.Media.Color {A = 255, R = 255, B = 255, G = 255});
         }
 
         /// <summary>
-        ///     Converts a solid color brush to a Drawing.Color
+        /// Converts a solid color brush to a Drawing.Color
         /// </summary>
         /// <param name="value">SolidColorBrush</param>
         /// <param name="targetType">Not used</param>
@@ -132,14 +133,14 @@ namespace WpfUtility.Services
     }
 
     /// <summary>
-    ///     Subtratcs an Int (parameter) from a given Int (value)
-    ///     E.g. ActualWidth - Spacing
+    /// Subtratcs an Int (parameter) from a given Int (value)
+    /// E.g. ActualWidth - Spacing
     /// </summary>
     public class SubtractIntConverter : IValueConverter
     {
         /// <summary>
-        ///     Subtratcs an Int (parameter) from a given Int (value)
-        ///     E.g. ActualWidth - Spacing
+        /// Subtratcs an Int (parameter) from a given Int (value)
+        /// E.g. ActualWidth - Spacing
         /// </summary>
         /// <param name="value">Int from which is subtracted</param>
         /// <param name="targetType">Not used</param>
@@ -158,7 +159,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Adds an Int (parameter) back to a given int (value)
+        /// Adds an Int (parameter) back to a given int (value)
         /// </summary>
         /// <param name="value">Int from which was subtracted</param>
         /// <param name="targetType">Not used</param>

@@ -1,13 +1,13 @@
 ﻿<UserControl x:Class="Sample.UserControls.Clipboard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:userControls="clr-namespace:Sample.UserControls"
-             mc:Ignorable="d" x:Name="UserControl"
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:Mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:D="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:UserControls="clr-namespace:Sample.UserControls"
+             Mc:Ignorable="D" x:Name="_userControl"
+             D:DesignHeight="300" D:DesignWidth="300">
     <UserControl.DataContext>
-        <userControls:ClipboardViewModel />
+        <UserControls:ClipboardViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Content="Clipboard interaction (right click):" />
         <DataGrid Grid.Column="0" Grid.Row="1" ItemsSource="{Binding SelectedProducts}" CanUserAddRows="False"
-                  x:Name="DataGrid"
+                  x:Name="_dataGrid"
                   AutoGenerateColumns="False" Margin="3" IsReadOnly="True" CanUserSortColumns="False"
                   CanUserResizeColumns="False"
                   CanUserResizeRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">

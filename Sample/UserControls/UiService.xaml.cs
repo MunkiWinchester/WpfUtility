@@ -3,7 +3,7 @@
 namespace Sample.UserControls
 {
     /// <summary>
-    ///     Interaction logic for UiService.xaml
+    /// Interaction logic for UiService.xaml
     /// </summary>
     public partial class UiService
     {

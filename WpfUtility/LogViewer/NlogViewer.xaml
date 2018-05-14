@@ -1,15 +1,15 @@
 ﻿<UserControl x:Class="WpfUtility.LogViewer.NlogViewer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:guc="clr-namespace:WpfUtility.GeneralUserControls"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:WpfUtility.LogViewer.Classes"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
-             mc:Ignorable="d">
+             xmlns:D="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Guc="clr-namespace:WpfUtility.GeneralUserControls"
+             xmlns:Mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Vm="clr-namespace:WpfUtility.LogViewer.Classes"
+             D:DesignHeight="300"
+             D:DesignWidth="300"
+             Mc:Ignorable="D">
     <UserControl.DataContext>
-        <vm:NlogViewerViewModel />
+        <Vm:NlogViewerViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
         <Style TargetType="ToolTip">
@@ -38,12 +38,12 @@
         <Label Grid.Row="0"
                Grid.Column="0"
                Content="Search:" />
-        <TextBox x:Name="TextBoxSearch"
+        <TextBox x:Name="_textBoxSearch"
                  Grid.Row="0"
                  Grid.Column="1"
                  Width="150"
                  Margin="3" />
-        <DataGrid x:Name="DataGrid"
+        <DataGrid x:Name="_dataGrid"
                   Grid.Row="1"
                   Grid.Column="0"
                   Grid.ColumnSpan="3"
@@ -87,7 +87,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="TimeTextColumn"
+                <DataGridTextColumn x:Name="_timeTextColumn"
                                     Width="120"
                                     Binding="{Binding Time, StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"
                                     Header="Time"
@@ -105,10 +105,10 @@
                                         Header="Message"
                                         IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="vm:LogEvent">
-                            <guc:HighlightTextBlock HighlightBrush="Turquoise"
+                        <DataTemplate DataType="Vm:LogEvent">
+                            <Guc:HighlightTextBlock HighlightBrush="Turquoise"
                                                     HighlightForeGround="Black"
-                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
+                                                    HighlightPhrase="{Binding ElementName=_textBoxSearch, Path=Text}"
                                                     IsCaseSensitive="False"
                                                     Text="{Binding FormattedMessage}"
                                                     TextWrapping="Wrap"
@@ -120,10 +120,10 @@
                                         Header="Exception"
                                         IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="vm:LogEvent">
-                            <guc:HighlightTextBlock HighlightBrush="Turquoise"
+                        <DataTemplate DataType="Vm:LogEvent">
+                            <Guc:HighlightTextBlock HighlightBrush="Turquoise"
                                                     HighlightForeGround="Black"
-                                                    HighlightPhrase="{Binding ElementName=TextBoxSearch, Path=Text}"
+                                                    HighlightPhrase="{Binding ElementName=_textBoxSearch, Path=Text}"
                                                     IsCaseSensitive="False"
                                                     Text="{Binding Exception}"
                                                     TextWrapping="Wrap"

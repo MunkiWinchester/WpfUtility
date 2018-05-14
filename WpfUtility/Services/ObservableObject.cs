@@ -7,14 +7,16 @@ using NlogViewer.Properties;
 namespace WpfUtility.Services
 {
     /// <summary>
-    ///     This class allows simpler handling of the INotifyPropertyChanged
+    /// This class allows simpler handling of the INotifyPropertyChanged
     /// </summary>
     public class ObservableObject : INotifyPropertyChanged
     {
+        /// <summary>
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        ///     Raises the OnPropertyChanged event
+        /// Raises the OnPropertyChanged event
         /// </summary>
         /// <param name="propertyName">Name of the property (if none is given CallerMemberName will be used)</param>
         [NotifyPropertyChangedInvocator]
@@ -24,7 +26,7 @@ namespace WpfUtility.Services
         }
 
         /// <summary>
-        ///     Sets a field to the given value
+        /// Sets a field to the given value
         /// </summary>
         /// <typeparam name="T">Type of the value</typeparam>
         /// <param name="field">Reference of the given field</param>
@@ -40,8 +42,9 @@ namespace WpfUtility.Services
             OnPropertyChanged(propertyName);
             return true;
         }
+
         /// <summary>
-        ///     Sets a field of the given class to the given value
+        /// Sets a field of the given class to the given value
         /// </summary>
         /// <typeparam name="T">The type of the class</typeparam>
         /// <param name="parent">The class which contains the field</param>
@@ -49,7 +52,8 @@ namespace WpfUtility.Services
         /// <param name="value">The new value</param>
         /// <param name="propertyName">Name of the property (if none is given CallerMemberName will be used)</param>
         /// <returns>True if the value has changed or false if it is equal</returns>
-        protected bool SetField<T>(ref T parent, string property, object value, [CallerMemberName] string propertyName = null)
+        protected bool SetField<T>(ref T parent, string property, object value,
+            [CallerMemberName] string propertyName = null)
         {
             if (parent == null)
                 return false;
@@ -59,9 +63,7 @@ namespace WpfUtility.Services
 
             var propertyInfo = parent.GetType().GetProperty(property);
             if (propertyInfo == null)
-            {
                 throw new NullReferenceException($"The property with the name \"{property}\" does not exist.");
-            }
 
             var currentValue = propertyInfo.GetValue(parent, null);
             if (currentValue.Equals(value))

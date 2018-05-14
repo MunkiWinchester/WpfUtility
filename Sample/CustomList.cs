@@ -78,6 +78,7 @@ namespace Sample
                 connectedString = list.Aggregate(connectedString, (current, entry) => current + $"{entry}; ");
                 connectedString = connectedString.TrimEnd(' ', ';');
             }
+
             return connectedString;
         }
     }

@@ -1,7 +1,7 @@
 ﻿namespace Sample.UserControls
 {
     /// <summary>
-    ///     Interaction logic for Paging.xaml
+    /// Interaction logic for Paging.xaml
     /// </summary>
     public partial class Paging
     {
