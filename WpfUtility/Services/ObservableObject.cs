@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using NlogViewer.Properties;
 
@@ -11,6 +13,26 @@ namespace WpfUtility.Services
     /// </summary>
     public class ObservableObject : INotifyPropertyChanged
     {
+        /// <summary>
+        /// The different property access types
+        /// </summary>
+        [Flags]
+        public enum PropertyAccessType
+        {
+            /// <summary>
+            /// All properties
+            /// </summary>
+            Any = 0,
+            /// <summary>
+            /// Only properties which are readable
+            /// </summary>
+            Read = 1,
+            /// <summary>
+            /// Only properties which are writeable
+            /// </summary>
+            Write = 2
+        }
+
         /// <summary>
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
@@ -23,6 +45,19 @@ namespace WpfUtility.Services
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Raises the OnPropertyChanged event for a list of properties
+        /// </summary>
+        /// <param name="properties">The list of properties</param>
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(IEnumerable<string> properties)
+        {
+            foreach (var property in properties)
+            {
+                OnPropertyChanged(property);
+            }
         }
 
         /// <summary>
@@ -73,6 +108,39 @@ namespace WpfUtility.Services
             OnPropertyChanged(propertyName);
 
             return true;
+        }
+
+        /// <summary>
+        /// Gets all properties of the deriving class
+        /// </summary>
+        /// <param name="accessType">The <see cref="PropertyAccessType"/> of the properties (optional, default = Read | Write)</param>
+        /// <param name="onlyPublic"><see langword="true"/> to get only public properties, otherwise <see langword="false"/> (optional, default = <see langword="true"/></param>
+        /// <returns></returns>
+        protected List<string> GetProperties(PropertyAccessType accessType = PropertyAccessType.Read | PropertyAccessType.Write, bool onlyPublic = true)
+        {
+            if (!GetType().IsClass)
+                return new List<string>();
+
+            List<PropertyInfo> properties;
+            switch ((int)accessType)
+            {
+                case 1:
+                    properties = GetType().GetProperties().Where(w => w.CanRead).ToList();
+                    break;
+                case 2:
+                    properties = GetType().GetProperties().Where(w => w.CanWrite).ToList();
+                    break;
+                case 3:
+                    properties = GetType().GetProperties().Where(w => w.CanRead && w.CanWrite).ToList();
+                    break;
+                default:
+                    properties = GetType().GetProperties().ToList();
+                    break;
+            }
+
+            return onlyPublic
+                ? properties.Where(w => w.GetMethod.IsPublic).Select(s => s.Name).ToList()
+                : properties.Select(s => s.Name).ToList();
         }
     }
 }

@@ -71,5 +71,8 @@
         <TabItem Header="UiService">
             <UserControls:UiService />
         </TabItem>
+        <TabItem Header="Property example">
+            <UserControls:PropertyExample />
+        </TabItem>
     </Controls:MetroAnimatedSingleRowTabControl>
 </Controls:MetroWindow>
